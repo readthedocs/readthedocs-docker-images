@@ -25,4 +25,6 @@ RUN pip2 install -U virtualenv
 RUN groupadd --gid 205 docs
 RUN useradd -m --uid 1005 --gid 205 docs
 
+USER docs
+
 CMD ["/bin/bash"]
