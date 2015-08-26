@@ -1,6 +1,15 @@
-# Read the Docs - Environment base
+# Read the Docs - Advanced image
+#
+# This image is for resource-intensive toolchains and and build tools with
+# special requirements
+
 FROM rtfd-build:base
 MAINTAINER Read the Docs <support@readthedocs.com>
+
+# .NET support - Mono, DNVM, and docfx installation
+ENV USER_HOME /home/docs
+ENV DNX_VERSION 1.0.0-beta6
+ENV DOCFX_VERSION 1.0.0-alpha-10020
 
 USER root
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 \
@@ -11,8 +20,6 @@ RUN apt-get update
 RUN apt-get install -y mono-complete mono-devel unzip
 
 USER docs
-ENV USER_HOME /home/docs
-ENV DNX_VERSION 1.0.0-beta6
 
 RUN curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | \
     DNX_BRANCH=dev sh
@@ -20,6 +27,6 @@ RUN curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh |
 RUN bash -c "source $USER_HOME/.dnx/dnvm/dnvm.sh && \
     dnvm install -p $DNX_VERSION"
 RUN bash -c "source $USER_HOME/.dnx/dnvm/dnvm.sh && \
-    dnu commands install docfx"
+    dnu commands install docfx $DOCFX_VERSION"
 
 CMD ["/bin/bash"]
