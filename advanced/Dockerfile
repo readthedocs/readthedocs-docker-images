@@ -29,4 +29,6 @@ RUN bash -c "source $USER_HOME/.dnx/dnvm/dnvm.sh && \
 RUN bash -c "source $USER_HOME/.dnx/dnvm/dnvm.sh && \
     dnu commands install docfx $DOCFX_VERSION"
 
+ENV PATH /home/docs/.dnx/runtimes/dnx-mono.$DNX_VERSION/bin:/home/docs/.dnx/bin:$PATH
+
 CMD ["/bin/bash"]
