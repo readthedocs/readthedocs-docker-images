@@ -14,6 +14,9 @@ RUN apt-get -y install \
     subversion graphviz curl sqlite libxml2-dev libxslt-dev python-numpy \
     python-scipy libevent-dev libmysqlclient-dev python-m2crypto libffi-dev \
     python-matplotlib graphviz-dev libenchant1c2a pandoc
+
+RUN apt-get -y install graphviz libpq-dev libxml2-dev libxslt1-dev libfreetype6 build-essential g++ python-dev postgresql-client libmysqlclient-dev sqlite libevent-dev libffi-dev libenchant1c2a curl texlive-full python-m2crypto python-matplotlib python-numpy python-scipy graphviz graphviz-dev libgraphviz-dev pandoc doxygen latex-cjk-chinese-arphic-gbsn00lp latex-cjk-chinese-arphic-gkai00mp latex-cjk-chinese-arphic-bsmi00lp latex-cjk-chinese-arphic-bkai00mp python3 python3-dev python3-pip python3-matplotlib python3-numpy python3-scipy
+
 RUN apt-get -y install texlive-latex-extra texlive-fonts-recommended
 
 RUN easy_install3 pip
