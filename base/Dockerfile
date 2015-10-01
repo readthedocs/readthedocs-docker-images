@@ -18,10 +18,11 @@ RUN apt-get -y install bzr subversion git-core mercurial libpq-dev libxml2-dev \
 # from readthedocs.build
 RUN apt-get -y install libfreetype6 g++ sqlite libevent-dev libffi-dev \
     libenchant1c2a curl texlive-full python-m2crypto python-matplotlib \
-    python-numpy python-scipy graphviz graphviz-dev libgraphviz-dev pandoc \
-    doxygen latex-cjk-chinese-arphic-gbsn00lp latex-cjk-chinese-arphic-gkai00mp \
-    latex-cjk-chinese-arphic-bsmi00lp latex-cjk-chinese-arphic-bkai00mp python3 \
-    python3-dev python3-pip python3-matplotlib python3-numpy python3-scipy \
+    python-numpy python-scipy python-pandas graphviz graphviz-dev \
+    libgraphviz-dev pandoc doxygen latex-cjk-chinese-arphic-gbsn00lp \
+    latex-cjk-chinese-arphic-gkai00mp latex-cjk-chinese-arphic-bsmi00lp \
+    latex-cjk-chinese-arphic-bkai00mp python3 python3-dev python3-pip \
+    python3-matplotlib python3-numpy python3-scipy python3-pandas \
     texlive-latex-extra texlive-fonts-recommended
 
 RUN easy_install3 pip
