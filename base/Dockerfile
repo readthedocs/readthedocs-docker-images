@@ -23,7 +23,8 @@ RUN apt-get -y install libfreetype6 g++ sqlite libevent-dev libffi-dev \
     latex-cjk-chinese-arphic-gkai00mp latex-cjk-chinese-arphic-bsmi00lp \
     latex-cjk-chinese-arphic-bkai00mp python3 python3-dev python3-pip \
     python3-matplotlib python3-numpy python3-scipy python3-pandas \
-    texlive-latex-extra texlive-fonts-recommended pkg-config libjpeg-dev
+    texlive-latex-extra texlive-fonts-recommended pkg-config libjpeg-dev \
+    libfreetype6-dev
 
 RUN easy_install3 pip
 RUN easy_install-2.7 pip
