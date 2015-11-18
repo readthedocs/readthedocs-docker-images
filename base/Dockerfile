@@ -27,10 +27,13 @@ RUN apt-get -y install libfreetype6 g++ sqlite libevent-dev libffi-dev \
     libfreetype6-dev libtiff5-dev libjpeg8-dev zlib1g-dev liblcms2-dev \
     libwebp-dev
 
-RUN easy_install3 pip
-RUN easy_install-2.7 pip
-RUN pip3 install -U virtualenv
-RUN pip2 install -U virtualenv
+RUN curl https://bootstrap.pypa.io/get-pip.py
+RUN python2.7 ./get-pip.py
+RUN python3 ./get-pip.py
+#RUN python3.4+ -m ensurepip --upgrade
+
+RUN python2.7 -m pip install -U virtualenv
+RUN python3 -m pip install -U virtualenv
 
 # UID and GID from readthedocs/user
 RUN groupadd --gid 205 docs
