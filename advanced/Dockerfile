@@ -9,7 +9,7 @@ MAINTAINER Read the Docs <support@readthedocs.com>
 # .NET support - Mono, DNVM, and docfx installation
 ENV USER_HOME /home/docs
 ENV DNX_VERSION 1.0.0-beta6
-ENV DOCFX_VERSION 1.0.0-alpha-10020
+ENV DOCFX_VERSION 1.0.0
 
 USER root
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 \
