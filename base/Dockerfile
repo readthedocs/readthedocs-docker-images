@@ -29,8 +29,8 @@ RUN apt-get -y install libfreetype6 g++ sqlite libevent-dev libffi-dev \
 
 RUN easy_install3 pip
 RUN easy_install-2.7 pip
-RUN pip3 install -U virtualenv
-RUN pip2 install -U virtualenv
+RUN pip3 install -U virtualenv auxlib
+RUN pip2 install -U virtualenv auxlib
 RUN pip2 install -U conda
 
 # UID and GID from readthedocs/user
