@@ -31,7 +31,8 @@ RUN easy_install3 pip
 RUN easy_install-2.7 pip
 RUN pip3 install -U virtualenv auxlib
 RUN pip2 install -U virtualenv auxlib
-RUN pip2 install -U conda
+RUN wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+RUN bash Miniconda2-latest-Linux-x86_64.sh
 
 # UID and GID from readthedocs/user
 RUN groupadd --gid 205 docs
