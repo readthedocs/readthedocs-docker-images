@@ -26,7 +26,7 @@ RUN apt-get -y install libfreetype6 g++ sqlite libevent-dev libffi-dev \
     python3-matplotlib python3-numpy python3-scipy python3-pandas \
     texlive-latex-extra texlive-fonts-recommended pkg-config libjpeg-dev \
     libfreetype6-dev libtiff5-dev libjpeg8-dev zlib1g-dev liblcms2-dev \
-    libwebp-dev libcairo2-dev
+    libwebp-dev libcairo2-dev plantuml
 
 RUN easy_install3 pip
 RUN easy_install pip
