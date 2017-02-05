@@ -3,7 +3,7 @@
 # This image is for resource-intensive toolchains and and build tools with
 # special requirements
 
-FROM readthedocs/build:latest
+FROM readthedocs/build:1.0
 MAINTAINER Read the Docs <support@readthedocs.com>
 
 # .NET support - Mono, DNVM, and docfx installation

@@ -1,6 +1,7 @@
 # Read the Docs - Environment base
 FROM ubuntu:14.04
 MAINTAINER Read the Docs <support@readthedocs.com>
+LABEL version="1.0"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
