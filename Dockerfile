@@ -1,6 +1,7 @@
 # Read the Docs - Environment base
 FROM ubuntu:16.04
 MAINTAINER Read the Docs <support@readthedocs.com>
+LABEL version="latest"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
@@ -8,38 +9,82 @@ ENV LANG C.UTF-8
 
 # System dependencies
 RUN apt-get -y update
-RUN apt-get -y install vim software-properties-common python-setuptools \
-    python3-setuptools
+RUN apt-get -y install vim software-properties-common
 
-# from readthedocs.common
-RUN apt-get -y install bzr subversion git-core mercurial libpq-dev libxml2-dev \
-    libxslt-dev libxslt1-dev build-essential python-dev postgresql-client \
-    libmysqlclient-dev
+# Install requirements
+RUN apt-get -y install \
+    bzr subversion git-core mercurial libpq-dev libxml2-dev libxslt-dev \
+    libxslt1-dev build-essential postgresql-client libmysqlclient-dev curl \
+    doxygen g++ graphviz-dev libfreetype6 libbz2-dev libcairo2-dev \
+    libenchant1c2a libevent-dev libffi-dev libfreetype6-dev \
+    libgraphviz-dev libjpeg-dev libjpeg8-dev liblcms2-dev libreadline-dev \
+    libsqlite3-dev libtiff5-dev libwebp-dev pandoc pkg-config zlib1g-dev
 
-# from readthedocs.build
-RUN apt-get -y install libfreetype6 g++ sqlite libevent-dev libffi-dev \
-    libenchant1c2a curl texlive-full python-m2crypto python-matplotlib \
-    python-numpy python-scipy python-pandas graphviz graphviz-dev \
-    libgraphviz-dev pandoc doxygen latex-cjk-chinese-arphic-gbsn00lp \
-    latex-cjk-chinese-arphic-gkai00mp latex-cjk-chinese-arphic-bsmi00lp \
-    latex-cjk-chinese-arphic-bkai00mp python3 python3-dev python3-pip \
-    python3-matplotlib python3-numpy python3-scipy python3-pandas \
-    texlive-latex-extra texlive-fonts-recommended pkg-config libjpeg-dev \
-    libfreetype6-dev libtiff5-dev libjpeg8-dev zlib1g-dev liblcms2-dev \
-    libwebp-dev libcairo2-dev
+# LaTeX -- split to reduce image layer size
+RUN apt-get -y install texlive-fonts-extra
+RUN apt-get -y install texlive-latex-extra-doc texlive-publishers-doc \
+    texlive-pictures-doc
+RUN apt-get -y install texlive-lang-english texlive-lang-japanese
+RUN apt-get -y install texlive-full
+RUN apt-get -y install \
+    texlive-fonts-recommended latex-cjk-chinese-arphic-bkai00mp \
+    latex-cjk-chinese-arphic-gbsn00lp latex-cjk-chinese-arphic-gkai00mp
 
-RUN easy_install3 pip
-RUN easy_install pip
-RUN pip3 install -U virtualenv auxlib
-RUN pip2 install -U virtualenv auxlib
-RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
-RUN bash Miniconda2-latest-Linux-x86_64.sh -b -p /usr/local/miniconda/
-RUN ln -s /usr/local/miniconda/bin/conda /usr/local/bin/conda
+# Install Python tools/libs
+RUN apt-get -y install python-pip && pip install -U virtualenv auxlib
+
+# Install Conda
+RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh && \
+    bash Miniconda2-latest-Linux-x86_64.sh -b -p /usr/local/miniconda/ && \
+    ln -s /usr/local/miniconda/bin/conda /usr/local/bin/conda
 
 # UID and GID from readthedocs/user
 RUN groupadd --gid 205 docs
 RUN useradd -m --uid 1005 --gid 205 docs
 
 USER docs
+
+# Install pyenv
+RUN git clone --depth 1 https://github.com/yyuu/pyenv.git ~docs/.pyenv
+ENV PYENV_ROOT /home/docs/.pyenv
+ENV PATH /home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
+
+# Install supported Python versions
+RUN pyenv install 2.7.13 && \
+    pyenv install 3.6.0 && \
+    pyenv install 3.5.2 && \
+    pyenv install 3.4.5 && \
+    pyenv install 3.3.6 && \
+    pyenv global 2.7.13 3.6.0 3.5.2 3.4.5 3.3.6
+
+WORKDIR /tmp
+
+RUN pyenv local 2.7.13 && \
+    pyenv exec pip install -U pip && \
+    pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
+    pyenv exec pip install pandas matplotlib virtualenv
+
+RUN pyenv local 3.6.0 && \
+    pyenv exec pip install -U pip && \
+    pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
+    pyenv exec pip install pandas matplotlib virtualenv
+
+RUN pyenv local 3.5.2 && \
+    pyenv exec pip install -U pip && \
+    pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
+    pyenv exec pip install pandas matplotlib virtualenv
+
+RUN pyenv local 3.4.5 && \
+    pyenv exec pip install -U pip && \
+    pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
+    pyenv exec pip install pandas matplotlib virtualenv
+
+RUN pyenv local 3.3.6 && \
+    pyenv exec pip install -U pip && \
+    pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
+    pyenv exec pip install "pandas<0.18" "matplotlib<1.5" virtualenv && \
+    pyenv local --unset
+
+WORKDIR /
 
 CMD ["/bin/bash"]
