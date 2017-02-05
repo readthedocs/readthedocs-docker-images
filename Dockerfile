@@ -1,5 +1,5 @@
 # Read the Docs - Environment base
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER Read the Docs <support@readthedocs.com>
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -29,7 +29,7 @@ RUN apt-get -y install libfreetype6 g++ sqlite libevent-dev libffi-dev \
     libwebp-dev libcairo2-dev
 
 RUN easy_install3 pip
-RUN easy_install-2.7 pip
+RUN easy_install pip
 RUN pip3 install -U virtualenv auxlib
 RUN pip2 install -U virtualenv auxlib
 RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
