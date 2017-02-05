@@ -4,6 +4,7 @@ MAINTAINER Read the Docs <support@readthedocs.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
+ENV LANG C.UTF-8
 
 # System dependencies
 RUN apt-get -y update
