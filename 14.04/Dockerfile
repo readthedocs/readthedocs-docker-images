@@ -11,6 +11,11 @@ RUN apt-get -y update
 RUN apt-get -y install vim software-properties-common python-setuptools \
     python3-setuptools
 
+# add ppas when software-properties-common are in place
+RUN add-apt-repository ppa:jasekpetr/trusty-backports
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 2D7FCB4366575C13
+RUN apt-get -y update
+
 # from readthedocs.common
 RUN apt-get -y install bzr subversion git-core mercurial libpq-dev libxml2-dev \
     libxslt-dev libxslt1-dev build-essential python-dev postgresql-client \
@@ -26,7 +31,7 @@ RUN apt-get -y install libfreetype6 g++ sqlite libevent-dev libffi-dev \
     python3-matplotlib python3-numpy python3-scipy python3-pandas \
     texlive-latex-extra texlive-fonts-recommended pkg-config libjpeg-dev \
     libfreetype6-dev libtiff5-dev libjpeg8-dev zlib1g-dev liblcms2-dev \
-    libwebp-dev libcairo2-dev
+    libwebp-dev libcairo2-dev plantuml
 
 RUN easy_install3 pip
 RUN easy_install-2.7 pip
