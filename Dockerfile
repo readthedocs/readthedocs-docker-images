@@ -41,6 +41,7 @@ RUN useradd -m --uid 1005 --gid 205 docs
 USER docs
 
 # Install miniconda as docs user
+WORKDIR /home/docs
 RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-4.2.11-Linux-x86_64.sh
 RUN bash Miniconda2-4.2.11-Linux-x86_64.sh -b -p /home/docs/miniconda2/
 RUN mkdir /home/docs/bin
