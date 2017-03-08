@@ -26,4 +26,6 @@ You can also compile these images locally:
 
     docker build -t readthedocs/build:latest .
 
-See :doc:`CONTRIBUTING` for more information on building and testing.
+See `CONTRIBUTING`_ for more information on building and testing.
+
+.. _CONTRIBUTING: CONTRIBUTING.rst
