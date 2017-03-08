@@ -18,17 +18,12 @@ repositoryr:
 Usage
 -----
 
-To use these images, you can pull from Docker Hub:
+To use prebuilt images, you can pull from Docker Hub:
 
     docker pull readthedocs/build:latest
 
-You can also compile these images manually:
+You can also compile these images locally:
 
     docker build -t readthedocs/build:latest .
 
-Push to Docker Hub
-------------------
-
-To push to Docker Hub::
-
-    docker push readthedocs/build:latest
+See :doc:`CONTRIBUTING` for more information on building and testing.

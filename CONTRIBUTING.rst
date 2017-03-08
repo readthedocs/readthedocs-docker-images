@@ -2,51 +2,71 @@ How to Contribute
 =================
 
 We can use contributions to the images here, but can also use your help in
-testing the images. If you'd like to sign up for beta testing the ``latest``
-image, sign up here:
+testing the images on Read the Docs. If you'd like to sign up for beta testing
+the ``latest`` image, sign up here:
 
 https://goo.gl/forms/3oAbxkGMUiEZz2782
 
 We'll need to verify that you are the account holder, and that you made the
 request for the projects that you listed.
 
-Testing
--------
+Testing Locally
+---------------
 
-You can test your image by running a shell in a container::
+If you'd like to add a feature to any of the images, you'll need to verify the
+image works locally first. After making changes to the ``Dockerfile``, you can
+build your image with::
+
+    docker build -t readthedocs/build:latest .
+
+This will take quite a long time, mostly due to LaTeX dependencies. The
+resulting image will be around 8GB.
+
+Once your image is built, you can test your image locally by running a shell in
+a container using your new image::
 
     docker run --rm -t -i readthedocs/build:latest /bin/bash
 
 This will put you into the root path in the container, as the ``docs`` user.
 From here you can head to your home path (``cd ~docs``) and run normal
-Python/Sphinx/etc operations to see if your changes have worked.
+Python/Sphinx/etc operations to see if your changes have worked. For example::
+
+    cd ~docs
+    git clone https://github.com/readthedocs/template
+    cd template
+    make html
 
 Releases
 --------
 
-Theses images are all built from our `automated Docker Hub repository`_. Here is
-how the images are currently built:
+These images are all built from our `automated Docker Hub repository`_. The
+automated build rules include pattern matching on Git tags. Here is how the
+images are currently tagged:
 
-build:1.0
-    From the ``1.0`` tag. These tags should only represent commits to the
-    ``releases/1.x`` branch.
+build:latest
+    From the ``master`` branch.
 
 build:2.0
     From any tag matching ``2.0[0-9.]*``. These tags should only represent
     commits to the ``releases/2.x`` branch.
 
-build:2.1
-    From any tag matching ``2.1[0-9.]*`` These tags should only represent
-    commits to the ``releases/2.x`` branch.
-
-build:latest
-    From the ``master`` branch.
+build:1.0
+    From the ``1.0`` tag. These tags should only represent commits to the
+    ``releases/1.x`` branch.
 
 We follow `semantic versioning`_, but drop the bug fix level version number for
 our images, as this level of granularity is not important for any application of
-these images. New releases should be merged into one of the ``releases/``
-branches, for instance ``releases/2.x``. This commit should then be tagged using
-the new version number.
+these images. Each release is tagged in Git, and the release version number is
+included in the Dockerfile version label (``LABEL version="2.0"``).
+
+For our ``latest`` version, you do not need to update the version label in the
+Dockerfile, and you do not need to tag the commit. This will be handled when the
+latest image becomes a release.
+
+Releases should be merged into one of the ``releases/`` branches, for instance
+``releases/2.x``. The version label in the Dockerfile should be updated to the
+next version in the series, following semver rules. This commit should then also
+be tagged using the new version number.
 
 If the version number in the Dockerfile was ``2.0.1`` before, and you implement
 a bug fix to the image, the new image will be ``2.0.2``. The output image from
