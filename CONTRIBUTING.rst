@@ -1,9 +1,19 @@
 How to Contribute
 =================
 
-We can use contributions to the images here, but can also use your help in
-testing the images on Read the Docs. If you'd like to sign up for beta testing
-the ``latest`` image, sign up here:
+These are the build container images that Read the Docs will use to build your
+documentation. They include all of the dependencies we require, and are a method
+of isolating the build processes from the rest of our infrastructure.
+
+If you are interested in contributing to the development of our build container
+images, you can help in one of two ways:
+
+If you would like to fix a bug or add a feature to our build images, see
+`Testing Locally`_ for more information on how to build and test these images.
+
+We can also use your help in beta testing the pre-built images on Read the Docs.
+If you'd like to sign up for beta testing our latest build image with your
+projects, you can fill out this form:
 
 https://goo.gl/forms/3oAbxkGMUiEZz2782
 
