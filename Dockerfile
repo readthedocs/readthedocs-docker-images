@@ -36,16 +36,17 @@ RUN apt-get -y install plantuml
 # Install Python tools/libs
 RUN apt-get -y install python-pip && pip install -U virtualenv auxlib
 
-# Install Conda
-RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh && \
-    bash Miniconda2-latest-Linux-x86_64.sh -b -p /usr/local/miniconda/ && \
-    ln -s /usr/local/miniconda/bin/conda /usr/local/bin/conda
-
 # UID and GID from readthedocs/user
 RUN groupadd --gid 205 docs
 RUN useradd -m --uid 1005 --gid 205 docs
 
 USER docs
+WORKDIR /home/docs
+
+# Install Conda
+RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-4.3.11-Linux-x86_64.sh
+RUN bash Miniconda2-4.3.11-Linux-x86_64.sh -b -p /home/docs/.conda/
+env PATH $PATH:/home/docs/.conda/bin
 
 # Install pyenv
 RUN git clone --depth 1 https://github.com/yyuu/pyenv.git ~docs/.pyenv
