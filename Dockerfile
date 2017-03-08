@@ -4,8 +4,7 @@ MAINTAINER Read the Docs <support@readthedocs.com>
 LABEL version="latest"
 
 # Install requirements
-RUN apt-get -y install \
-    libpq-dev libxml2-dev libxslt-dev \
+RUN apt-get -y install libpq-dev libxml2-dev libxslt-dev \
     libxslt1-dev build-essential postgresql-client libmysqlclient-dev curl \
     doxygen g++ graphviz-dev libfreetype6 libbz2-dev libcairo2-dev \
     libenchant1c2a libevent-dev libffi-dev libfreetype6-dev \
