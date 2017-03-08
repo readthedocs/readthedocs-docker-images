@@ -18,7 +18,7 @@ repositoryr:
 Usage
 -----
 
-To use prebuilt images, you can pull from Docker Hub:
+To use the pre-built images, you can pull from Docker Hub:
 
     docker pull readthedocs/build:latest
 
