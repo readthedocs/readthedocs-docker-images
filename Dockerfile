@@ -42,9 +42,8 @@ USER docs
 
 # Install miniconda as docs user
 WORKDIR /home/docs
-RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-4.2.11-Linux-x86_64.sh
-RUN bash Miniconda2-4.2.11-Linux-x86_64.sh -b -p /home/docs/miniconda2/
-RUN mkdir /home/docs/bin
-RUN ln -s /home/docs/miniconda2/bin/conda /home/docs/bin/conda
+RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-4.3.11-Linux-x86_64.sh
+RUN bash Miniconda2-4.3.11-Linux-x86_64.sh -b -p /home/docs/miniconda2/
+env PATH $PATH:/home/docs/miniconda2/bin
 
 CMD ["/bin/bash"]
