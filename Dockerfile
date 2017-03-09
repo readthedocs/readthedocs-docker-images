@@ -3,13 +3,15 @@ FROM readthedocs/build:base
 MAINTAINER Read the Docs <support@readthedocs.com>
 LABEL version="latest"
 
+USER root
+
 # Install requirements
 RUN apt-get -y install libpq-dev libxml2-dev libxslt-dev \
     libxslt1-dev build-essential postgresql-client libmysqlclient-dev curl \
     g++ libfreetype6 libbz2-dev libcairo2-dev \
     libenchant1c2a libevent-dev libffi-dev libfreetype6-dev \
     libgraphviz-dev libjpeg-dev libjpeg8-dev liblcms2-dev libreadline-dev \
-    libsqlite3-dev libtiff5-dev libwebp-dev pkg-config zlib1g-dev
+    libtiff5-dev libwebp-dev pkg-config zlib1g-dev
 
 # LaTeX -- split to reduce image layer size
 RUN apt-get -y install texlive-fonts-extra
@@ -23,5 +25,7 @@ RUN apt-get -y install \
 
 # Install plantuml
 RUN apt-get -y install plantuml
+
+USER docs
 
 CMD ["/bin/bash"]

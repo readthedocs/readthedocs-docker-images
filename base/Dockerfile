@@ -13,13 +13,12 @@ ENV LANG C.UTF-8
 
 # System dependencies
 RUN apt-get -y update
-RUN apt-get -y install vim software-properties-common
-RUN apt-get -y install python-setuptools python3-setuptools python-dev python3-dev
+RUN apt-get -y install vim curl
 
 # Version control and basic building utilies
-RUN apt-get -y install bzr subversion git-core mercurial build-essential 
+RUN apt-get -y install bzr subversion git-core mercurial 
 
-# from readthedocs.build
+# Basic conversion and sphinx extension requirements
 RUN apt-get -y install graphviz graphviz-dev pandoc doxygen 
 
 # Install Python tools/libs
@@ -28,6 +27,12 @@ RUN apt-get -y install python-pip && pip install -U virtualenv auxlib
 # UID and GID from readthedocs/user
 RUN groupadd --gid 205 docs
 RUN useradd -m --uid 1005 --gid 205 docs
+
+# Try and fix openssl build
+RUN apt-get -y install libssl-dev libsqlite3-dev
+
+# Fix matplotlib
+RUN apt-get -y install pkg-config libfreetype6 libfreetype6-dev
 
 USER docs
 WORKDIR /home/docs
@@ -41,6 +46,7 @@ env PATH $PATH:/home/docs/.conda/bin
 RUN git clone --depth 1 https://github.com/yyuu/pyenv.git ~docs/.pyenv
 ENV PYENV_ROOT /home/docs/.pyenv
 ENV PATH /home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
+
 
 # Install supported Python versions
 RUN pyenv install 2.7.13 && \
