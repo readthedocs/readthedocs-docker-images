@@ -24,6 +24,7 @@ To use these images, you can pull from Docker Hub:
 
 You can also compile these images manually:
 
+    docker build -t readthedocs/build:base base
     docker build -t readthedocs/build:latest .
 
 Push to Docker Hub
