@@ -24,6 +24,7 @@ To use the pre-built images, you can pull from Docker Hub:
 
 You can also compile these images locally:
 
+    docker build -t readthedocs/build:base base
     docker build -t readthedocs/build:latest .
 
 See `CONTRIBUTING`_ for more information on building and testing.
