@@ -48,5 +48,7 @@ env PATH $PATH:/home/docs/.conda/bin
 
 # Add conda-forge channel with the highest channel priority
 RUN conda config --add channels conda-forge
+RUN conda config --set auto_update_conda false
+
 
 CMD ["/bin/bash"]
