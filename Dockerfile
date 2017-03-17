@@ -20,6 +20,10 @@ RUN apt-get -y install \
     libgraphviz-dev libjpeg-dev libjpeg8-dev liblcms2-dev libreadline-dev \
     libsqlite3-dev libtiff5-dev libwebp-dev pandoc pkg-config zlib1g-dev
 
+# pyenv extra requirements
+RUN apt-get install -y \
+    make libssl-dev wget llvm libncurses5-dev libncursesw5-dev xz-utils
+
 # LaTeX -- split to reduce image layer size
 RUN apt-get -y install texlive-fonts-extra
 RUN apt-get -y install texlive-latex-extra-doc texlive-publishers-doc \
