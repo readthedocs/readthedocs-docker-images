@@ -1,7 +1,7 @@
 # Read the Docs - Environment base
 FROM ubuntu:16.04
 MAINTAINER Read the Docs <support@readthedocs.com>
-LABEL version="2.0.1"
+LABEL version="2.0.2"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
@@ -45,5 +45,11 @@ WORKDIR /home/docs
 RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-4.3.11-Linux-x86_64.sh
 RUN bash Miniconda2-4.3.11-Linux-x86_64.sh -b -p /home/docs/.conda/
 env PATH $PATH:/home/docs/.conda/bin
+
+# Add conda-forge channel with the highest channel priority
+RUN conda config --add channels conda-forge
+# Don't have conda try and upgrade itself, so we can pin a version
+RUN conda config --set auto_update_conda false
+
 
 CMD ["/bin/bash"]
