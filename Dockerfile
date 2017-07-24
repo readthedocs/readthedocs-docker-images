@@ -44,6 +44,9 @@ RUN apt-get -y install python-pip && pip install -U virtualenv auxlib
 RUN groupadd --gid 205 docs
 RUN useradd -m --uid 1005 --gid 205 docs
 
+# Install jsdoc
+RUN apt-get -y install nodejs nodejs-legacy npm && npm install --global jsdoc
+
 USER docs
 WORKDIR /home/docs
 
