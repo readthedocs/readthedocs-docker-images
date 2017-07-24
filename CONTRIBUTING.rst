@@ -88,4 +88,4 @@ main ``2.x`` image at a time. There is no need for us to run multiple bug fix
 versions at the same time.
 
 .. _automated Docker Hub repository: https://hub.docker.com/r/readthedocs/build/
-.. _sematic versioning: http://semver.org
+.. _semantic versioning: http://semver.org
