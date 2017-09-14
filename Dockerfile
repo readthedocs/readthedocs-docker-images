@@ -62,11 +62,11 @@ ENV PATH /home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
 
 # Install supported Python versions
 RUN pyenv install 2.7.13 && \
-    pyenv install 3.6.0 && \
-    pyenv install 3.5.2 && \
-    pyenv install 3.4.5 && \
+    pyenv install 3.6.2 && \
+    pyenv install 3.5.4 && \
+    pyenv install 3.4.7 && \
     pyenv install 3.3.6 && \
-    pyenv global 2.7.13 3.6.0 3.5.2 3.4.5 3.3.6
+    pyenv global 2.7.13 3.6.2 3.5.4 3.4.7 3.3.6
 
 WORKDIR /tmp
 
@@ -75,17 +75,17 @@ RUN pyenv local 2.7.13 && \
     pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
     pyenv exec pip install pandas matplotlib virtualenv
 
-RUN pyenv local 3.6.0 && \
+RUN pyenv local 3.6.2 && \
     pyenv exec pip install -U pip && \
     pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
     pyenv exec pip install pandas matplotlib virtualenv
 
-RUN pyenv local 3.5.2 && \
+RUN pyenv local 3.5.4 && \
     pyenv exec pip install -U pip && \
     pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
     pyenv exec pip install pandas matplotlib virtualenv
 
-RUN pyenv local 3.4.5 && \
+RUN pyenv local 3.4.7 && \
     pyenv exec pip install -U pip && \
     pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
     pyenv exec pip install pandas matplotlib virtualenv
