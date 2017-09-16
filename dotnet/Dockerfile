@@ -1,6 +1,6 @@
 # Read the Docs - Advanced image
 #
-# This image is for resource-intensive toolchains and and build tools with
+# This image is for resource-intensive toolchains and build tools with
 # special requirements
 
 FROM readthedocs/build:latest
