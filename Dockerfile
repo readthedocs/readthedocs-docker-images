@@ -51,8 +51,8 @@ USER docs
 WORKDIR /home/docs
 
 # Install Conda
-RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-4.3.11-Linux-x86_64.sh
-RUN bash Miniconda2-4.3.11-Linux-x86_64.sh -b -p /home/docs/.conda/
+RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh
+RUN bash Miniconda2-latest-MacOSX-x86_64.sh -b -p /home/docs/.conda/
 ENV PATH $PATH:/home/docs/.conda/bin
 
 # Install pyenv
