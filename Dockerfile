@@ -42,8 +42,8 @@ USER docs
 
 # Install miniconda as docs user
 WORKDIR /home/docs
-RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-4.3.11-Linux-x86_64.sh
-RUN bash Miniconda2-4.3.11-Linux-x86_64.sh -b -p /home/docs/.conda/
+RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-4.3.27.1-Linux-x86_64.sh
+RUN bash Miniconda2-4.3.27.1-Linux-x86_64.sh -b -p /home/docs/.conda/
 env PATH $PATH:/home/docs/.conda/bin
 
 # Add conda-forge channel with the highest channel priority
