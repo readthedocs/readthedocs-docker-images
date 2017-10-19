@@ -6,6 +6,7 @@ LABEL version="latest"
 ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
 ENV LANG C.UTF-8
+ENV CONDA_VERSION 4.3.27.1
 
 # System dependencies
 RUN apt-get -y update
@@ -51,8 +52,8 @@ USER docs
 WORKDIR /home/docs
 
 # Install Conda
-RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-4.3.27.1-Linux-x86_64.sh
-RUN bash Miniconda2-4.3.27.1-Linux-x86_64.sh -b -p /home/docs/.conda/
+RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
+RUN bash Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
 ENV PATH $PATH:/home/docs/.conda/bin
 
 # Install pyenv

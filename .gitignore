@@ -1,0 +1,4 @@
+.cache/
+Pipfile.lock
+__pycache__
+.ropeproject/
