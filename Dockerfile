@@ -6,6 +6,8 @@ LABEL version="latest"
 ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
 ENV LANG C.UTF-8
+
+# EDIT THIS JUST TO MAKE THE TEST RUN, expecting the conda version test fails
 ENV CONDA_VERSION 4.3.30
 
 # System dependencies
