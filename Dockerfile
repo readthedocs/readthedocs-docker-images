@@ -6,6 +6,7 @@ LABEL version="2.0.3"
 ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
 ENV LANG C.UTF-8
+ENV CONDA_VERSION 4.3.30
 
 # System dependencies
 RUN apt-get -y update
@@ -42,9 +43,9 @@ USER docs
 
 # Install miniconda as docs user
 WORKDIR /home/docs
-RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-4.3.27.1-Linux-x86_64.sh
-RUN bash Miniconda2-4.3.27.1-Linux-x86_64.sh -b -p /home/docs/.conda/
-env PATH $PATH:/home/docs/.conda/bin
+RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
+RUN bash Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
+ENV PATH $PATH:/home/docs/.conda/bin
 
 # Add conda-forge channel with the highest channel priority
 RUN conda config --add channels conda-forge
