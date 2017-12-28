@@ -6,7 +6,7 @@ LABEL version="2.0.3"
 ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
 ENV LANG C.UTF-8
-ENV CONDA_VERSION 4.3.30
+ENV CONDA_VERSION 4.3.31
 
 # System dependencies
 RUN apt-get -y update
