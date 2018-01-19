@@ -48,6 +48,9 @@ RUN useradd -m --uid 1005 --gid 205 docs
 # Install jsdoc
 RUN apt-get -y install nodejs nodejs-legacy npm && npm install --global jsdoc
 
+# Install linguist for programming language detection
+RUN apt-get -y install ruby-github-linguist
+
 USER docs
 WORKDIR /home/docs
 
