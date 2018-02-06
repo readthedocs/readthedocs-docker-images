@@ -50,6 +50,7 @@ RUN apt-get -y install nodejs nodejs-legacy npm && npm install --global jsdoc
 
 # Install linguist for programming language detection
 RUN apt-get -y install ruby-github-linguist
+RUN ln -s /usr/bin/github-linguist /usr/local/bin/linguist
 
 USER docs
 WORKDIR /home/docs
