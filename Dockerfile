@@ -1,5 +1,5 @@
 # Read the Docs - Environment base
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 MAINTAINER Read the Docs <support@readthedocs.com>
 LABEL version="latest"
 
@@ -8,11 +8,10 @@ ENV APPDIR /app
 ENV LANG C.UTF-8
 
 # Versions, and expose labels for exernal usage
-ENV PYTHON_VERSION_27 2.7.13
-ENV PYTHON_VERSION_33 3.3.6
-ENV PYTHON_VERSION_34 3.4.7
-ENV PYTHON_VERSION_35 3.5.4
-ENV PYTHON_VERSION_36 3.6.2
+ENV PYTHON_VERSION_27 2.7.14
+ENV PYTHON_VERSION_33 3.3.7
+ENV PYTHON_VERSION_35 3.5.5
+ENV PYTHON_VERSION_36 3.6.4
 ENV CONDA_VERSION 4.4.10
 LABEL python.version_27=$PYTHON_VERSION_27
 LABEL python.version_33=$PYTHON_VERSION_33
@@ -59,7 +58,7 @@ RUN groupadd --gid 205 docs
 RUN useradd -m --uid 1005 --gid 205 docs
 
 # Install jsdoc
-RUN apt-get -y install nodejs nodejs-legacy npm && npm install --global jsdoc
+RUN apt-get -y install nodejs npm && npm install --global jsdoc
 
 USER docs
 WORKDIR /home/docs
