@@ -9,13 +9,10 @@ ENV LANG C.UTF-8
 
 # Versions, and expose labels for exernal usage
 ENV PYTHON_VERSION_27 2.7.14
-ENV PYTHON_VERSION_33 3.3.7
 ENV PYTHON_VERSION_35 3.5.5
 ENV PYTHON_VERSION_36 3.6.4
 ENV CONDA_VERSION 4.4.10
 LABEL python.version_27=$PYTHON_VERSION_27
-LABEL python.version_33=$PYTHON_VERSION_33
-LABEL python.version_34=$PYTHON_VERSION_34
 LABEL python.version_35=$PYTHON_VERSION_35
 LABEL python.version_36=$PYTHON_VERSION_36
 LABEL conda.version=$CONDA_VERSION
@@ -77,14 +74,10 @@ ENV PATH /home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
 RUN pyenv install $PYTHON_VERSION_27 && \
     pyenv install $PYTHON_VERSION_36 && \
     pyenv install $PYTHON_VERSION_35 && \
-    pyenv install $PYTHON_VERSION_34 && \
-    pyenv install $PYTHON_VERSION_33 && \
     pyenv global \
         $PYTHON_VERSION_27 \
         $PYTHON_VERSION_36 \
-        $PYTHON_VERSION_35 \
-        $PYTHON_VERSION_34 \
-        $PYTHON_VERSION_33
+        $PYTHON_VERSION_35
 
 WORKDIR /tmp
 
@@ -102,17 +95,6 @@ RUN pyenv local $PYTHON_VERSION_35 && \
     pyenv exec pip install -U pip && \
     pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
     pyenv exec pip install pandas matplotlib virtualenv
-
-RUN pyenv local $PYTHON_VERSION_34 && \
-    pyenv exec pip install -U pip && \
-    pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install pandas matplotlib virtualenv
-
-RUN pyenv local $PYTHON_VERSION_33 && \
-    pyenv exec pip install -U pip && \
-    pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install "pandas<0.18" "matplotlib<1.5" virtualenv && \
-    pyenv local --unset
 
 WORKDIR /
 
