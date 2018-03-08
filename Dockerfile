@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
 ENV LANG C.UTF-8
 
-# Versions, and expose labels for exernal usage
+# Versions, and expose labels for querying image metadata
 ENV PYTHON_VERSION_27 2.7.13
 ENV PYTHON_VERSION_33 3.3.6
 ENV PYTHON_VERSION_34 3.4.7
