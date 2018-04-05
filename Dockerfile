@@ -6,7 +6,20 @@ LABEL version="latest"
 ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
 ENV LANG C.UTF-8
+
+# Versions, and expose labels for querying image metadata
+ENV PYTHON_VERSION_27 2.7.13
+ENV PYTHON_VERSION_33 3.3.6
+ENV PYTHON_VERSION_34 3.4.7
+ENV PYTHON_VERSION_35 3.5.4
+ENV PYTHON_VERSION_36 3.6.2
 ENV CONDA_VERSION 4.4.10
+LABEL python.version_27=$PYTHON_VERSION_27
+LABEL python.version_33=$PYTHON_VERSION_33
+LABEL python.version_34=$PYTHON_VERSION_34
+LABEL python.version_35=$PYTHON_VERSION_35
+LABEL python.version_36=$PYTHON_VERSION_36
+LABEL conda.version=$CONDA_VERSION
 
 # System dependencies
 RUN apt-get -y update
@@ -62,36 +75,41 @@ ENV PYENV_ROOT /home/docs/.pyenv
 ENV PATH /home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
 
 # Install supported Python versions
-RUN pyenv install 2.7.13 && \
-    pyenv install 3.6.2 && \
-    pyenv install 3.5.4 && \
-    pyenv install 3.4.7 && \
-    pyenv install 3.3.6 && \
-    pyenv global 2.7.13 3.6.2 3.5.4 3.4.7 3.3.6
+RUN pyenv install $PYTHON_VERSION_27 && \
+    pyenv install $PYTHON_VERSION_36 && \
+    pyenv install $PYTHON_VERSION_35 && \
+    pyenv install $PYTHON_VERSION_34 && \
+    pyenv install $PYTHON_VERSION_33 && \
+    pyenv global \
+        $PYTHON_VERSION_27 \
+        $PYTHON_VERSION_36 \
+        $PYTHON_VERSION_35 \
+        $PYTHON_VERSION_34 \
+        $PYTHON_VERSION_33
 
 WORKDIR /tmp
 
-RUN pyenv local 2.7.13 && \
+RUN pyenv local $PYTHON_VERSION_27 && \
     pyenv exec pip install -U pip && \
     pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
     pyenv exec pip install pandas matplotlib virtualenv
 
-RUN pyenv local 3.6.2 && \
+RUN pyenv local $PYTHON_VERSION_36 && \
     pyenv exec pip install -U pip && \
     pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
     pyenv exec pip install pandas matplotlib virtualenv
 
-RUN pyenv local 3.5.4 && \
+RUN pyenv local $PYTHON_VERSION_35 && \
     pyenv exec pip install -U pip && \
     pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
     pyenv exec pip install pandas matplotlib virtualenv
 
-RUN pyenv local 3.4.7 && \
+RUN pyenv local $PYTHON_VERSION_34 && \
     pyenv exec pip install -U pip && \
     pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
     pyenv exec pip install pandas matplotlib virtualenv
 
-RUN pyenv local 3.3.6 && \
+RUN pyenv local $PYTHON_VERSION_33 && \
     pyenv exec pip install -U pip && \
     pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
     pyenv exec pip install "pandas<0.18" "matplotlib<1.5" virtualenv && \
