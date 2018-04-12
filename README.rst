@@ -8,10 +8,27 @@ environments to encapsulate the build process.
 You can find these images on Docker Hub, on the `readthedocs/build`_
 repositoryr:
 
-* `readthedocs/build:1.0` - Ubuntu 14.04 based image
-* `readthedocs/build:1.0-dotnet` - Ubuntu 14.04 based image, plus .NET
-* `readthedocs/build:2.0` - Ubuntu 16.04 based image
-* `readthedocs/build:latest` - Latest development image
+`readthedocs/build:1.0`
+    **Deprecated**
+    Ubuntu 14.04 based image
+
+`readthedocs/build:1.0-dotnet`
+    **Deprecated**
+    Ubuntu 14.04 based image, plus .NET
+
+`readthedocs/build:2.0`
+    **stable**
+    Ubuntu 16.04 based image. This is the **stable** image previously used
+
+`readthedocs/build:3.0`
+    **latest**
+    Ubuntu 16.04 supporting Python 2.7, 3.3, 3.4, 3.5, and 3.6. This is the
+    **latest** default image supported by Read the Docs
+
+`readthedocs/build:4.0rc1`
+    **testing**
+    Ubuntu 18.04 release candidate supporting Python 2.7, 3.5, 3.6. For internal
+    development **testing** only, not available for public usage yet.
 
 .. _readthedocs/build: https://hub.docker.com/r/readthedocs/build/
 
@@ -24,7 +41,7 @@ To use the pre-built images, you can pull from Docker Hub:
 
 You can also compile these images locally:
 
-    docker build -t readthedocs/build:latest .
+    docker build -t readthedocs/build:testing .
 
 See `CONTRIBUTING`_ for more information on building and testing.
 
