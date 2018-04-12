@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e
+
+docker tag readthedocs/build:2.0 readthedocs/build:stable
+docker tag readthedocs/build:3.0 readthedocs/build:latest
