@@ -1,8 +1,12 @@
 language: python
 python:
   - "3.6"
+env:
+  global:
+    - PIPENV_VENV_IN_PROJECT=1
+    - PIPENV_IGNORE_VIRTUALENVS=1
 before_install:
   - pip install pipenv
 install:
-  - pipenv install --system
-script: pytest
+  - pipenv install
+script: pipenv run pytest
