@@ -32,7 +32,8 @@ RUN apt-get -y install \
 
 # pyenv extra requirements
 RUN apt-get install -y \
-    make libssl-dev wget llvm libncurses5-dev libncursesw5-dev xz-utils
+    make libssl-dev wget llvm libncurses5-dev libncursesw5-dev xz-utils \
+    tk-dev
 
 # LaTeX -- split to reduce image layer size
 RUN apt-get -y install texlive-fonts-extra
