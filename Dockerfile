@@ -1,13 +1,13 @@
 # Read the Docs - Environment base
 FROM ubuntu:18.04
-MAINTAINER Read the Docs <support@readthedocs.com>
+LABEL maintainer="Read the Docs <support@readthedocs.com>"
 LABEL version="4.0.0rc1"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
 ENV LANG C.UTF-8
 
-# Versions, and expose labels for exernal usage
+# Versions, and expose labels for external usage
 ENV PYTHON_VERSION_27 2.7.14
 ENV PYTHON_VERSION_35 3.5.5
 ENV PYTHON_VERSION_36 3.6.4
@@ -77,9 +77,9 @@ RUN pyenv install $PYTHON_VERSION_27 && \
     pyenv install $PYTHON_VERSION_36 && \
     pyenv install $PYTHON_VERSION_35 && \
     pyenv global \
-        $PYTHON_VERSION_27 \
-        $PYTHON_VERSION_36 \
-        $PYTHON_VERSION_35
+    $PYTHON_VERSION_27 \
+    $PYTHON_VERSION_36 \
+    $PYTHON_VERSION_35
 
 WORKDIR /tmp
 
