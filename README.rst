@@ -18,7 +18,7 @@ repositoryr:
 
 `readthedocs/build:2.0`
     **stable**
-    Ubuntu 16.04 based image. This is the **stable** image previously used
+    Ubuntu 16.04 based image. This is the **default** image currently in use
 
 `readthedocs/build:3.0`
     **latest**
