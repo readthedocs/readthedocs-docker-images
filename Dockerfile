@@ -11,10 +11,12 @@ ENV LANG C.UTF-8
 ENV PYTHON_VERSION_27 2.7.14
 ENV PYTHON_VERSION_35 3.5.5
 ENV PYTHON_VERSION_36 3.6.4
+ENV PYTHON_VERSION_37 3.7.0
 ENV CONDA_VERSION 4.5.11
 LABEL python.version_27=$PYTHON_VERSION_27
 LABEL python.version_35=$PYTHON_VERSION_35
 LABEL python.version_36=$PYTHON_VERSION_36
+LABEL python.version_37=$PYTHON_VERSION_37
 LABEL conda.version=$CONDA_VERSION
 
 # System dependencies
@@ -74,10 +76,12 @@ ENV PATH /home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
 
 # Install supported Python versions
 RUN pyenv install $PYTHON_VERSION_27 && \
+    pyenv install $PYTHON_VERSION_37 && \
     pyenv install $PYTHON_VERSION_36 && \
     pyenv install $PYTHON_VERSION_35 && \
     pyenv global \
         $PYTHON_VERSION_27 \
+        $PYTHON_VERSION_37 \
         $PYTHON_VERSION_36 \
         $PYTHON_VERSION_35
 
@@ -86,6 +90,12 @@ WORKDIR /tmp
 RUN pyenv local $PYTHON_VERSION_27 && \
     pyenv exec pip install -U pip && \
     pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
+    pyenv exec pip install pandas matplotlib virtualenv
+
+RUN pyenv local $PYTHON_VERSION_37 && \
+    pyenv exec pip install -U pip && \
+    pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
+    pyenv exec pip install pandas matplotlib virtualenv
     pyenv exec pip install pandas matplotlib virtualenv
 
 RUN pyenv local $PYTHON_VERSION_36 && \
