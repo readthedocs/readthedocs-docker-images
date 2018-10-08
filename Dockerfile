@@ -77,9 +77,9 @@ RUN pyenv install $PYTHON_VERSION_27 && \
     pyenv install $PYTHON_VERSION_36 && \
     pyenv install $PYTHON_VERSION_35 && \
     pyenv global \
-    $PYTHON_VERSION_27 \
-    $PYTHON_VERSION_36 \
-    $PYTHON_VERSION_35
+        $PYTHON_VERSION_27 \
+        $PYTHON_VERSION_36 \
+        $PYTHON_VERSION_35
 
 WORKDIR /tmp
 
