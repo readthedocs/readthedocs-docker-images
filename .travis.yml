@@ -1,34 +1,18 @@
-sudo: required
-services:
-  - docker
-
 language: python
 python:
   - "3.6"
-
-stages:
-  - test
-  - conda
-
-install: true
-
-script:
-  - docker build -t readthedocs/${IMAGE}:testing ${PATH}
-
-jobs:
-  include:
-    - env:
-        - IMAGE=build
-        - PATH=.
-    - env:
-        - IMAGE=testing
-        - PATH=dotnet
-
-    - stage: conda
-      env:
-        global:
-          - PIPENV_VENV_IN_PROJECT=1
-          - PIPENV_IGNORE_VIRTUALENVS=1
-      before_install: pip install pipenv
-      install: pipenv install
-      script: pipenv run pytest
+sudo: required
+services:
+  - docker
+env:
+  - TEST_SCRIPT='pipenv run pytest'
+  - TEST_SCRIPT='docker build -t readthedocs/build:testing .'
+  - TEST_SCRIPT='docker build -t readthedocs/dotnet:testing dotnet'
+  global:
+    - PIPENV_VENV_IN_PROJECT=1
+    - PIPENV_IGNORE_VIRTUALENVS=1
+before_install:
+  - pip install pipenv
+install:
+  - pipenv install
+script: ${TEST_SCRIPT}
