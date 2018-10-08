@@ -1,13 +1,7 @@
 language: python
 python:
   - "3.6"
-sudo: required
-services:
-  - docker
 env:
-  - TEST_SCRIPT='pipenv run pytest'
-  - TEST_SCRIPT='docker build -t readthedocs/build:testing .'
-  - TEST_SCRIPT='docker build -t readthedocs/dotnet:testing dotnet'
   global:
     - PIPENV_VENV_IN_PROJECT=1
     - PIPENV_IGNORE_VIRTUALENVS=1
@@ -15,4 +9,12 @@ before_install:
   - pip install pipenv
 install:
   - pipenv install
-script: ${TEST_SCRIPT}
+matrix:
+  include:
+    - script: pipenv run pytest
+    - script: docker build -t readthedocs/build:testing .
+      services: docker
+      sudo: required
+    - script: docker build -t readthedocs/dotnet:testing dotnet
+      services: docker
+      sudo: required
