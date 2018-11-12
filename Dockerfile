@@ -48,6 +48,9 @@ RUN apt-get -y install \
     latex-cjk-chinese-arphic-gbsn00lp latex-cjk-chinese-arphic-gkai00mp \
     fonts-symbola
 
+# Install 'rsvg-convert' for SVG -> PDF conversion
+RUN apt-get -y install librsvg2-bin
+
 # Install plantuml
 RUN apt-get -y install plantuml
 
