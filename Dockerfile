@@ -48,6 +48,10 @@ RUN apt-get -y install \
     latex-cjk-chinese-arphic-gbsn00lp latex-cjk-chinese-arphic-gkai00mp \
     fonts-symbola
 
+# Install imagemagick to support sphinx.ext.imgconverter
+# http://www.sphinx-doc.org/en/master/usage/extensions/imgconverter.html
+RUN apt-get -y install imagemagick
+
 # Install plantuml
 RUN apt-get -y install plantuml
 
