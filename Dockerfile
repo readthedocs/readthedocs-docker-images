@@ -49,6 +49,8 @@ RUN apt-get -y install \
     fonts-symbola
 
 # Install 'rsvg-convert' for SVG -> PDF conversion
+# using Sphinx extension sphinxcontrib.rsvgconverter, see
+# https://github.com/missinglinkelectronics/sphinxcontrib-svg2pdfconverter
 RUN apt-get -y install librsvg2-bin
 
 # Install plantuml
