@@ -27,7 +27,7 @@ repositoryr:
 
 `readthedocs/build:4.0rc1`
     **testing**
-    Ubuntu 18.04 release candidate supporting Python 2.7, 3.5, 3.6. For internal
+    Ubuntu 18.04 release candidate supporting Python 2.7, 3.5, 3.6, 3.7. For internal
     development **testing** only, not available for public usage yet.
 
 .. _readthedocs/build: https://hub.docker.com/r/readthedocs/build/
