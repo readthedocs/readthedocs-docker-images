@@ -11,10 +11,9 @@ install:
   - pipenv install
 matrix:
   include:
-    - script: pipenv run pytest
-    - script: docker build -t readthedocs/build:testing .
-      services: docker
-      sudo: required
-    - script: docker build -t readthedocs/dotnet:testing dotnet
+    - name: Conda
+      script: pipenv run pytest
+    - name: Build
+      script: docker build -t readthedocs/build:testing .
       services: docker
       sudo: required
