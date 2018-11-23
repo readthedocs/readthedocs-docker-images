@@ -58,8 +58,8 @@ RUN apt-get -y install python-pip && pip install -U virtualenv auxlib
 RUN groupadd --gid 205 docs
 RUN useradd -m --uid 1005 --gid 205 docs
 
-# Install jsdoc
-RUN apt-get -y install nodejs npm && npm install --global jsdoc
+# Install jsdoc and typedoc
+RUN apt-get -y install nodejs npm && npm install --global jsdoc typedoc
 
 USER docs
 WORKDIR /home/docs
