@@ -6,7 +6,7 @@ These are the Docker image definitions used by the Read the Docs build
 environments to encapsulate the build process.
 
 You can find these images on Docker Hub, on the `readthedocs/build`_
-repositoryr:
+repository:
 
 `readthedocs/build:1.0`
     **Deprecated**
