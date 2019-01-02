@@ -1,13 +1,13 @@
 # Read the Docs - Environment base
 FROM ubuntu:18.04
-MAINTAINER Read the Docs <support@readthedocs.com>
+LABEL mantainer="Read the Docs <support@readthedocs.com>"
 LABEL version="5.0.0rc1"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
 ENV LANG C.UTF-8
 
-# Versions, and expose labels for exernal usage
+# Versions, and expose labels for external usage
 ENV PYTHON_VERSION_27 2.7.15
 ENV PYTHON_VERSION_36 3.6.8
 ENV PYTHON_VERSION_37 3.7.2
