@@ -31,9 +31,10 @@ RUN apt-get -y install \
     libsqlite3-dev libtiff5-dev libwebp-dev pandoc pkg-config zlib1g-dev
 
 # pyenv extra requirements
+# https://github.com/pyenv/pyenv/wiki/Common-build-problems
 RUN apt-get install -y \
     make libssl-dev wget llvm libncurses5-dev libncursesw5-dev xz-utils \
-    tk-dev
+    tk-dev liblzma-dev python-openssl
 
 # LaTeX -- split to reduce image layer size
 RUN apt-get -y install texlive-fonts-extra
