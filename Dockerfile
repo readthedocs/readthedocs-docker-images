@@ -93,19 +93,19 @@ RUN pyenv install $PYTHON_VERSION_27 && \
 WORKDIR /tmp
 
 RUN pyenv local $PYTHON_VERSION_27 && \
-    pyenv exec pip install -U pip && \
-    pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir -U pip && \
+    pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
 
 RUN pyenv local $PYTHON_VERSION_37 && \
-    pyenv exec pip install -U pip && \
-    pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir -U pip && \
+    pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
 
 RUN pyenv local $PYTHON_VERSION_36 && \
-    pyenv exec pip install -U pip && \
-    pyenv exec pip install --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir -U pip && \
+    pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
 
 WORKDIR /
 
