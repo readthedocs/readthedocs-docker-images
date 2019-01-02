@@ -56,7 +56,10 @@ RUN apt-get -y install \
 # rsvg-convert: is for SVG -> PDF conversion
 # using Sphinx extension sphinxcontrib.rsvgconverter, see
 # https://github.com/missinglinkelectronics/sphinxcontrib-svg2pdfconverter
-RUN apt-get -y install plantuml imagemagick librsvg2-bin
+#
+# swig: is required for different purposes
+# https://github.com/rtfd/readthedocs-docker-images/issues/15
+RUN apt-get -y install plantuml imagemagick librsvg2-bin swig
 
 # Install Python tools/libs
 RUN apt-get -y install python-pip && pip install -U virtualenv auxlib
