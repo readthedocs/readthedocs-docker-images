@@ -47,13 +47,16 @@ RUN apt-get -y install \
     latex-cjk-chinese-arphic-gbsn00lp latex-cjk-chinese-arphic-gkai00mp \
     fonts-symbola
 
-# Install 'rsvg-convert' for SVG -> PDF conversion
+# plantuml: is to support sphinxcontrib-plantuml
+# https://pypi.org/project/sphinxcontrib-plantuml/
+#
+# imagemagick: is to support sphinx.ext.imgconverter
+# http://www.sphinx-doc.org/en/master/usage/extensions/imgconverter.html
+#
+# rsvg-convert: is for SVG -> PDF conversion
 # using Sphinx extension sphinxcontrib.rsvgconverter, see
 # https://github.com/missinglinkelectronics/sphinxcontrib-svg2pdfconverter
-RUN apt-get -y install librsvg2-bin
-
-# Install plantuml
-RUN apt-get -y install plantuml
+RUN apt-get -y install plantuml imagemagick librsvg2-bin
 
 # Install Python tools/libs
 RUN apt-get -y install python-pip && pip install -U virtualenv auxlib
