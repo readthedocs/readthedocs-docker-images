@@ -57,12 +57,12 @@ RUN apt-get -y install plantuml
 # Install Python tools/libs
 RUN apt-get -y install python-pip && pip install -U virtualenv auxlib
 
+# Install jsdoc and typedoc
+RUN apt-get -y install nodejs npm && npm install --global jsdoc typedoc
+
 # UID and GID from readthedocs/user
 RUN groupadd --gid 205 docs
 RUN useradd -m --uid 1005 --gid 205 docs
-
-# Install jsdoc and typedoc
-RUN apt-get -y install nodejs npm && npm install --global jsdoc typedoc
 
 USER docs
 WORKDIR /home/docs
