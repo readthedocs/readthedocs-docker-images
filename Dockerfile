@@ -78,7 +78,10 @@ ENV PATH $PATH:/home/docs/.conda/bin
 RUN rm -f Miniconda3-${CONDA_VERSION}-Linux-x86_64.sh
 
 # Install pyenv
-RUN git clone --depth 1 https://github.com/yyuu/pyenv.git ~docs/.pyenv
+RUN wget https://github.com/pyenv/pyenv/archive/master.zip
+RUN unzip master.zip && \
+    rm -f master.zip && \
+    mv pyenv-master ~docs/.pyenv
 ENV PYENV_ROOT /home/docs/.pyenv
 ENV PATH /home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
 
