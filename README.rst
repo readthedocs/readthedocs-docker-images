@@ -10,25 +10,29 @@ repository:
 
 `readthedocs/build:1.0`
     **Deprecated**
-    Ubuntu 14.04 based image
+    Ubuntu 14.04 based image.
 
 `readthedocs/build:1.0-dotnet`
     **Deprecated**
-    Ubuntu 14.04 based image, plus .NET
+    Ubuntu 14.04 based image, plus .NET.
 
 `readthedocs/build:2.0`
-    **stable**
-    Ubuntu 16.04 based image. This is the **stable** image previously used
+    **Deprecated**
+    Ubuntu 16.04 based image.
 
 `readthedocs/build:3.0`
-    **latest**
-    Ubuntu 16.04 supporting Python 2.7, 3.3, 3.4, 3.5, and 3.6. This is the
-    **latest** default image supported by Read the Docs
+    ``stable``
+    Ubuntu 16.04 supporting Python 2.7, 3.3, 3.4, 3.5, and 3.6.
+    This is the **stable** default image supported by Read the Docs.
 
-`readthedocs/build:4.0rc1`
-    **testing**
-    Ubuntu 18.04 release candidate supporting Python 2.7, 3.5, 3.6, 3.7. For internal
-    development **testing** only, not available for public usage yet.
+`readthedocs/build:4.0`
+    ``latest``
+    Ubuntu 18.04 release candidate supporting Python 2.7, 3.5, 3.6, 3.7.
+    This is the **latest** default image supported by Read the Docs.
+
+`readthedocs/build:5.0rc1`
+    Ubuntu 18.04 release candidate supporting Python 2.7, 3.5, 3.6, 3.7.
+    For internal development **testing** only, not available for public usage yet.
 
 .. _readthedocs/build: https://hub.docker.com/r/readthedocs/build/
 
