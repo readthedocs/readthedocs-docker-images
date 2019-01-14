@@ -27,11 +27,11 @@ repository:
 
 `readthedocs/build:4.0`
     ``latest``
-    Ubuntu 18.04 release candidate supporting Python 2.7, 3.5, 3.6, 3.7.
+    Ubuntu 18.04 supporting Python 2.7, 3.5, 3.6, 3.7.
     This is the **latest** default image supported by Read the Docs.
 
 `readthedocs/build:5.0rc1`
-    Ubuntu 18.04 release candidate supporting Python 2.7, 3.5, 3.6, 3.7.
+    Ubuntu 18.04 release candidate supporting Python 2.7, 3.6, 3.7.
     For internal development **testing** only, not available for public usage yet.
 
 .. _readthedocs/build: https://hub.docker.com/r/readthedocs/build/
