@@ -64,7 +64,7 @@ RUN apt-get -y install plantuml imagemagick librsvg2-bin swig
 # Install Python tools/libs
 RUN apt-get -y install python-pip && pip install -U virtualenv auxlib
 
-# Install jsdoc and typedoc
+# sphinx-js dependencies: jsdoc and typedoc (TypeScript support)
 RUN apt-get -y install nodejs npm && npm install --global jsdoc typedoc
 
 # UID and GID from readthedocs/user
