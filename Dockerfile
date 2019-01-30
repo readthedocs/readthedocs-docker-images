@@ -19,33 +19,78 @@ LABEL conda.version=$CONDA_VERSION
 
 # System dependencies
 RUN apt-get -y update
-RUN apt-get -y install vim software-properties-common
+RUN apt-get -y install \
+      software-properties-common \
+      vim
 
 # Install requirements
 RUN apt-get -y install \
-    bzr subversion git-core mercurial libpq-dev libxml2-dev libxslt-dev \
-    libxslt1-dev build-essential postgresql-client libmysqlclient-dev curl \
-    doxygen g++ graphviz-dev libfreetype6 libbz2-dev libcairo2-dev \
-    libenchant1c2a libevent-dev libffi-dev libfreetype6-dev \
-    libgraphviz-dev libjpeg-dev libjpeg8-dev liblcms2-dev libreadline-dev \
-    libsqlite3-dev libtiff5-dev libwebp-dev pandoc pkg-config zlib1g-dev
+      build-essential \
+      bzr \
+      curl \
+      doxygen \
+      g++ \
+      git-core \
+      graphviz-dev \
+      libbz2-dev \
+      libcairo2-dev \
+      libenchant1c2a \
+      libevent-dev \
+      libffi-dev \
+      libfreetype6 \
+      libfreetype6-dev \
+      libgraphviz-dev \
+      libjpeg8-dev \
+      libjpeg-dev \
+      liblcms2-dev \
+      libmysqlclient-dev \
+      libpq-dev \
+      libreadline-dev \
+      libsqlite3-dev \
+      libtiff5-dev \
+      libwebp-dev \
+      libxml2-dev \
+      libxslt1-dev \
+      libxslt-dev \
+      mercurial \
+      pandoc \
+      pkg-config \
+      postgresql-client \
+      subversion \
+      zlib1g-dev
 
 # pyenv extra requirements
 # https://github.com/pyenv/pyenv/wiki/Common-build-problems
 RUN apt-get install -y \
-    make libssl-dev wget llvm libncurses5-dev libncursesw5-dev xz-utils \
-    tk-dev liblzma-dev python-openssl
+      liblzma-dev \
+      libncurses5-dev \
+      libncursesw5-dev \
+      libssl-dev \
+      llvm \
+      make \
+      python-openssl \
+      tk-dev \
+      wget \
+      xz-utils
 
 # LaTeX -- split to reduce image layer size
-RUN apt-get -y install texlive-fonts-extra
-RUN apt-get -y install texlive-latex-extra-doc texlive-publishers-doc \
-    texlive-pictures-doc
-RUN apt-get -y install texlive-lang-english texlive-lang-japanese
-RUN apt-get -y install texlive-full
 RUN apt-get -y install \
-    texlive-fonts-recommended latex-cjk-chinese-arphic-bkai00mp \
-    latex-cjk-chinese-arphic-gbsn00lp latex-cjk-chinese-arphic-gkai00mp \
-    fonts-symbola
+      texlive-fonts-extra
+RUN apt-get -y install \
+      texlive-latex-extra-doc \
+      texlive-pictures-doc \
+      texlive-publishers-doc
+RUN apt-get -y install \
+      texlive-lang-english \
+      texlive-lang-japanese
+RUN apt-get -y install \
+      texlive-full
+RUN apt-get -y install \
+      fonts-symbola \
+      latex-cjk-chinese-arphic-bkai00mp \
+      latex-cjk-chinese-arphic-gbsn00lp \
+      latex-cjk-chinese-arphic-gkai00mp \
+      texlive-fonts-recommended
 
 # plantuml: is to support sphinxcontrib-plantuml
 # https://pypi.org/project/sphinxcontrib-plantuml/
@@ -59,13 +104,26 @@ RUN apt-get -y install \
 #
 # swig: is required for different purposes
 # https://github.com/rtfd/readthedocs-docker-images/issues/15
-RUN apt-get -y install plantuml imagemagick librsvg2-bin swig
+RUN apt-get -y install \
+      imagemagick \
+      librsvg2-bin \
+      plantuml \
+      swig
 
 # Install Python tools/libs
-RUN apt-get -y install python-pip && pip install -U virtualenv auxlib
+RUN apt-get -y install \
+      python-pip \
+ && pip install -U \
+      auxlib \
+      virtualenv
 
 # sphinx-js dependencies: jsdoc and typedoc (TypeScript support)
-RUN apt-get -y install nodejs npm && npm install --global jsdoc typedoc
+RUN apt-get -y install \
+      nodejs \
+      npm \
+ && npm install --global \
+      jsdoc \
+      typedoc
 
 # UID and GID from readthedocs/user
 RUN groupadd --gid 205 docs
