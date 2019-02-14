@@ -1,7 +1,7 @@
 # Read the Docs - Environment base
 FROM ubuntu:18.04
 LABEL mantainer="Read the Docs <support@readthedocs.com>"
-LABEL version="5.0.0rc1"
+LABEL version="5.0.0rc2"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
@@ -11,10 +11,12 @@ ENV LANG C.UTF-8
 ENV PYTHON_VERSION_27 2.7.15
 ENV PYTHON_VERSION_36 3.6.8
 ENV PYTHON_VERSION_37 3.7.2
+ENV PYPY_VERSION_35 pypy3.5-7.0.0
 ENV CONDA_VERSION 4.5.12
 LABEL python.version_27=$PYTHON_VERSION_27
 LABEL python.version_36=$PYTHON_VERSION_36
 LABEL python.version_37=$PYTHON_VERSION_37
+LABEL pypy.version_35=$PYPY_VERSION_35
 LABEL conda.version=$CONDA_VERSION
 
 # System dependencies
@@ -150,10 +152,12 @@ ENV PATH /home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
 RUN pyenv install $PYTHON_VERSION_27 && \
     pyenv install $PYTHON_VERSION_37 && \
     pyenv install $PYTHON_VERSION_36 && \
+    pyenv install $PY_VERSION_35 && \
     pyenv global \
         $PYTHON_VERSION_27 \
         $PYTHON_VERSION_37 \
-        $PYTHON_VERSION_36
+        $PYTHON_VERSION_36 \
+        $PYPY_VERSION_35
 
 WORKDIR /tmp
 
@@ -171,6 +175,10 @@ RUN pyenv local $PYTHON_VERSION_36 && \
     pyenv exec pip install --no-cache-dir -U pip && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
     pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+
+RUN pyenv local $PYPY_VERSION_35 && \
+    pyenv exec pip install --no-cache-dir -U pip && \
+    pyenv exec pip install --no-cache-dir virtualenv
 
 WORKDIR /
 
