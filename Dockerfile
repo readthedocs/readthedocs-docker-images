@@ -8,14 +8,14 @@ ENV APPDIR /app
 ENV LANG C.UTF-8
 
 # Versions, and expose labels for external usage
-ENV PYTHON_VERSION_27 2.7.15
-ENV PYTHON_VERSION_36 3.6.8
-ENV PYTHON_VERSION_37 3.7.2
-ENV CONDA_VERSION 4.5.12
-LABEL python.version_27=$PYTHON_VERSION_27
-LABEL python.version_36=$PYTHON_VERSION_36
-LABEL python.version_37=$PYTHON_VERSION_37
-LABEL conda.version=$CONDA_VERSION
+ENV PYTHON_VERSION_27=2.7.15 \
+    PYTHON_VERSION_36=3.6.8 \
+    PYTHON_VERSION_37=3.7.2 \
+    CONDA_VERSION=4.5.12
+LABEL python.version_27=$PYTHON_VERSION_27 \
+      python.version_36=$PYTHON_VERSION_36 \
+      python.version_37=$PYTHON_VERSION_37 \
+      conda.version=$CONDA_VERSION
 
 # System dependencies
 RUN apt-get -y update
