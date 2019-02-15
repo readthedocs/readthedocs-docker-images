@@ -125,18 +125,17 @@ USER docs
 WORKDIR /home/docs
 
 # Install Conda
-RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
-RUN bash Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
-ENV PATH $PATH:/home/docs/.conda/bin
-RUN rm -f Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
+RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh \
+ && bash Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/ \
+ && rm -f Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
+ENV PATH=$PATH:/home/docs/.conda/bin
 
 # Install pyenv
-RUN wget https://github.com/pyenv/pyenv/archive/master.zip
-RUN unzip master.zip && \
-    rm -f master.zip && \
-    mv pyenv-master ~docs/.pyenv
-ENV PYENV_ROOT /home/docs/.pyenv
-ENV PATH /home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
+RUN curl -L https://github.com/pyenv/pyenv/archive/master.tar.gz \
+  | tar xz \
+ && mv pyenv-master .pyenv
+ENV PYENV_ROOT=/home/docs/.pyenv \
+    PATH=/home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
 
 # Install supported Python versions
 RUN pyenv install $PYTHON_VERSION_27 && \
