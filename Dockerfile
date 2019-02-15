@@ -3,7 +3,6 @@ FROM ubuntu:18.04
 LABEL mantainer="Read the Docs <support@readthedocs.com>"
 LABEL version="5.0.0rc1"
 
-ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
 ENV LANG C.UTF-8
 
@@ -18,13 +17,15 @@ LABEL python.version_27=$PYTHON_VERSION_27 \
       conda.version=$CONDA_VERSION
 
 # System dependencies
-RUN apt-get -y update
-RUN apt-get -y install \
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt-get -y update \
+ && apt-get -y install \
       software-properties-common \
       vim
 
 # Install requirements
-RUN apt-get -y install \
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt-get -y install \
       build-essential \
       bzr \
       curl \
@@ -61,7 +62,8 @@ RUN apt-get -y install \
 
 # pyenv extra requirements
 # https://github.com/pyenv/pyenv/wiki/Common-build-problems
-RUN apt-get install -y \
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt-get -y install \
       liblzma-dev \
       libncurses5-dev \
       libncursesw5-dev \
@@ -74,18 +76,23 @@ RUN apt-get install -y \
       xz-utils
 
 # LaTeX -- split to reduce image layer size
-RUN apt-get -y install \
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt-get -y install \
       texlive-fonts-extra
-RUN apt-get -y install \
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt-get -y install \
       texlive-latex-extra-doc \
       texlive-pictures-doc \
       texlive-publishers-doc
-RUN apt-get -y install \
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt-get -y install \
       texlive-lang-english \
       texlive-lang-japanese
-RUN apt-get -y install \
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt-get -y install \
       texlive-full
-RUN apt-get -y install \
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt-get -y install \
       fonts-symbola \
       latex-cjk-chinese-arphic-bkai00mp \
       latex-cjk-chinese-arphic-gbsn00lp \
@@ -104,21 +111,24 @@ RUN apt-get -y install \
 #
 # swig: is required for different purposes
 # https://github.com/rtfd/readthedocs-docker-images/issues/15
-RUN apt-get -y install \
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt-get -y install \
       imagemagick \
       librsvg2-bin \
       plantuml \
       swig
 
 # Install Python tools/libs
-RUN apt-get -y install \
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt-get -y install \
       python-pip \
  && pip install -U \
       auxlib \
       virtualenv
 
 # sphinx-js dependencies: jsdoc and typedoc (TypeScript support)
-RUN apt-get -y install \
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt-get -y install \
       nodejs \
       npm \
  && npm install --global \
