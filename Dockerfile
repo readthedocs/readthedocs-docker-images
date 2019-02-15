@@ -79,17 +79,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 RUN export DEBIAN_FRONTEND=noninteractive \
  && apt-get -y install \
       fonts-symbola \
-      latex-cjk-chinese-arphic-bkai00mp \
-      latex-cjk-chinese-arphic-gbsn00lp \
-      latex-cjk-chinese-arphic-gkai00mp \
-      texlive-fonts-extra \
-      texlive-fonts-recommended \
-      texlive-full \
-      texlive-lang-english \
-      texlive-lang-japanese \
-      texlive-latex-extra-doc \
-      texlive-pictures-doc \
-      texlive-publishers-doc
+      texlive-full
 
 # plantuml: is to support sphinxcontrib-plantuml
 # https://pypi.org/project/sphinxcontrib-plantuml/
