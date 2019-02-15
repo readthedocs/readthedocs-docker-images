@@ -6,16 +6,6 @@ LABEL version="5.0.0rc1"
 ENV APPDIR /app
 ENV LANG C.UTF-8
 
-# Versions, and expose labels for external usage
-ENV PYTHON_VERSION_27=2.7.15 \
-    PYTHON_VERSION_36=3.6.8 \
-    PYTHON_VERSION_37=3.7.2 \
-    CONDA_VERSION=4.5.12
-LABEL python.version_27=$PYTHON_VERSION_27 \
-      python.version_36=$PYTHON_VERSION_36 \
-      python.version_37=$PYTHON_VERSION_37 \
-      conda.version=$CONDA_VERSION
-
 # UID and GID from readthedocs/user
 RUN groupadd --gid 205 docs \
  && useradd  --gid 205 -m --uid 1005 docs
@@ -123,6 +113,16 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 USER docs
 WORKDIR /home/docs
+
+# Versions, and expose labels for external usage
+ENV PYTHON_VERSION_27=2.7.15 \
+    PYTHON_VERSION_36=3.6.8 \
+    PYTHON_VERSION_37=3.7.2 \
+    CONDA_VERSION=4.5.12
+LABEL python.version_27=$PYTHON_VERSION_27 \
+      python.version_36=$PYTHON_VERSION_36 \
+      python.version_37=$PYTHON_VERSION_37 \
+      conda.version=$CONDA_VERSION
 
 # Install Conda
 RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh \
