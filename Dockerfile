@@ -75,29 +75,21 @@ RUN export DEBIAN_FRONTEND=noninteractive \
       wget \
       xz-utils
 
-# LaTeX -- split to reduce image layer size
-RUN export DEBIAN_FRONTEND=noninteractive \
- && apt-get -y install \
-      texlive-fonts-extra
-RUN export DEBIAN_FRONTEND=noninteractive \
- && apt-get -y install \
-      texlive-latex-extra-doc \
-      texlive-pictures-doc \
-      texlive-publishers-doc
-RUN export DEBIAN_FRONTEND=noninteractive \
- && apt-get -y install \
-      texlive-lang-english \
-      texlive-lang-japanese
-RUN export DEBIAN_FRONTEND=noninteractive \
- && apt-get -y install \
-      texlive-full
+# Install LateX packages
 RUN export DEBIAN_FRONTEND=noninteractive \
  && apt-get -y install \
       fonts-symbola \
       latex-cjk-chinese-arphic-bkai00mp \
       latex-cjk-chinese-arphic-gbsn00lp \
       latex-cjk-chinese-arphic-gkai00mp \
-      texlive-fonts-recommended
+      texlive-fonts-extra \
+      texlive-fonts-recommended \
+      texlive-full \
+      texlive-lang-english \
+      texlive-lang-japanese \
+      texlive-latex-extra-doc \
+      texlive-pictures-doc \
+      texlive-publishers-doc
 
 # plantuml: is to support sphinxcontrib-plantuml
 # https://pypi.org/project/sphinxcontrib-plantuml/
