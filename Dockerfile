@@ -16,6 +16,10 @@ LABEL python.version_27=$PYTHON_VERSION_27 \
       python.version_37=$PYTHON_VERSION_37 \
       conda.version=$CONDA_VERSION
 
+# UID and GID from readthedocs/user
+RUN groupadd --gid 205 docs \
+ && useradd  --gid 205 -m --uid 1005 docs
+
 # System dependencies
 RUN export DEBIAN_FRONTEND=noninteractive \
  && apt-get -y update \
@@ -116,10 +120,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
  && npm install --global \
       jsdoc \
       typedoc
-
-# UID and GID from readthedocs/user
-RUN groupadd --gid 205 docs
-RUN useradd -m --uid 1005 --gid 205 docs
 
 USER docs
 WORKDIR /home/docs
