@@ -138,30 +138,28 @@ ENV PYENV_ROOT=/home/docs/.pyenv \
     PATH=/home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
 
 # Install supported Python versions
-RUN pyenv install $PYTHON_VERSION_27 && \
-    pyenv install $PYTHON_VERSION_37 && \
-    pyenv install $PYTHON_VERSION_36 && \
-    pyenv global \
-        $PYTHON_VERSION_27 \
-        $PYTHON_VERSION_37 \
-        $PYTHON_VERSION_36
+RUN set -x \
+ && pyenv install "${PYTHON_VERSION_27}" \
+ && pyenv install "${PYTHON_VERSION_37}" \
+ && pyenv install "${PYTHON_VERSION_36}" \
+ && pyenv global \
+      "${PYTHON_VERSION_27}" \
+      "${PYTHON_VERSION_37}" \
+      "${PYTHON_VERSION_36}" \
+ && true
 
-WORKDIR /tmp
-
-RUN pyenv local $PYTHON_VERSION_27 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
-
-RUN pyenv local $PYTHON_VERSION_37 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
-
-RUN pyenv local $PYTHON_VERSION_36 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+RUN set -x \
+ && cd /tmp \
+ && for env in "${PYTHON_VERSION_27}" "${PYTHON_VERSION_37}" "${PYTHON_VERSION_36}"; \
+    do   pyenv local "${env}" \
+      && pyenv exec pip install --no-cache-dir -U pip \
+      && pyenv exec pip install --no-cache-dir --only-binary numpy,scipy \
+           matplotlib \
+           numpy \
+           pandas \
+           scipy \
+           virtualenv \
+    ; done
 
 WORKDIR /
 
