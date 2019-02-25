@@ -23,12 +23,12 @@ repository:
 `readthedocs/build:3.0`
     ``stable``
     Ubuntu 16.04 supporting Python 2.7, 3.3, 3.4, 3.5, and 3.6.
-    This is the **stable** default image supported by Read the Docs.
+    This is the **stable** image supported by Read the Docs.
 
 `readthedocs/build:4.0`
     ``latest``
     Ubuntu 18.04 supporting Python 2.7, 3.5, 3.6, 3.7.
-    This is the **latest** default image supported by Read the Docs.
+    This is the **latest** default image used for documentation builds and supported by Read the Docs.
 
 `readthedocs/build:5.0rc1`
     Ubuntu 18.04 release candidate supporting Python 2.7, 3.6, 3.7.
