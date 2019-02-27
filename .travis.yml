@@ -9,4 +9,6 @@ before_install:
   - pip install pipenv
 install:
   - pipenv install
-script: pipenv run pytest
+script:
+  - pipenv run pytest
+  - docker build .
