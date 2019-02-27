@@ -152,7 +152,7 @@ ENV PATH /home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
 RUN pyenv install $PYTHON_VERSION_27 && \
     pyenv install $PYTHON_VERSION_37 && \
     pyenv install $PYTHON_VERSION_36 && \
-    pyenv install $PY_VERSION_35 && \
+    pyenv install $PYPY_VERSION_35 && \
     pyenv global \
         $PYTHON_VERSION_27 \
         $PYTHON_VERSION_37 \
