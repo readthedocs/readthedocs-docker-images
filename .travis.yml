@@ -12,3 +12,7 @@ install:
 script:
   - pipenv run pytest
   - docker build .
+
+branches:
+  only:
+    - master
