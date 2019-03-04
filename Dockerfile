@@ -177,7 +177,8 @@ RUN pyenv local $PYTHON_VERSION_36 && \
     pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
 
 RUN pyenv local $PYPY_VERSION_35 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
+    pyenv exec python -m ensurepip && \
+    pyenv exec pip3 install --no-cache-dir -U pip && \
     pyenv exec pip install --no-cache-dir virtualenv
 
 WORKDIR /
