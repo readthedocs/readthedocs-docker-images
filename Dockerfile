@@ -87,12 +87,16 @@ RUN apt-get -y install \
       texlive-lang-japanese
 RUN apt-get -y install \
       texlive-full
+
+# xindy: is useful to generate non-ascii indexes
+# https://github.com/rtfd/readthedocs.org/issues/4454
 RUN apt-get -y install \
       fonts-symbola \
       latex-cjk-chinese-arphic-bkai00mp \
       latex-cjk-chinese-arphic-gbsn00lp \
       latex-cjk-chinese-arphic-gkai00mp \
-      texlive-fonts-recommended
+      texlive-fonts-recommended \
+      xindy
 
 # plantuml: is to support sphinxcontrib-plantuml
 # https://pypi.org/project/sphinxcontrib-plantuml/
