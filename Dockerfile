@@ -88,10 +88,14 @@ RUN apt-get -y install \
 RUN apt-get -y install \
       texlive-full
 
+# lmodern: extra fonts
+# https://github.com/rtfd/readthedocs.org/issues/5494
+#
 # xindy: is useful to generate non-ascii indexes
 # https://github.com/rtfd/readthedocs.org/issues/4454
 RUN apt-get -y install \
       fonts-symbola \
+      lmodern \
       latex-cjk-chinese-arphic-bkai00mp \
       latex-cjk-chinese-arphic-gbsn00lp \
       latex-cjk-chinese-arphic-gkai00mp \
