@@ -20,18 +20,18 @@ repository:
     **Deprecated**
     Ubuntu 16.04 based image.
 
-`readthedocs/build:3.0`
+`readthedocs/build:4.0`
     ``stable``
-    Ubuntu 16.04 supporting Python 2.7, 3.3, 3.4, 3.5, and 3.6.
+    Ubuntu 18.04 supporting Python 2.7, 3.5, 3.6, 3.7.
     This is the **stable** image supported by Read the Docs.
 
-`readthedocs/build:4.0`
+`readthedocs/build:5.0`
     ``latest``
-    Ubuntu 18.04 supporting Python 2.7, 3.5, 3.6, 3.7.
+    Ubuntu 18.04 supporting Python 2.7, 3.6, 3.7 and pypy3.5-7.0.0.
     This is the **latest** default image used for documentation builds and supported by Read the Docs.
 
-`readthedocs/build:5.0rc1`
-    Ubuntu 18.04 release candidate supporting Python 2.7, 3.6, 3.7.
+`readthedocs/build:6.0rc1`
+    Ubuntu 18.04 supporting Python 2.7, 3.5, 3.6, 3.7 and PyPy3.5-7.0.0.
     For internal development **testing** only, not available for public usage yet.
 
 .. _readthedocs/build: https://hub.docker.com/r/readthedocs/build/
