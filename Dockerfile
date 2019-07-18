@@ -145,10 +145,10 @@ USER docs
 WORKDIR /home/docs
 
 # Install Conda
-RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
-RUN bash Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
+RUN curl -O https://repo.continuum.io/miniconda/Miniconda3-${CONDA_VERSION}-Linux-x86_64.sh
+RUN bash Miniconda3-${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
 ENV PATH $PATH:/home/docs/.conda/bin
-RUN rm -f Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
+RUN rm -f Miniconda3-${CONDA_VERSION}-Linux-x86_64.sh
 
 # Install pyenv
 RUN wget https://github.com/pyenv/pyenv/archive/master.zip
