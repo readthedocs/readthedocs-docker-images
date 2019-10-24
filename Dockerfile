@@ -186,7 +186,7 @@ RUN pyenv local $PYTHON_VERSION_27 && \
 RUN pyenv local $PYTHON_VERSION_38 && \
     pyenv exec pip install --no-cache-dir -U pip && \
     pyenv exec pip install --no-cache-dir -U setuptools && \
-    pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
+    pyenv exec pip install --no-cache-dir --only-binary numpy numpy && \
     pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
 
 RUN pyenv local $PYTHON_VERSION_37 && \
