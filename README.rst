@@ -31,7 +31,7 @@ repository:
     This is the **latest** default image used for documentation builds and supported by Read the Docs.
 
 `readthedocs/build:6.0rc1`
-    Ubuntu 18.04 supporting Python 2.7, 3.5, 3.6, 3.7 and PyPy3.5-7.0.0.
+    Ubuntu 18.04 supporting Python 2.7, 3.5, 3.6, 3.7, 3.8 and PyPy3.5-7.0.0.
     For internal development **testing** only, not available for public usage yet.
 
 .. _readthedocs/build: https://hub.docker.com/r/readthedocs/build/
