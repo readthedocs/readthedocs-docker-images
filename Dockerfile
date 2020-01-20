@@ -97,6 +97,10 @@ RUN apt-get -y install \
 #
 # xindy: is useful to generate non-ascii indexes
 # https://github.com/rtfd/readthedocs.org/issues/4454
+#
+# fonts-noto-cjk-extra
+# fonts-hanazono: chinese fonts
+# https://github.com/readthedocs/readthedocs.org/issues/6319
 RUN apt-get -y install \
       fonts-symbola \
       lmodern \
@@ -104,6 +108,8 @@ RUN apt-get -y install \
       latex-cjk-chinese-arphic-gbsn00lp \
       latex-cjk-chinese-arphic-gkai00mp \
       texlive-fonts-recommended \
+      fonts-noto-cjk-extra \
+      fonts-hanazono \
       xindy
 
 # plantuml: is to support sphinxcontrib-plantuml
