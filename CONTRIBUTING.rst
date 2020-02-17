@@ -41,32 +41,8 @@ Releases
 --------
 
 These images are all built from our `automated Docker Hub repository`_. The
-automated build rules include pattern matching on Git tags. Here is how the
-images are currently tagged:
-
-build:latest
-    This is the latest supported release. Currently, this is ``3.0``.
-
-build:stable
-    This is the previously supported release. Currently, this is ``2.0``.
-
-build:4.0rc1
-    This is the next image being released, it will go through a testing cycle
-    before being considered a full release however. It is only a release
-    candidate currently, and is not useable on Read the Docs until full release.
-    This is the version built from ``master`` currently.
-
-build:3.0
-    From any tag matching ``3.0[0-9.]*``. These tags should only represent
-    commits to the ``releases/3.x`` branch.
-
-build:2.0
-    From any tag matching ``2.0[0-9.]*``. These tags should only represent
-    commits to the ``releases/2.x`` branch.
-
-build:1.0
-    From the ``1.0`` tag. These tags should only represent commits to the
-    ``releases/1.x`` branch.
+automated build rules include pattern matching on Git tags. The current tags
+are defined in the :doc:`README`.
 
 We follow `semantic versioning`_, but drop the bug fix level version number for
 our images, as this level of granularity is not important for any application of
