@@ -15,6 +15,9 @@ ENV PYTHON_VERSION_37 3.7.3
 ENV PYTHON_VERSION_38 3.8.0
 ENV PYPY_VERSION_35 pypy3.5-7.0.0
 ENV CONDA_VERSION 4.7.12.1
+ENV PIP_VERSION 20.0.1
+ENV SETUPTOOLS_VERSION 45.1.0
+ENV VIRTUALENV_VERSION 16.7.9
 LABEL python.version_27=$PYTHON_VERSION_27
 LABEL python.version_35=$PYTHON_VERSION_35
 LABEL python.version_36=$PYTHON_VERSION_36
@@ -184,40 +187,40 @@ RUN pyenv install $PYTHON_VERSION_27 && \
 WORKDIR /tmp
 
 RUN pyenv local $PYTHON_VERSION_27 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==$PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$VIRTUALENV_VERSION
 
 RUN pyenv local $PYTHON_VERSION_38 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==$PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy numpy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$VIRTUALENV_VERSION
 
 RUN pyenv local $PYTHON_VERSION_37 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==$PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$VIRTUALENV_VERSION
 
 RUN pyenv local $PYTHON_VERSION_36 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==$PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$VIRTUALENV_VERSION
 
 RUN pyenv local $PYTHON_VERSION_35 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==$PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$VIRTUALENV_VERSION
 
 RUN pyenv local $PYPY_VERSION_35 && \
     pyenv exec python -m ensurepip && \
-    pyenv exec pip3 install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
-    pyenv exec pip install --no-cache-dir virtualenv
+    pyenv exec pip3 install --no-cache-dir -U pip==$PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
+    pyenv exec pip install --no-cache-dir virtualenv==$VIRTUALENV_VERSION
 
 WORKDIR /
 
