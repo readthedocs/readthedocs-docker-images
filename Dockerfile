@@ -1,7 +1,7 @@
 # Read the Docs - Environment base
 FROM ubuntu:18.04
 LABEL mantainer="Read the Docs <support@readthedocs.com>"
-LABEL version="6.0.3"
+LABEL version="6.0.4"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
