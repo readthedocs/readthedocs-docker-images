@@ -21,16 +21,21 @@ repository:
     Ubuntu 16.04 based image.
 
 `readthedocs/build:4.0`
-    ``stable``
+    **Deprecated**
     Ubuntu 18.04 supporting Python 2.7, 3.5, 3.6, 3.7.
-    This is the **stable** image supported by Read the Docs.
 
 `readthedocs/build:5.0`
-    ``latest``
+    ``stable``
     Ubuntu 18.04 supporting Python 2.7, 3.6, 3.7 and pypy3.5-7.0.0.
+    This is the **stable** image supported by Read the Docs.
+
+`readthedocs/build:6.0`
+    ``latest``
+    Ubuntu 18.04 supporting Python 2.7, 3.5, 3.6, 3.7, 3.8 and PyPy3.5-7.0.0.
     This is the **latest** default image used for documentation builds and supported by Read the Docs.
 
-`readthedocs/build:6.0rc1`
+`readthedocs/build:7.0`
+    ``testing``
     Ubuntu 18.04 supporting Python 2.7, 3.5, 3.6, 3.7, 3.8 and PyPy3.5-7.0.0.
     For internal development **testing** only, not available for public usage yet.
 
