@@ -139,7 +139,7 @@ RUN apt-get -y install \
       python-pip \
  && pip install -U \
       auxlib \
-      virtualenv
+      virtualenv==$VIRTUALENV_VERSION
 
 # sphinx-js dependencies: jsdoc and typedoc (TypeScript support)
 RUN apt-get -y install \
