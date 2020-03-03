@@ -14,8 +14,16 @@ ENV PYTHON_VERSION_36 3.6.8
 ENV PYTHON_VERSION_37 3.7.3
 ENV PYTHON_VERSION_38 3.8.0
 ENV PYPY_VERSION_35 pypy3.5-7.0.0
+
 # Note: 4.7.12.1 drastically increases memory usage
 ENV CONDA_VERSION 4.6.14
+
+# Use _PIP_VERSION (with starting _) because of a bug in Pip
+# https://github.com/pypa/pip/issues/4528
+ENV _PIP_VERSION 20.0.1
+
+ENV SETUPTOOLS_VERSION 45.1.0
+ENV VIRTUALENV_VERSION 16.7.9
 LABEL python.version_27=$PYTHON_VERSION_27
 LABEL python.version_35=$PYTHON_VERSION_35
 LABEL python.version_36=$PYTHON_VERSION_36
@@ -136,7 +144,7 @@ RUN apt-get -y install \
       python-pip \
  && pip install -U \
       auxlib \
-      virtualenv
+      virtualenv==$VIRTUALENV_VERSION
 
 # sphinx-js dependencies: jsdoc and typedoc (TypeScript support)
 RUN apt-get -y install \
@@ -185,40 +193,40 @@ RUN pyenv install $PYTHON_VERSION_27 && \
 WORKDIR /tmp
 
 RUN pyenv local $PYTHON_VERSION_27 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==20.0.1 && \
+    pyenv exec pip install --no-cache-dir -U setuptools==44.0.0 && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==16.7.9
 
 RUN pyenv local $PYTHON_VERSION_38 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==$_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy numpy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$VIRTUALENV_VERSION
 
 RUN pyenv local $PYTHON_VERSION_37 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==$_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$VIRTUALENV_VERSION
 
 RUN pyenv local $PYTHON_VERSION_36 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==$_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$VIRTUALENV_VERSION
 
 RUN pyenv local $PYTHON_VERSION_35 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==$_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$VIRTUALENV_VERSION
 
 RUN pyenv local $PYPY_VERSION_35 && \
     pyenv exec python -m ensurepip && \
-    pyenv exec pip3 install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
-    pyenv exec pip install --no-cache-dir virtualenv
+    pyenv exec pip3 install --no-cache-dir -U pip==$_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
+    pyenv exec pip install --no-cache-dir virtualenv==$VIRTUALENV_VERSION
 
 WORKDIR /
 
