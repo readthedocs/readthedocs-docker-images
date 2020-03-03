@@ -193,10 +193,10 @@ RUN pyenv install $PYTHON_VERSION_27 && \
 WORKDIR /tmp
 
 RUN pyenv local $PYTHON_VERSION_27 && \
-    pyenv exec pip install --no-cache-dir -U pip==$_PIP_VERSION && \
-    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
+    pyenv exec pip install --no-cache-dir -U pip==20.0.1 && \
+    pyenv exec pip install --no-cache-dir -U setuptools==44.0.0 && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$VIRTUALENV_VERSION
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==16.7.9
 
 RUN pyenv local $PYTHON_VERSION_38 && \
     pyenv exec pip install --no-cache-dir -U pip==$_PIP_VERSION && \
