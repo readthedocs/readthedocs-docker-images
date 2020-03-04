@@ -137,14 +137,6 @@ RUN useradd -m --uid 1005 --gid 205 docs
 USER docs
 WORKDIR /home/docs
 
-# Install Conda
-# Note: 4.7.12.1 drastically increases memory usage
-ENV CONDA_VERSION 4.6.14
-RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
-RUN bash Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
-ENV PATH $PATH:/home/docs/.conda/bin
-RUN rm -f Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
-
 # Install pyenv
 RUN wget https://github.com/pyenv/pyenv/archive/master.zip
 RUN unzip master.zip && \
@@ -221,6 +213,17 @@ RUN pyenv local $PYPY_VERSION_35 && \
     pyenv exec pip3 install --no-cache-dir -U pip==$_PIP_VERSION && \
     pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir virtualenv==$VIRTUALENV_VERSION
+
+
+# Install Conda
+WORKDIR /home/docs
+# Note: 4.7.12.1 drastically increases memory usage
+ENV CONDA_VERSION 4.6.14
+RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
+RUN bash Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
+ENV PATH $PATH:/home/docs/.conda/bin
+RUN rm -f Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
+
 
 WORKDIR /
 
