@@ -7,31 +7,6 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
 ENV LANG C.UTF-8
 
-# Versions, and expose labels for external usage
-ENV PYTHON_VERSION_27 2.7.16
-ENV PYTHON_VERSION_35 3.5.7
-ENV PYTHON_VERSION_36 3.6.8
-ENV PYTHON_VERSION_37 3.7.3
-ENV PYTHON_VERSION_38 3.8.0
-ENV PYPY_VERSION_35 pypy3.5-7.0.0
-
-# Note: 4.7.12.1 drastically increases memory usage
-ENV CONDA_VERSION 4.6.14
-
-# Use _PIP_VERSION (with starting _) because of a bug in Pip
-# https://github.com/pypa/pip/issues/4528
-ENV _PIP_VERSION 20.0.1
-
-ENV SETUPTOOLS_VERSION 45.1.0
-ENV VIRTUALENV_VERSION 16.7.9
-LABEL python.version_27=$PYTHON_VERSION_27
-LABEL python.version_35=$PYTHON_VERSION_35
-LABEL python.version_36=$PYTHON_VERSION_36
-LABEL python.version_37=$PYTHON_VERSION_37
-LABEL python.version_38=$PYTHON_VERSION_38
-LABEL pypy.version_35=$PYPY_VERSION_35
-LABEL conda.version=$CONDA_VERSION
-
 # System dependencies
 RUN apt-get -y update
 RUN apt-get -y install \
@@ -140,6 +115,7 @@ RUN apt-get -y install \
       swig
 
 # Install Python tools/libs
+ENV VIRTUALENV_VERSION 16.7.9
 RUN apt-get -y install \
       python-pip \
  && pip install -U \
@@ -162,6 +138,8 @@ USER docs
 WORKDIR /home/docs
 
 # Install Conda
+# Note: 4.7.12.1 drastically increases memory usage
+ENV CONDA_VERSION 4.6.14
 RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
 RUN bash Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
 ENV PATH $PATH:/home/docs/.conda/bin
@@ -174,6 +152,14 @@ RUN unzip master.zip && \
     mv pyenv-master ~docs/.pyenv
 ENV PYENV_ROOT /home/docs/.pyenv
 ENV PATH /home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
+
+# Define Python versions to be installed via pyenv
+ENV PYTHON_VERSION_27 2.7.16
+ENV PYTHON_VERSION_35 3.5.7
+ENV PYTHON_VERSION_36 3.6.8
+ENV PYTHON_VERSION_37 3.7.3
+ENV PYTHON_VERSION_38 3.8.0
+ENV PYPY_VERSION_35 pypy3.5-7.0.0
 
 # Install supported Python versions
 RUN pyenv install $PYTHON_VERSION_27 && \
@@ -192,12 +178,20 @@ RUN pyenv install $PYTHON_VERSION_27 && \
 
 WORKDIR /tmp
 
+# Python2 dependencies are hardcoded because Python2 is
+# deprecated. Updating them to their latest versions may raise
+# incompatibility issues.
 RUN pyenv local $PYTHON_VERSION_27 && \
     pyenv exec pip install --no-cache-dir -U pip==20.0.1 && \
     pyenv exec pip install --no-cache-dir -U setuptools==44.0.0 && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
     pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==16.7.9
 
+# Use _PIP_VERSION (with starting _) because of a bug in Pip
+# https://github.com/pypa/pip/issues/4528
+ENV _PIP_VERSION 20.0.1
+
+ENV SETUPTOOLS_VERSION 45.1.0
 RUN pyenv local $PYTHON_VERSION_38 && \
     pyenv exec pip install --no-cache-dir -U pip==$_PIP_VERSION && \
     pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
@@ -229,5 +223,17 @@ RUN pyenv local $PYPY_VERSION_35 && \
     pyenv exec pip install --no-cache-dir virtualenv==$VIRTUALENV_VERSION
 
 WORKDIR /
+
+# Adding labels for external usage
+LABEL python.version_27=$PYTHON_VERSION_27
+LABEL python.version_35=$PYTHON_VERSION_35
+LABEL python.version_36=$PYTHON_VERSION_36
+LABEL python.version_37=$PYTHON_VERSION_37
+LABEL python.version_38=$PYTHON_VERSION_38
+LABEL python.pip=$_PIP_VERSION
+LABEL python.setuptools=$SETUPTOOLS_VERSION
+LABEL python.virtualenv=$VIRTUALENV_VERSION
+LABEL pypy.version_35=$PYPY_VERSION_35
+LABEL conda.version=$CONDA_VERSION
 
 CMD ["/bin/bash"]
