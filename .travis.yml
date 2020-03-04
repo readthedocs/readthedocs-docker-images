@@ -10,7 +10,7 @@ before_install:
 install:
   - pipenv install
 script:
-  - pipenv run pytest
+  - pipenv run pytest --suppress-no-test-exit-code
   - docker build .
 
 branches:
