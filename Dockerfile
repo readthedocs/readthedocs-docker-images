@@ -186,7 +186,7 @@ RUN (export PYTHON_CONFIGURE_OPTS="--enable-shared"; \
         $RTD_PYTHON_VERSION_37 \
         $RTD_PYTHON_VERSION_36 \
         $RTD_PYTHON_VERSION_35 \
-        $RTD_PYPY_VERSION_35
+        $RTD_PYPY_VERSION_35)
 
 WORKDIR /tmp
 
