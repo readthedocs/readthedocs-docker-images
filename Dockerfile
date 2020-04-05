@@ -173,7 +173,8 @@ ENV PYENV_ROOT /home/docs/.pyenv
 ENV PATH /home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
 
 # Install supported Python versions
-RUN pyenv install $RTD_PYTHON_VERSION_27 && \
+RUN (export PYTHON_CONFIGURE_OPTS="--enable-shared"; \
+    pyenv install $RTD_PYTHON_VERSION_27 && \
     pyenv install $RTD_PYTHON_VERSION_38 && \
     pyenv install $RTD_PYTHON_VERSION_37 && \
     pyenv install $RTD_PYTHON_VERSION_35 && \
