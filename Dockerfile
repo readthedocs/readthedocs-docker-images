@@ -124,6 +124,8 @@ RUN apt-get -y install \
 # imagemagick: is to support sphinx.ext.imgconverter
 # http://www.sphinx-doc.org/en/master/usage/extensions/imgconverter.html
 #
+# inkscape: required to support more accurate svg conversion
+#
 # rsvg-convert: is for SVG -> PDF conversion
 # using Sphinx extension sphinxcontrib.rsvgconverter, see
 # https://github.com/missinglinkelectronics/sphinxcontrib-svg2pdfconverter
@@ -132,6 +134,7 @@ RUN apt-get -y install \
 # https://github.com/rtfd/readthedocs-docker-images/issues/15
 RUN apt-get -y install \
       imagemagick \
+      inkscape \
       librsvg2-bin \
       plantuml \
       swig
