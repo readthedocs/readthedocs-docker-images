@@ -1,7 +1,6 @@
 # Read the Docs - Environment base
 FROM ubuntu:18.04
 LABEL mantainer="Read the Docs <support@readthedocs.com>"
-LABEL version="5.0.0"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV APPDIR /app
@@ -115,12 +114,12 @@ RUN apt-get -y install \
       swig
 
 # Install Python tools/libs
-ENV VIRTUALENV_VERSION 16.7.9
+ENV RTD_VIRTUALENV_VERSION 16.7.9
 RUN apt-get -y install \
       python-pip \
  && pip install -U \
       auxlib \
-      virtualenv==$VIRTUALENV_VERSION
+      virtualenv==$RTD_VIRTUALENV_VERSION
 
 # sphinx-js dependencies: jsdoc and typedoc (TypeScript support)
 RUN apt-get -y install \
@@ -146,84 +145,79 @@ ENV PYENV_ROOT /home/docs/.pyenv
 ENV PATH /home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
 
 # Define Python versions to be installed via pyenv
-ENV PYTHON_VERSION_27 2.7.16
-ENV PYTHON_VERSION_35 3.5.7
-ENV PYTHON_VERSION_36 3.6.8
-ENV PYTHON_VERSION_37 3.7.3
-ENV PYTHON_VERSION_38 3.8.0
-ENV PYPY_VERSION_35 pypy3.5-7.0.0
+ENV RTD_PYTHON_VERSION_27 2.7.16
+ENV RTD_PYTHON_VERSION_35 3.5.7
+ENV RTD_PYTHON_VERSION_36 3.6.8
+ENV RTD_PYTHON_VERSION_37 3.7.3
+ENV RTD_PYTHON_VERSION_38 3.8.0
+ENV RTD_PYPY_VERSION_35 pypy3.5-7.0.0
 
 # Install supported Python versions
-RUN pyenv install $PYTHON_VERSION_27 && \
-    pyenv install $PYTHON_VERSION_38 && \
-    pyenv install $PYTHON_VERSION_37 && \
-    pyenv install $PYTHON_VERSION_35 && \
-    pyenv install $PYTHON_VERSION_36 && \
-    pyenv install $PYPY_VERSION_35 && \
+RUN pyenv install $RTD_PYTHON_VERSION_27 && \
+    pyenv install $RTD_PYTHON_VERSION_38 && \
+    pyenv install $RTD_PYTHON_VERSION_37 && \
+    pyenv install $RTD_PYTHON_VERSION_35 && \
+    pyenv install $RTD_PYTHON_VERSION_36 && \
+    pyenv install $RTD_PYPY_VERSION_35 && \
     pyenv global \
-        $PYTHON_VERSION_27 \
-        $PYTHON_VERSION_38 \
-        $PYTHON_VERSION_37 \
-        $PYTHON_VERSION_36 \
-        $PYTHON_VERSION_35 \
-        $PYPY_VERSION_35
+        $RTD_PYTHON_VERSION_27 \
+        $RTD_PYTHON_VERSION_38 \
+        $RTD_PYTHON_VERSION_37 \
+        $RTD_PYTHON_VERSION_36 \
+        $RTD_PYTHON_VERSION_35 \
+        $RTD_PYPY_VERSION_35
 
 WORKDIR /tmp
 
 # Python2 dependencies are hardcoded because Python2 is
 # deprecated. Updating them to their latest versions may raise
 # incompatibility issues.
-RUN pyenv local $PYTHON_VERSION_27 && \
+RUN pyenv local $RTD_PYTHON_VERSION_27 && \
     pyenv exec pip install --no-cache-dir -U pip==20.0.1 && \
     pyenv exec pip install --no-cache-dir -U setuptools==44.0.0 && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
     pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==16.7.9
 
-# Use _PIP_VERSION (with starting _) because of a bug in Pip
-# https://github.com/pypa/pip/issues/4528
-ENV _PIP_VERSION 20.0.1
-
-ENV SETUPTOOLS_VERSION 45.1.0
+ENV RTD_PIP_VERSION 20.0.1
+ENV RTD_SETUPTOOLS_VERSION 45.1.0
 RUN pyenv local $PYTHON_VERSION_38 && \
-    pyenv exec pip install --no-cache-dir -U pip==$_PIP_VERSION && \
-    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
+    pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy numpy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$VIRTUALENV_VERSION
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
 
-RUN pyenv local $PYTHON_VERSION_37 && \
-    pyenv exec pip install --no-cache-dir -U pip==$_PIP_VERSION && \
-    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
+RUN pyenv local $RTD_PYTHON_VERSION_37 && \
+    pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$VIRTUALENV_VERSION
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
 
-RUN pyenv local $PYTHON_VERSION_36 && \
-    pyenv exec pip install --no-cache-dir -U pip==$_PIP_VERSION && \
-    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
+RUN pyenv local $RTD_PYTHON_VERSION_36 && \
+    pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$VIRTUALENV_VERSION
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
 
-RUN pyenv local $PYTHON_VERSION_35 && \
-    pyenv exec pip install --no-cache-dir -U pip==$_PIP_VERSION && \
-    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
+RUN pyenv local $RTD_PYTHON_VERSION_35 && \
+    pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$VIRTUALENV_VERSION
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
 
-RUN pyenv local $PYPY_VERSION_35 && \
+RUN pyenv local $RTD_PYPY_VERSION_35 && \
     pyenv exec python -m ensurepip && \
-    pyenv exec pip3 install --no-cache-dir -U pip==$_PIP_VERSION && \
-    pyenv exec pip install --no-cache-dir -U setuptools==$SETUPTOOLS_VERSION && \
-    pyenv exec pip install --no-cache-dir virtualenv==$VIRTUALENV_VERSION
-
+    pyenv exec pip3 install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
+    pyenv exec pip install --no-cache-dir virtualenv==$RTD_VIRTUALENV_VERSION
 
 # Install Conda
 WORKDIR /home/docs
 # Note: 4.7.12.1 drastically increases memory usage
-ENV CONDA_VERSION 4.6.14
-RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
-RUN bash Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
+ENV RTD_CONDA_VERSION 4.6.14
+RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-${RTD_CONDA_VERSION}-Linux-x86_64.sh
+RUN bash Miniconda2-${RTD_CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
 ENV PATH $PATH:/home/docs/.conda/bin
-RUN rm -f Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
-
+RUN rm -f Miniconda2-${RTD_CONDA_VERSION}-Linux-x86_64.sh
 
 WORKDIR /
 
