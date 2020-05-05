@@ -34,7 +34,7 @@ Python/Sphinx/etc operations to see if your changes have worked. For example::
 
     cd ~docs
     git clone https://github.com/readthedocs/template
-    cd template
+    cd template/docs
     make html
 
 Releases
