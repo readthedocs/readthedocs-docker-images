@@ -150,10 +150,12 @@ ENV RTD_PYTHON_VERSION_35 3.5.7
 ENV RTD_PYTHON_VERSION_36 3.6.8
 ENV RTD_PYTHON_VERSION_37 3.7.3
 ENV RTD_PYTHON_VERSION_38 3.8.0
+ENV RTD_PYTHON_VERSION_39 3.9.0rc1
 ENV RTD_PYPY_VERSION_35 pypy3.5-7.0.0
 
 # Install supported Python versions
 RUN pyenv install $RTD_PYTHON_VERSION_27 && \
+    pyenv install $RTD_PYTHON_VERSION_39 && \
     pyenv install $RTD_PYTHON_VERSION_38 && \
     pyenv install $RTD_PYTHON_VERSION_37 && \
     pyenv install $RTD_PYTHON_VERSION_35 && \
@@ -161,6 +163,7 @@ RUN pyenv install $RTD_PYTHON_VERSION_27 && \
     pyenv install $RTD_PYPY_VERSION_35 && \
     pyenv global \
         $RTD_PYTHON_VERSION_27 \
+        $RTD_PYTHON_VERSION_39 \
         $RTD_PYTHON_VERSION_38 \
         $RTD_PYTHON_VERSION_37 \
         $RTD_PYTHON_VERSION_36 \
@@ -180,6 +183,12 @@ RUN pyenv local $RTD_PYTHON_VERSION_27 && \
 
 ENV RTD_PIP_VERSION 20.0.1
 ENV RTD_SETUPTOOLS_VERSION 45.1.0
+RUN pyenv local $RTD_PYTHON_VERSION_39 && \
+    pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
+    pyenv exec pip install --no-cache-dir --only-binary numpy numpy && \
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
+
 RUN pyenv local $RTD_PYTHON_VERSION_38 && \
     pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
     pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
@@ -232,6 +241,7 @@ LABEL python.version_35=$PYTHON_VERSION_35
 LABEL python.version_36=$PYTHON_VERSION_36
 LABEL python.version_37=$PYTHON_VERSION_37
 LABEL python.version_38=$PYTHON_VERSION_38
+LABEL python.version_38=$PYTHON_VERSION_39
 LABEL python.pip=$_PIP_VERSION
 LABEL python.setuptools=$SETUPTOOLS_VERSION
 LABEL python.virtualenv=$VIRTUALENV_VERSION
