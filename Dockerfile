@@ -1,5 +1,5 @@
 # Read the Docs - Environment base
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 LABEL mantainer="Read the Docs <support@readthedocs.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
