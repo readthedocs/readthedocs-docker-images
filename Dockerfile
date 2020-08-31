@@ -221,7 +221,8 @@ RUN pyenv local $PYPY_VERSION_35 && \
     pyenv exec pip install --no-cache-dir virtualenv
 
 # Install Rust
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain stable
+ENV RUST_VERSION 1.46.0
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain ${RUST_VERSION}
 ENV PATH="/home/docs/.cargo/bin:$PATH"
 
 WORKDIR /
