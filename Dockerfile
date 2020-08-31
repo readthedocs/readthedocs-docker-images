@@ -185,9 +185,7 @@ ENV RTD_PIP_VERSION 20.0.1
 ENV RTD_SETUPTOOLS_VERSION 45.1.0
 RUN pyenv local $RTD_PYTHON_VERSION_39 && \
     pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
-    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
-    pyenv exec pip install --no-cache-dir --only-binary numpy numpy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION
 
 RUN pyenv local $RTD_PYTHON_VERSION_38 && \
     pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
