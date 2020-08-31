@@ -116,8 +116,8 @@ RUN apt-get -y install \
 # Install Python tools/libs
 ENV RTD_VIRTUALENV_VERSION 16.7.9
 RUN apt-get -y install \
-      python-pip \
- && pip install -U \
+      python3-pip \
+ && pip3 install -U \
       auxlib \
       virtualenv==$RTD_VIRTUALENV_VERSION
 
