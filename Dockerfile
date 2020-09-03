@@ -225,11 +225,6 @@ ENV RTD_RUST_VERSION 1.46.0
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain ${RTD_RUST_VERSION}
 ENV PATH="/home/docs/.cargo/bin:$PATH"
 
-# Install Rust
-ENV RTD_RUST_VERSION 1.46.0
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain ${RTD_RUST_VERSION}
-ENV PATH="/home/docs/.cargo/bin:$PATH"
-
 WORKDIR /
 
 CMD ["/bin/bash"]
