@@ -10,9 +10,11 @@ before_install:
 install:
   - pipenv install
 script:
-  - pipenv run pytest
-  - docker build .
+  - docker build -t readthedocs/build:master .
+  - pipenv run pytest -m master
+
 
 branches:
   only:
     - master
+    - releases/6.x
