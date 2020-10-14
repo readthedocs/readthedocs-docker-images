@@ -18,6 +18,12 @@ from docker import APIClient
         ('readthedocs/build:6.0', 'python3.6 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.6.8/lib/python3.6/site-packages/pip (python 3.6)"),
         ('readthedocs/build:6.0', 'python3.7 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pip (python 3.7)"),
         ('readthedocs/build:6.0', 'python3.8 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.8.0/lib/python3.8/site-packages/pip (python 3.8)"),
+        # setuptools
+        ('readthedocs/build:6.0', 'python2 -c "import setuptools; print(setuptools.__version__)"', "44.4.0"),
+        ('readthedocs/build:6.0', 'python3.5 -c "import setuptools; print(setuptools.__version__)"', "45.1.0"),
+        ('readthedocs/build:6.0', 'python3.6 -c "import setuptools; print(setuptools.__version__)"', "45.1.0"),
+        ('readthedocs/build:6.0', 'python3.7 -c "import setuptools; print(setuptools.__version__)"', "45.1.0"),
+        ('readthedocs/build:6.0', 'python3.8 -c "import setuptools; print(setuptools.__version__)"', "45.1.0"),
         # virtualenv
         ('readthedocs/build:6.0', 'virtualenv --version', '16.7.9'),
         # others
