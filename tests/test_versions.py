@@ -7,11 +7,12 @@ from docker import APIClient
     [
         # TODO: add other Docker images as well
         # python
-        ('readthedocs/build:6.0', 'python2 --version', 'Python 2.7.16'),
-        ('readthedocs/build:6.0', 'python3.5 --version', 'Python 3.5.7'),
-        ('readthedocs/build:6.0', 'python3.6 --version', 'Python 3.6.8'),
-        ('readthedocs/build:6.0', 'python3.7 --version', 'Python 3.7.3'),
-        ('readthedocs/build:6.0', 'python3.8 --version', 'Python 3.8.0'),
+        ('readthedocs/build:6.0', 'python2 --version', 'Python 2.7.18'),
+        ('readthedocs/build:6.0', 'python3.5 --version', 'Python 3.5.10'),
+        ('readthedocs/build:6.0', 'python3.6 --version', 'Python 3.6.12'),
+        ('readthedocs/build:6.0', 'python3.7 --version', 'Python 3.7.9'),
+        ('readthedocs/build:6.0', 'python3.8 --version', 'Python 3.8.8'),
+        ('readthedocs/build:6.0', 'pypy3.5 --version', 'Python 3.5.3 (928a4f70d3de7d17449456946154c5da6e600162, Feb 09 2019, 11:50:43)\n[PyPy 7.0.0 with GCC 8.2.0]'),
         # pip
         ('readthedocs/build:6.0', 'python3.5 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.5.7/lib/python3.5/site-packages/pip (python 3.5)"),
         ('readthedocs/build:6.0', 'python3.6 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.6.8/lib/python3.6/site-packages/pip (python 3.6)"),
