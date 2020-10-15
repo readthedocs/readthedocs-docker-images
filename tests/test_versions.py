@@ -38,6 +38,7 @@ from .utils import run_command_in_container
         ('npm --version', '6.14.4'),
         ('conda --version', 'conda 4.6.14'),
         ('cargo --version', 'cargo 1.46.0 (149022b1d 2020-07-17)'),
+        ('git --version', 'git version 2.25.1'),
     ]
 )
 def test_command_versions_image_master(command, expected_output):
@@ -79,6 +80,7 @@ def test_command_versions_image_master(command, expected_output):
         ('npm --version', '3.5.2'),
         ('conda --version', 'conda 4.6.14'),
         ('cargo --version', 'cargo 1.46.0 (149022b1d 2020-07-17)'),
+        ('git --version', 'git version 2.17.1'),
     ]
 )
 def test_command_versions_image_70(command, expected_output):
@@ -119,6 +121,7 @@ def test_command_versions_image_70(command, expected_output):
         ('node --version', 'v8.10.0'),
         ('npm --version', '3.5.2'),
         ('conda --version', 'conda 4.6.14'),
+        ('git --version', 'git version 2.17.1'),
     ]
 )
 def test_command_versions_image_60(command, expected_output):
@@ -151,6 +154,7 @@ def test_command_versions_image_60(command, expected_output):
         ('node --version', 'v8.10.0'),
         ('npm --version', '3.5.2'),
         ('conda --version', 'conda 4.6.14'),
+        ('git --version', 'git version 2.17.1'),
     ]
 )
 def test_command_versions_image_50(command, expected_output):
