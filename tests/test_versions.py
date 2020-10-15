@@ -28,11 +28,11 @@ from .utils import run_command_in_container
         ('python3.7 -c "import setuptools; print(setuptools.__version__)"', "45.1.0"),
         ('python3.8 -c "import setuptools; print(setuptools.__version__)"', "45.1.0"),
         # virtualenv
-        ('python2 -m virtualenv --version', 'virtualenv 16.7.9 from /home/docs/.pyenv/versions/3.7.16/lib/python2.7/site-packages/virtualenv/__init__.pyc'),
-        ('python3.5 -m virtualenv --version', 'virtualenv 16.7.9 from /home/docs/.pyenv/versions/3.5.10/lib/python3.5/site-packages/virtualenv/__init__.pyc'),
-        ('python3.6 -m virtualenv --version', 'virtualenv 16.7.9 from /home/docs/.pyenv/versions/3.6.12/lib/python3.6/site-packages/virtualenv/__init__.pyc'),
-        ('python3.7 -m virtualenv --version', 'virtualenv 16.7.9 from /home/docs/.pyenv/versions/3.7.9/lib/python3.7/site-packages/virtualenv/__init__.pyc'),
-        ('python3.8 -m virtualenv --version', 'virtualenv 16.7.9 from /home/docs/.pyenv/versions/3.8.6/lib/python3.8/site-packages/virtualenv/__init__.pyc'),
+        ('python2 -m virtualenv --version', '16.7.9'),
+        ('python3.5 -m virtualenv --version', '16.7.9'),
+        ('python3.6 -m virtualenv --version', '16.7.9'),
+        ('python3.7 -m virtualenv --version', '16.7.9'),
+        ('python3.8 -m virtualenv --version', '16.7.9'),
         # others
         ('node --version', 'v10.19.0'),
         ('npm --version', '6.14.4'),
