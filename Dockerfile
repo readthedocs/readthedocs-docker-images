@@ -222,7 +222,7 @@ RUN pyenv local $RTD_PYPY_VERSION_35 && \
 WORKDIR /home/docs
 # Note: 4.7.12.1 drastically increases memory usage
 ENV RTD_CONDA_VERSION 4.6.14
-RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-${RTD_CONDA_VERSION}-Linux-x86_64.sh
+RUN curl -L -O https://repo.continuum.io/miniconda/Miniconda2-${RTD_CONDA_VERSION}-Linux-x86_64.sh
 RUN bash Miniconda2-${RTD_CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
 ENV PATH $PATH:/home/docs/.conda/bin
 RUN rm -f Miniconda2-${RTD_CONDA_VERSION}-Linux-x86_64.sh
