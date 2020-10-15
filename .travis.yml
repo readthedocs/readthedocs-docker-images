@@ -10,7 +10,7 @@ before_install:
 install:
   - pipenv install
 script:
-  - docker build -t readthedocs/build:master .
+  - docker build --cache-from readthedocs/build:master -t readthedocs/build:master .
   - pipenv run pytest -m image_master
 
 branches:
