@@ -37,6 +37,7 @@ from .utils import run_command_in_container
         ('node --version', 'v8.10.0'),
         ('npm --version', '3.5.2'),
         ('conda --version', 'conda 4.6.14'),
+        ('cargo --version', 'cargo 1.46.0 (149022b1d 2020-07-17)'),
     ]
 )
 def test_command_versions_image_70(command, expected_output):
