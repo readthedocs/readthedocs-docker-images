@@ -143,7 +143,7 @@ USER docs
 WORKDIR /home/docs
 
 # Install Conda
-RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
+RUN curl -L -O https://repo.continuum.io/miniconda/Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
 RUN bash Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
 ENV PATH $PATH:/home/docs/.conda/bin
 RUN rm -f Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
