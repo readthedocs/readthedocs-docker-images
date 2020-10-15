@@ -16,7 +16,7 @@ from .utils import run_command_in_container
         ('python3.8 --version', 'Python 3.8.6'),
         ('pypy3.5 --version', 'Python 3.5.3 (928a4f70d3de7d17449456946154c5da6e600162, Feb 09 2019, 11:50:43)\n[PyPy 7.0.0 with GCC 8.2.0]'),
         # pip
-        ('python2 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/2.7.18/lib/python3.5/site-packages/pip (python 2.7)"),
+        ('python2 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/2.7.18/lib/python2.7/site-packages/pip (python 2.7)"),
         ('python3.5 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.5.10/lib/python3.5/site-packages/pip (python 3.5)"),
         ('python3.6 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.6.12/lib/python3.6/site-packages/pip (python 3.6)"),
         ('python3.7 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.7.9/lib/python3.7/site-packages/pip (python 3.7)"),
