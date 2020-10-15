@@ -42,7 +42,7 @@ from .utils import run_command_in_container
     ]
 )
 def test_command_versions_image_master(command, expected_output):
-    cmd_output = run_command_in_container('readthedocs/build:7.0', command)
+    cmd_output = run_command_in_container('readthedocs/build:master', command)
     assert cmd_output == expected_output
 
 
