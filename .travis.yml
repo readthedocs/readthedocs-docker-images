@@ -11,10 +11,13 @@ install:
   - pipenv install
 script:
   - docker build -t readthedocs/build:master .
-  - pipenv run pytest -m master
+  - pipenv run pytest -m image_master
 
 
 branches:
   only:
     - master
+    - releases/5.x
     - releases/6.x
+    - releases/7.x
+    - releases/8.x
