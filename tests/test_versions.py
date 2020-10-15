@@ -58,7 +58,7 @@ def test_command_versions_image_master(command, expected_output):
         ('python3.8 --version', 'Python 3.8.6'),
         ('pypy3.5 --version', 'Python 3.5.3 (928a4f70d3de7d17449456946154c5da6e600162, Feb 09 2019, 11:50:43)\n[PyPy 7.0.0 with GCC 8.2.0]'),
         # pip
-        ('python2 -m pip --version', "pip 20.0.2 from /home/docs/.pyenv/versions/2.7.18/lib/python3.5/site-packages/pip (python 3.5)"),
+        ('python2 -m pip --version', "pip 20.0.2 from /home/docs/.pyenv/versions/2.7.18/lib/python2.7/site-packages/pip (python 2.7)"),
         ('python3.5 -m pip --version', "pip 20.0.2 from /home/docs/.pyenv/versions/3.5.10/lib/python3.5/site-packages/pip (python 3.5)"),
         ('python3.6 -m pip --version', "pip 20.0.2 from /home/docs/.pyenv/versions/3.6.12/lib/python3.6/site-packages/pip (python 3.6)"),
         ('python3.7 -m pip --version', "pip 20.0.2 from /home/docs/.pyenv/versions/3.7.9/lib/python3.7/site-packages/pip (python 3.7)"),
@@ -70,7 +70,7 @@ def test_command_versions_image_master(command, expected_output):
         ('python3.7 -c "import setuptools; print(setuptools.__version__)"', "45.2.0"),
         ('python3.8 -c "import setuptools; print(setuptools.__version__)"', "45.2.0"),
         # virtualenv
-        ('python2 -m virtualenv --version', 'virtualenv 20.0.7 from /home/docs/.pyenv/versions/3.7.16/lib/python2.7/site-packages/virtualenv/__init__.pyc'),
+        ('python2 -m virtualenv --version', 'virtualenv 20.0.7 from /home/docs/.pyenv/versions/2.7.18/lib/python2.7/site-packages/virtualenv/__init__.pyc'),
         ('python3.5 -m virtualenv --version', 'virtualenv 20.0.7 from /home/docs/.pyenv/versions/3.5.10/lib/python3.5/site-packages/virtualenv/__init__.pyc'),
         ('python3.6 -m virtualenv --version', 'virtualenv 20.0.7 from /home/docs/.pyenv/versions/3.6.12/lib/python3.6/site-packages/virtualenv/__init__.pyc'),
         ('python3.7 -m virtualenv --version', 'virtualenv 20.0.7 from /home/docs/.pyenv/versions/3.7.9/lib/python3.7/site-packages/virtualenv/__init__.pyc'),
@@ -100,7 +100,7 @@ def test_command_versions_image_70(command, expected_output):
         ('python3.8 --version', 'Python 3.8.6'),
         ('pypy3.5 --version', 'Python 3.5.3 (928a4f70d3de7d17449456946154c5da6e600162, Feb 09 2019, 11:50:43)\n[PyPy 7.0.0 with GCC 8.2.0]'),
         # pip
-        ('python2 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/2.7.18/lib/python3.5/site-packages/pip (python 3.5)"),
+        ('python2 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/2.7.18/lib/python2.7/site-packages/pip (python 2.7)"),
         ('python3.5 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.5.10/lib/python3.5/site-packages/pip (python 3.5)"),
         ('python3.6 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.6.12/lib/python3.6/site-packages/pip (python 3.6)"),
         ('python3.7 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.7.9/lib/python3.7/site-packages/pip (python 3.7)"),
