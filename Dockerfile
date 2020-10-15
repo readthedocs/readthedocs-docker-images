@@ -121,11 +121,12 @@ RUN apt-get -y install \
       swig
 
 # Install Python tools/libs
+ENV RTD_VIRTUALENV_VERSION 16.6.0
 RUN apt-get -y install \
       python-pip \
  && pip install -U \
       auxlib \
-      virtualenv
+      virtualenv==$RTD_VIRTUALENV_VERSION
 
 # sphinx-js dependencies: jsdoc and typedoc (TypeScript support)
 RUN apt-get -y install \
@@ -170,28 +171,30 @@ RUN pyenv install $PYTHON_VERSION_27 && \
 WORKDIR /tmp
 
 RUN pyenv local $PYTHON_VERSION_27 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==19.1.1 && \
+    pyenv exec pip install --no-cache-dir -U setuptools==41.0.1 && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==16.6.0
 
+ENV RTD_PIP_VERSION 19.1.1
+ENV RTD_SETUPTOOLS_VERSION 41.0.1
 RUN pyenv local $PYTHON_VERSION_37 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
 
 RUN pyenv local $PYTHON_VERSION_36 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
 
 RUN pyenv local $PYPY_VERSION_35 && \
     pyenv exec python -m ensurepip && \
-    pyenv exec pip3 install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
-    pyenv exec pip install --no-cache-dir virtualenv
+    pyenv exec pip3 install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
+    pyenv exec pip install --no-cache-dir virtualenv==$RTD_VIRTUALENV_VERSION
 
 WORKDIR /
 
