@@ -1,66 +1,44 @@
 import pytest
 from docker import APIClient
 
+from .utils import run_command_in_container
 
+
+@pytest.mark.image_60
 @pytest.mark.parametrize(
-    'container_image,command,expected_output',
+    'command,expected_output',
     [
         # TODO: add other Docker images as well
         # python
-        ('readthedocs/build:6.0', 'python2 --version', 'Python 2.7.18'),
-        ('readthedocs/build:6.0', 'python3.5 --version', 'Python 3.5.10'),
-        ('readthedocs/build:6.0', 'python3.6 --version', 'Python 3.6.12'),
-        ('readthedocs/build:6.0', 'python3.7 --version', 'Python 3.7.9'),
-        ('readthedocs/build:6.0', 'python3.8 --version', 'Python 3.8.8'),
-        ('readthedocs/build:6.0', 'pypy3.5 --version', 'Python 3.5.3 (928a4f70d3de7d17449456946154c5da6e600162, Feb 09 2019, 11:50:43)\n[PyPy 7.0.0 with GCC 8.2.0]'),
+        ('python2 --version', 'Python 2.7.18'),
+        ('python3.5 --version', 'Python 3.5.10'),
+        ('python3.6 --version', 'Python 3.6.12'),
+        ('python3.7 --version', 'Python 3.7.9'),
+        ('python3.8 --version', 'Python 3.8.6'),
+        ('pypy3.5 --version', 'Python 3.5.3 (928a4f70d3de7d17449456946154c5da6e600162, Feb 09 2019, 11:50:43)\n[PyPy 7.0.0 with GCC 8.2.0]'),
         # pip
-        ('readthedocs/build:6.0', 'python3.5 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.5.7/lib/python3.5/site-packages/pip (python 3.5)"),
-        ('readthedocs/build:6.0', 'python3.6 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.6.8/lib/python3.6/site-packages/pip (python 3.6)"),
-        ('readthedocs/build:6.0', 'python3.7 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pip (python 3.7)"),
-        ('readthedocs/build:6.0', 'python3.8 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.8.0/lib/python3.8/site-packages/pip (python 3.8)"),
+        ('python3.5 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.5.10/lib/python3.5/site-packages/pip (python 3.5)"),
+        ('python3.6 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.6.12/lib/python3.6/site-packages/pip (python 3.6)"),
+        ('python3.7 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.7.9/lib/python3.7/site-packages/pip (python 3.7)"),
+        ('python3.8 -m pip --version', "pip 20.0.1 from /home/docs/.pyenv/versions/3.8.6/lib/python3.8/site-packages/pip (python 3.8)"),
         # setuptools
-        ('readthedocs/build:6.0', 'python2 -c "import setuptools; print(setuptools.__version__)"', "44.4.0"),
-        ('readthedocs/build:6.0', 'python3.5 -c "import setuptools; print(setuptools.__version__)"', "45.1.0"),
-        ('readthedocs/build:6.0', 'python3.6 -c "import setuptools; print(setuptools.__version__)"', "45.1.0"),
-        ('readthedocs/build:6.0', 'python3.7 -c "import setuptools; print(setuptools.__version__)"', "45.1.0"),
-        ('readthedocs/build:6.0', 'python3.8 -c "import setuptools; print(setuptools.__version__)"', "45.1.0"),
+        ('python2 -c "import setuptools; print(setuptools.__version__)"', "44.0.0"),
+        ('python3.5 -c "import setuptools; print(setuptools.__version__)"', "45.1.0"),
+        ('python3.6 -c "import setuptools; print(setuptools.__version__)"', "45.1.0"),
+        ('python3.7 -c "import setuptools; print(setuptools.__version__)"', "45.1.0"),
+        ('python3.8 -c "import setuptools; print(setuptools.__version__)"', "45.1.0"),
         # virtualenv
-        ('readthedocs/build:6.0', 'virtualenv --version', '16.7.9'),
+        ('python2 -m virtualenv --version', '16.7.9'),
+        ('python3.5 -m virtualenv --version', '16.7.9'),
+        ('python3.6 -m virtualenv --version', '16.7.9'),
+        ('python3.7 -m virtualenv --version', '16.7.9'),
+        ('python3.8 -m virtualenv --version', '16.7.9'),
         # others
-        ('readthedocs/build:6.0', 'node --version', 'v8.10.0'),
-        ('readthedocs/build:6.0', 'npm --version', '3.5.2'),
-        ('readthedocs/build:6.0', 'conda --version', 'conda 4.6.14'),
+        ('node --version', 'v8.10.0'),
+        ('npm --version', '3.5.2'),
+        ('conda --version', 'conda 4.6.14'),
     ]
 )
-def test_python_versions(container_image, command, expected_output):
-    client = APIClient()
-
-    # Create the container
-    container = client.create_container(
-        image=container_image,
-        command=(
-            '/bin/sh -c "sleep {time}; exit {exit}"'.format(
-                time=60,
-                exit=42,
-            )
-        ),
-        detach=True,
-        user='docs',
-    )
-
-    # Start the container
-    container_id = container.get('Id')
-    client.start(container=container_id)
-
-    # Execute commands to verify versions
-    exec_cmd = client.exec_create(
-        container=container_id,
-        cmd=f"/bin/sh -c '{command}'",
-        stdout=True,
-        stderr=True,
-    )
-    cmd_output = client.exec_start(exec_id=exec_cmd['Id'], stream=False)
-    cmd_output = cmd_output.decode('utf-8', 'replace').strip()
-    client.kill(container_id)
-
+def test_command_versions_image_60(command, expected_output):
+    cmd_output = run_command_in_container('readthedocs/build:6.0', command)
     assert cmd_output == expected_output
