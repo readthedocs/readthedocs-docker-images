@@ -7,11 +7,10 @@ env:
     - PIPENV_IGNORE_VIRTUALENVS=1
 before_install:
   - pip install pipenv
-  - docker pull readthedocs/build:7.0 || true
 install:
   - pipenv install
 script:
-  - docker build --cache-from readthedocs/build:7.0 -t readthedocs/build:7.0 .
+  - docker build -t readthedocs/build:7.0 .
   - pipenv run pytest -m image_70
 
 
