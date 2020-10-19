@@ -212,10 +212,10 @@ RUN pyenv local $PYTHON_VERSION_36 && \
     pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
 
 RUN pyenv local $PYTHON_VERSION_35 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
 
 RUN pyenv local $PYPY_VERSION_35 && \
     pyenv exec python -m ensurepip && \
