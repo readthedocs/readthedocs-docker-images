@@ -132,11 +132,12 @@ RUN apt-get -y install \
       swig
 
 # Install Python tools/libs
+ENV RTD_VIRTUALENV_VERSION 20.0.7
 RUN apt-get -y install \
       python-pip \
  && pip install -U \
       auxlib \
-      virtualenv
+      virtualenv==$RTD_VIRTUALENV_VERSION
 
 # sphinx-js dependencies: jsdoc and typedoc (TypeScript support)
 RUN apt-get -y install \
@@ -154,7 +155,7 @@ USER docs
 WORKDIR /home/docs
 
 # Install Conda
-RUN curl -O https://repo.continuum.io/miniconda/Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
+RUN curl -L -O https://repo.continuum.io/miniconda/Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
 RUN bash Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
 ENV PATH $PATH:/home/docs/.conda/bin
 RUN rm -f Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
@@ -185,28 +186,30 @@ RUN pyenv install $PYTHON_VERSION_27 && \
 WORKDIR /tmp
 
 RUN pyenv local $PYTHON_VERSION_27 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==20.0.2 && \
+    pyenv exec pip install --no-cache-dir -U setuptools==44.0.0 && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==20.0.7
 
+ENV RTD_PIP_VERSION 20.0.2
+ENV RTD_SETUPTOOLS_VERSION 45.2.0
 RUN pyenv local $PYTHON_VERSION_38 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
-    pyenv exec pip install --no-cache-dir --only-binary numpy numpy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+  pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+  pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
+  pyenv exec pip install --no-cache-dir --only-binary numpy numpy && \
+  pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
 
 RUN pyenv local $PYTHON_VERSION_37 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
 
 RUN pyenv local $PYTHON_VERSION_36 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
 
 RUN pyenv local $PYTHON_VERSION_35 && \
     pyenv exec pip install --no-cache-dir -U pip && \
@@ -216,9 +219,9 @@ RUN pyenv local $PYTHON_VERSION_35 && \
 
 RUN pyenv local $PYPY_VERSION_35 && \
     pyenv exec python -m ensurepip && \
-    pyenv exec pip3 install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
-    pyenv exec pip install --no-cache-dir virtualenv
+    pyenv exec pip3 install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
+    pyenv exec pip install --no-cache-dir virtualenv==$RTD_VIRTUALENV_VERSION
 
 WORKDIR /
 
