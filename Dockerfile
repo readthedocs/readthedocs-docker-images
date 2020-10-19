@@ -160,6 +160,11 @@ RUN bash Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
 ENV PATH $PATH:/home/docs/.conda/bin
 RUN rm -f Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
 
+# Install Rust
+ENV RTD_RUST_VERSION 1.46.0
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain ${RTD_RUST_VERSION}
+ENV PATH="/home/docs/.cargo/bin:$PATH"
+
 # Install pyenv
 RUN wget https://github.com/pyenv/pyenv/archive/master.zip
 RUN unzip master.zip && \
@@ -212,10 +217,10 @@ RUN pyenv local $PYTHON_VERSION_36 && \
     pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
 
 RUN pyenv local $PYTHON_VERSION_35 && \
-    pyenv exec pip install --no-cache-dir -U pip && \
-    pyenv exec pip install --no-cache-dir -U setuptools && \
+    pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir --only-binary numpy,scipy numpy scipy && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
 
 RUN pyenv local $PYPY_VERSION_35 && \
     pyenv exec python -m ensurepip && \
