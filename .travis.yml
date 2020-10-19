@@ -7,12 +7,17 @@ env:
     - PIPENV_IGNORE_VIRTUALENVS=1
 before_install:
   - pip install pipenv
+  - docker pull readthedocs/build:master || true
 install:
   - pipenv install
 script:
-  - pipenv run pytest
-  - docker build .
+  - docker build --cache-from readthedocs/build:master -t readthedocs/build:master .
+  - pipenv run pytest -m image_master
 
 branches:
   only:
     - master
+    - releases/5.x
+    - releases/6.x
+    - releases/7.x
+    - releases/8.x

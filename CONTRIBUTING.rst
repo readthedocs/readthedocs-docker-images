@@ -34,7 +34,7 @@ Python/Sphinx/etc operations to see if your changes have worked. For example::
 
     cd ~docs
     git clone https://github.com/readthedocs/template
-    cd template
+    cd template/docs
     make html
 
 Releases
@@ -46,20 +46,17 @@ are defined in the :doc:`README`.
 
 We follow `semantic versioning`_, but drop the bug fix level version number for
 our images, as this level of granularity is not important for any application of
-these images. Each release is tagged in Git, and the release version number is
-included in the Dockerfile version label (``LABEL version="2.0"``).
+these images.
 
 Releases should be merged into one of the ``releases/`` branches, for instance
-``releases/2.x``. The version label in the Dockerfile should be updated to the
-next version in the series, following semver rules. This commit should then also
-be tagged using the new version number.
+``releases/2.x``. This commit should then also be tagged using the new version number.
 
-If the version number in the Dockerfile was ``2.0.1`` before, and you implement
+If the version number was ``2.0.1`` before, and you implement
 a bug fix to the image, the new image will be ``2.0.2``. The output image from
 Docker Hub will still be ``2.0`` however. If a new feature is introduced, the
-new version tagged and in the Dockerfile will be ``2.1``.
+new version tagged will be ``2.1``.
 
-We don't care about bug fix version numbers here, as RTD will only ever have one
+We don't care about bug fix version numbers here, as Read the Docs will only ever have one
 main ``2.x`` image at a time. There is no need for us to run multiple bug fix
 versions at the same time.
 
