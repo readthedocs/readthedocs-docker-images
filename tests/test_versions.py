@@ -70,7 +70,7 @@ def test_command_versions_image_master(command, expected_output):
         ('python3.7 -c "import setuptools; print(setuptools.__version__)"', "45.2.0"),
         ('python3.8 -c "import setuptools; print(setuptools.__version__)"', "45.2.0"),
         # virtualenv
-        ('python2 -m virtualenv --version', 'virtualenv 20.0.7 from /home/docs/.pyenv/versions/2.7.18/lib/python2.7/site-packages/virtualenv/__init__.py'),
+        ('python2 -m virtualenv --version', 'virtualenv 20.0.7 from /home/docs/.pyenv/versions/2.7.18/lib/python2.7/site-packages/virtualenv/__init__.pyc'),
         ('python3.5 -m virtualenv --version', 'virtualenv 20.0.7 from /home/docs/.pyenv/versions/3.5.10/lib/python3.5/site-packages/virtualenv/__init__.py'),
         ('python3.6 -m virtualenv --version', 'virtualenv 20.0.7 from /home/docs/.pyenv/versions/3.6.12/lib/python3.6/site-packages/virtualenv/__init__.py'),
         ('python3.7 -m virtualenv --version', 'virtualenv 20.0.7 from /home/docs/.pyenv/versions/3.7.9/lib/python3.7/site-packages/virtualenv/__init__.py'),
