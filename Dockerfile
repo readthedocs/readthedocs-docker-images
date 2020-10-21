@@ -101,7 +101,7 @@ RUN apt-get -y install \
 # imagemagick: is to support sphinx.ext.imgconverter
 # http://www.sphinx-doc.org/en/master/usage/extensions/imgconverter.html
 #
-# rsvg-convert: is for SVG -> PDF conversion
+# librsvg2-bin: rsvg-convert for SVG -> PDF conversion
 # using Sphinx extension sphinxcontrib.rsvgconverter, see
 # https://github.com/missinglinkelectronics/sphinxcontrib-svg2pdfconverter
 #
