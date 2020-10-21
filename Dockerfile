@@ -105,11 +105,14 @@ RUN apt-get -y install \
 # using Sphinx extension sphinxcontrib.rsvgconverter, see
 # https://github.com/missinglinkelectronics/sphinxcontrib-svg2pdfconverter
 #
+# poppler-utils: pdftoppm for PDF -> PNG/JPEG/TIFF conversion
+#
 # swig: is required for different purposes
 # https://github.com/rtfd/readthedocs-docker-images/issues/15
 RUN apt-get -y install \
       imagemagick \
       librsvg2-bin \
+      poppler-utils \
       plantuml \
       swig
 
