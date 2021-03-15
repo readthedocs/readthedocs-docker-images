@@ -37,7 +37,7 @@ repository:
 `readthedocs/build:8.0`
     ``testing``
     Ubuntu 20.04 supporting Python 2.7, 3.5, 3.6, 3.7, 3.8, 3.9.0rc1 and PyPy3.5-7.0.0.
-    For internal development **testing** only, not available for public usage yet.
+    Available for public usage as **testing** image. You should expect some breaking changes here.
 
 .. _readthedocs/build: https://hub.docker.com/r/readthedocs/build/
 
