@@ -31,6 +31,7 @@ RUN apt-get -y install \
       libgraphviz-dev \
       libjpeg8-dev \
       libjpeg-dev \
+      libkrb5-dev \
       liblcms2-dev \
       libmysqlclient-dev \
       libpq-dev \
