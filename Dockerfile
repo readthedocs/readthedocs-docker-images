@@ -228,7 +228,7 @@ ENV PATH $PATH:/home/docs/.conda/bin
 RUN rm -f Miniconda2-${RTD_CONDA_VERSION}-Linux-x86_64.sh
 
 # Install Rust
-ENV RTD_RUST_VERSION 1.46.0
+ENV RTD_RUST_VERSION 1.52.0
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain ${RTD_RUST_VERSION}
 ENV PATH="/home/docs/.cargo/bin:$PATH"
 
