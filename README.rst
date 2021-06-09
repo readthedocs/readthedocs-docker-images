@@ -41,6 +41,14 @@ repository:
 
 .. _readthedocs/build: https://hub.docker.com/r/readthedocs/build/
 
+.. warning::
+
+   We are transitioning to a new way of building our Docker images, see
+   `the relevant design document <https://docs.readthedocs.io/en/stable/development/design/build-images.html>`_
+   for more information.
+   As a result, we will not update the current images
+   and will focus on implementing the new ones instead.
+
 Usage
 -----
 
