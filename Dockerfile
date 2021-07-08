@@ -14,17 +14,21 @@ ENV PYTHON_VERSION_36 3.6.12
 ENV PYTHON_VERSION_37 3.7.9
 ENV PYTHON_VERSION_38 3.8.6
 ENV PYTHON_VERSION_39 3.9.1
+ENV PYTHON_VERSION_310 3.10.0b3
 ENV PYPY_VERSION_35 pypy3.5-7.0.0
-# Note: 4.7.12.1 drastically increases memory usage
-ENV CONDA_VERSION 4.6.14
+# Latest miniconda version is Miniconda3-py39_4.10.1, but it's not available for x86_64
+ENV CONDA_PYTHON_VERSION py38
+ENV CONDA_VERSION 4.9.2
 LABEL python.version_27=$PYTHON_VERSION_27
 LABEL python.version_35=$PYTHON_VERSION_35
 LABEL python.version_36=$PYTHON_VERSION_36
 LABEL python.version_37=$PYTHON_VERSION_37
 LABEL python.version_38=$PYTHON_VERSION_38
 LABEL python.version_39=$PYTHON_VERSION_39
+LABEL python.version_310=$PYTHON_VERSION_310
 LABEL pypy.version_35=$PYPY_VERSION_35
 LABEL conda.version=$CONDA_VERSION
+LABEL conda.python_version=$CONDA_PYTHON_VERSION
 
 # System dependencies
 RUN apt-get -y update
@@ -157,7 +161,7 @@ USER docs
 WORKDIR /home/docs
 
 # Install Conda
-RUN curl -L -O https://repo.continuum.io/miniconda/Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
+RUN curl -L -O https://repo.continuum.io/miniconda/Miniconda3-${CONDA_PYTHON_VERSION}_${CONDA_VERSION}-Linux-x86_64.sh
 RUN bash Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
 ENV PATH $PATH:/home/docs/.conda/bin
 RUN rm -f Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
@@ -177,6 +181,7 @@ ENV PATH /home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
 
 # Install supported Python versions
 RUN pyenv install $PYTHON_VERSION_27 && \
+    pyenv install $PYTHON_VERSION_310 && \
     pyenv install $PYTHON_VERSION_39 && \
     pyenv install $PYTHON_VERSION_38 && \
     pyenv install $PYTHON_VERSION_37 && \
@@ -185,6 +190,7 @@ RUN pyenv install $PYTHON_VERSION_27 && \
     pyenv install $PYPY_VERSION_35 && \
     pyenv global \
         $PYTHON_VERSION_27 \
+        $PYTHON_VERSION_310 \
         $PYTHON_VERSION_39 \
         $PYTHON_VERSION_38 \
         $PYTHON_VERSION_37 \
@@ -202,6 +208,12 @@ RUN pyenv local $PYTHON_VERSION_27 && \
 
 ENV RTD_PIP_VERSION 20.0.2
 ENV RTD_SETUPTOOLS_VERSION 45.2.0
+RUN pyenv local $PYTHON_VERSION_310 && \
+    pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
+    pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
+    pyenv exec pip install --no-cache-dir --only-binary numpy numpy && \
+    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
+
 RUN pyenv local $PYTHON_VERSION_39 && \
   pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
   pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
