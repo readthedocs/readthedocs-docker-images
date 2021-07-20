@@ -89,6 +89,8 @@ def test_command_versions_image_master(command, expected_output):
         ('conda --version', 'conda 4.9.2'),
         ('cargo --version', 'cargo 1.46.0 (149022b1d 2020-07-17)'),
         ('git --version', 'git version 2.17.1'),
+        ('jsdoc --version', 'JSDoc 3.6.6 (Sun, 20 Sep 2020 02:25:14 GMT)'),
+        ('cat /usr/local/lib/node_modules/typedoc/package.json | grep "\"version\": "', '  "version": "0.20.20"'),
     ]
 )
 def test_command_versions_image_70(command, expected_output):

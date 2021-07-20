@@ -150,8 +150,8 @@ RUN apt-get -y install \
       nodejs \
       npm \
  && npm install --global \
-      jsdoc \
-      typedoc
+      jsdoc@3.6.6 \
+      typedoc@0.20.20
 
 # UID and GID from readthedocs/user
 RUN groupadd --gid 205 docs
