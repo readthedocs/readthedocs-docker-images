@@ -79,6 +79,7 @@ RUN apt-get install -y \
       libncurses5-dev \
       libncursesw5-dev \
       libssl-dev \
+      libxmlsec1-dev \
       llvm \
       make \
       python-openssl \
