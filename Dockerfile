@@ -161,10 +161,10 @@ USER docs
 WORKDIR /home/docs
 
 # Install Conda
-RUN curl -L -O https://repo.continuum.io/miniconda/Miniconda3-${CONDA_PYTHON_VERSION}_${CONDA_VERSION}-Linux-x86_64.sh
-RUN bash Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/
+RUN curl -L -O https://repo.continuum.io/miniconda/Miniconda3-${CONDA_PYTHON_VERSION}_${CONDA_VERSION}-Linux-x86_64.sh && \
+    bash Miniconda3-${CONDA_PYTHON_VERSION}_${CONDA_VERSION}-Linux-x86_64.sh -b -p /home/docs/.conda/ && \
+    rm -f Miniconda3-${CONDA_PYTHON_VERSION}_${CONDA_VERSION}-Linux-x86_64.sh
 ENV PATH $PATH:/home/docs/.conda/bin
-RUN rm -f Miniconda2-${CONDA_VERSION}-Linux-x86_64.sh
 
 # Install Rust
 ENV RTD_RUST_VERSION 1.46.0
