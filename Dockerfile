@@ -146,14 +146,6 @@ RUN apt-get -y install \
       auxlib \
       virtualenv==$RTD_VIRTUALENV_VERSION
 
-# sphinx-js dependencies: jsdoc and typedoc (TypeScript support)
-RUN apt-get -y install \
-      nodejs \
-      npm \
- && npm install --global \
-      jsdoc@3.6.6 \
-      typedoc@0.20.20
-
 # UID and GID from readthedocs/user
 RUN groupadd --gid 205 docs
 RUN useradd -m --uid 1005 --gid 205 docs
@@ -251,6 +243,22 @@ RUN pyenv local $PYPY_VERSION_35 && \
     pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir virtualenv==$RTD_VIRTUALENV_VERSION
 
+# NOTE: this is moved to the bottom because apt-get finds some incompatibilities
+# between packages and uninstall them:
+# The following packages will be REMOVED:
+#  libmysqlclient-dev libssl-dev libxmlsec1-dev
+# As libssl-dev and libxmlsec1-dev are required to build Python with pyenv,
+# we first build Python versions and then install these packages
+# sphinx-js dependencies: jsdoc and typedoc (TypeScript support)
+USER root
+RUN apt-get -y install \
+    nodejs \
+    npm \
+    && npm install --global \
+    jsdoc@3.6.6 \
+    typedoc@0.20.20
+
+USER docs
 WORKDIR /
 
 CMD ["/bin/bash"]
