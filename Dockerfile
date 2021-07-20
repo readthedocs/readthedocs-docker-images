@@ -201,10 +201,11 @@ RUN pyenv local $PYTHON_VERSION_27 && \
 
 ENV RTD_PIP_VERSION 20.0.2
 ENV RTD_SETUPTOOLS_VERSION 45.2.0
+
+# NOTE: numpy is not installed by default because it's not built for Python 3.10 yet
 RUN pyenv local $PYTHON_VERSION_310 && \
     pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
     pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
-    pyenv exec pip install --no-cache-dir --only-binary numpy numpy && \
     pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
 
 RUN pyenv local $PYTHON_VERSION_39 && \
