@@ -206,7 +206,7 @@ ENV RTD_SETUPTOOLS_VERSION 45.2.0
 RUN pyenv local $PYTHON_VERSION_310 && \
     pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
     pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
-    pyenv exec pip install --no-cache-dir pandas matplotlib virtualenv==$RTD_VIRTUALENV_VERSION
+    pyenv exec pip install --no-cache-dir virtualenv==$RTD_VIRTUALENV_VERSION
 
 RUN pyenv local $PYTHON_VERSION_39 && \
   pyenv exec pip install --no-cache-dir -U pip==$RTD_PIP_VERSION && \
