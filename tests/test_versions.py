@@ -56,7 +56,7 @@ def test_command_versions_image_master(command, expected_output):
         ('python3.7 --version', 'Python 3.7.9'),
         ('python3.8 --version', 'Python 3.8.6'),
         ('python3.9 --version', 'Python 3.9.1'),
-        ('python3.10 --version', 'Python 3.10.0b3'),
+        ('python3.10 --version', 'Python 3.10.0b4'),
         ('pypy3.5 --version', 'Python 3.5.3 (928a4f70d3de7d17449456946154c5da6e600162, Feb 09 2019, 11:50:43)\n[PyPy 7.0.0 with GCC 8.2.0]'),
         # pip
         ('python2 -m pip --version', "pip 20.0.2 from /home/docs/.pyenv/versions/2.7.18/lib/python2.7/site-packages/pip (python 2.7)"),
@@ -65,7 +65,7 @@ def test_command_versions_image_master(command, expected_output):
         ('python3.7 -m pip --version', "pip 20.0.2 from /home/docs/.pyenv/versions/3.7.9/lib/python3.7/site-packages/pip (python 3.7)"),
         ('python3.8 -m pip --version', "pip 20.0.2 from /home/docs/.pyenv/versions/3.8.6/lib/python3.8/site-packages/pip (python 3.8)"),
         ('python3.9 -m pip --version', "pip 20.0.2 from /home/docs/.pyenv/versions/3.9.1/lib/python3.9/site-packages/pip (python 3.9)"),
-        ('python3.10 -m pip --version', "pip 20.0.2 from /home/docs/.pyenv/versions/3.10.0b3/lib/python3.10/site-packages/pip (python 3.10)"),
+        ('python3.10 -m pip --version', "pip 20.0.2 from /home/docs/.pyenv/versions/3.10.0b4/lib/python3.10/site-packages/pip (python 3.10)"),
         # setuptools
         ('python2 -c "import setuptools; print(setuptools.__version__)"', "44.0.0"),
         ('python3.5 -c "import setuptools; print(setuptools.__version__)"', "45.2.0"),
@@ -81,7 +81,7 @@ def test_command_versions_image_master(command, expected_output):
         ('python3.7 -m virtualenv --version', 'virtualenv 20.0.7 from /home/docs/.pyenv/versions/3.7.9/lib/python3.7/site-packages/virtualenv/__init__.py'),
         ('python3.8 -m virtualenv --version', 'virtualenv 20.0.7 from /home/docs/.pyenv/versions/3.8.6/lib/python3.8/site-packages/virtualenv/__init__.py'),
         ('python3.9 -m virtualenv --version', 'virtualenv 20.0.7 from /home/docs/.pyenv/versions/3.9.1/lib/python3.9/site-packages/virtualenv/__init__.py'),
-        ('python3.10 -m virtualenv --version', 'virtualenv 20.0.7 from /home/docs/.pyenv/versions/3.10.0b3/lib/python3.10/site-packages/virtualenv/__init__.py'),
+        ('python3.10 -m virtualenv --version', 'virtualenv 20.0.7 from /home/docs/.pyenv/versions/3.10.0b4/lib/python3.10/site-packages/virtualenv/__init__.py'),
         # others
         ('node --version', 'v8.10.0'),
         ('npm --version', '3.5.2'),
@@ -89,7 +89,7 @@ def test_command_versions_image_master(command, expected_output):
         ('cargo --version', 'cargo 1.46.0 (149022b1d 2020-07-17)'),
         ('git --version', 'git version 2.17.1'),
         ('jsdoc --version', 'JSDoc 3.6.6 (Sun, 20 Sep 2020 02:25:14 GMT)'),
-        ('cat /usr/local/lib/node_modules/typedoc/package.json | grep -E "version.:"', '  "version": "0.20.20"'),
+        ('cat /usr/local/lib/node_modules/typedoc/package.json | grep -E "version.:"', '"version": "0.20.20"'),
     ]
 )
 def test_command_versions_image_70(command, expected_output):
