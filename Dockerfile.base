@@ -51,7 +51,6 @@ RUN apt-get -y install \
       subversion \
       zlib1g-dev
 
-
 # LaTeX -- split to reduce image layer size
 RUN apt-get -y install \
     texlive-fonts-extra
@@ -85,19 +84,31 @@ RUN apt-get -y install \
     fonts-hanazono \
     xindy
 
-# pyenv extra requirements
-# https://github.com/pyenv/pyenv/wiki/Common-build-problems
+# asdf Python extra requirements
+# https://github.com/pyenv/pyenv/wiki#suggested-build-environment
 RUN apt-get install -y \
     liblzma-dev \
     libncurses5-dev \
     libncursesw5-dev \
     libssl-dev \
+    libxmlsec1-dev \
     llvm \
     make \
     python-openssl \
     tk-dev \
     wget \
     xz-utils
+
+# asdf nodejs extra requirements
+# https://github.com/asdf-vm/asdf-nodejs#linux-debian
+RUN apt install -y \
+    dirmngr \
+    gpg
+
+# asdf Golang extra requirements
+# https://github.com/kennyp/asdf-golang#linux-debian
+RUN apt install -y \
+    coreutils
 
 # UID and GID from readthedocs/user
 RUN groupadd --gid 205 docs
@@ -106,27 +117,18 @@ RUN useradd -m --uid 1005 --gid 205 docs
 USER docs
 WORKDIR /home/docs
 
-# Install pyenv
-RUN wget https://github.com/pyenv/pyenv/archive/master.zip && \
-    unzip master.zip && \
-    rm -f master.zip && \
-    mv pyenv-master ~docs/.pyenv
-ENV PYENV_ROOT /home/docs/.pyenv
-ENV PATH /home/docs/.pyenv/shims:$PATH:/home/docs/.pyenv/bin
+# Install asdf
+RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --depth 1 --branch v0.8.1
+RUN echo ". /home/docs/.asdf/asdf.sh" >> ~/.bashrc
+RUN echo ". /home/docs/.asdf/completions/asdf.bash" >> ~/.bashrc
 
-# Install nodenv
-RUN wget https://github.com/nodenv/nodenv/archive/master.zip && \
-    unzip master.zip && \
-    rm -f master.zip && \
-    mv nodenv-master ~docs/.nodenv
-RUN cd ~/.nodenv && src/configure && make -C src
-ENV PATH /home/docs/.nodenv/bin:$PATH
+# Activate asdf in current session
+ENV PATH /home/docs/.asdf/shims:/home/docs/.asdf/bin:$PATH
 
-# Install node-build
-RUN mkdir /home/docs/.nodenv/plugins
-RUN wget https://github.com/nodenv/node-build/archive/master.zip && \
-    unzip master.zip && \
-    rm -f master.zip && \
-    mv node-build-master ~/.nodenv/plugins/node-build
+# Install asdf plugins
+RUN asdf plugin-add python
+RUN asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+RUN asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
+RUN asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
 
 CMD ["/bin/bash"]

@@ -1,8 +1,8 @@
-# Read the Docs - ubuntu20-conda47
+# Read the Docs - ubuntu20-mamba410
 FROM readthedocs/build:ubuntu20-base
 
 # Define Python versions to be installed via asdf
-ENV RTD_PYTHON_VERSION miniconda3-4.7.12
+ENV RTD_PYTHON_VERSION mambaforge-4.10.1-5
 
 # Labels for external usage
 LABEL python.version=$RTD_PYTHON_VERSION
