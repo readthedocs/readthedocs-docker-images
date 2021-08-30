@@ -101,13 +101,13 @@ RUN apt-get install -y \
 
 # asdf nodejs extra requirements
 # https://github.com/asdf-vm/asdf-nodejs#linux-debian
-RUN apt install -y \
+RUN apt-get install -y \
     dirmngr \
     gpg
 
 # asdf Golang extra requirements
 # https://github.com/kennyp/asdf-golang#linux-debian
-RUN apt install -y \
+RUN apt-get install -y \
     coreutils
 
 # UID and GID from readthedocs/user
