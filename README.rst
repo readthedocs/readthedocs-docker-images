@@ -8,7 +8,7 @@ environments to encapsulate the build process.
 You can find these images on Docker Hub, on the `readthedocs/build`_
 repository:
 
-`readthedocs/build:ubuntu20-base`
+`readthedocs/build:ubuntu20-YYYY.MM.DD`
     Ubuntu 20.04 supporting multiple versions of Python, PyPy, conda, mamba, nodejs, rust and go.
     Available for public usage as ``build.os: ubuntu20``
 
@@ -25,11 +25,11 @@ Usage
 
 To use the pre-built images, you can pull from Docker Hub:
 
-    docker pull readthedocs/build:latest
+    docker pull readthedocs/build:ubuntu20-YYYY.MM.DD
 
 You can also compile these images locally:
 
-    docker build -t readthedocs/build:ubuntu20 .
+    docker build -t readthedocs/build:ubuntu20-YYYY.MM.DD .
 
 See `CONTRIBUTING`_ for more information on building and testing.
 
