@@ -131,6 +131,9 @@ RUN asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
 RUN asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
 
 # Create directories for languages installations
-RUN mkdir -p /home/docs/.asdf/installs/{python,nodejs,rust,golang}
+RUN mkdir -p /home/docs/.asdf/installs/python && \
+    mkdir -p /home/docs/.asdf/installs/nodejs && \
+    mkdir -p /home/docs/.asdf/installs/rust && \
+    mkdir -p /home/docs/.asdf/installs/golang
 
 CMD ["/bin/bash"]
