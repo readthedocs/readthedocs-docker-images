@@ -119,10 +119,10 @@ RUN echo ". /home/docs/.asdf/completions/asdf.bash" >> /home/docs/.bashrc
 ENV PATH /home/docs/.asdf/shims:/home/docs/.asdf/bin:$PATH
 
 # Install asdf plugins
-RUN asdf plugin-add python
+RUN asdf plugin add python
 RUN asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-RUN asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
-RUN asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
+RUN asdf plugin add rust https://github.com/code-lever/asdf-rust.git
+RUN asdf plugin add golang https://github.com/kennyp/asdf-golang.git
 
 # Create directories for languages installations
 RUN mkdir -p /home/docs/.asdf/installs/python && \
