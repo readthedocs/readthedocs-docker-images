@@ -87,13 +87,11 @@ RUN apt-get -y install \
 # https://github.com/pyenv/pyenv/wiki#suggested-build-environment
 RUN apt-get install -y \
     liblzma-dev \
-    libncurses5-dev \
     libncursesw5-dev \
     libssl-dev \
     libxmlsec1-dev \
     llvm \
     make \
-    python-openssl \
     tk-dev \
     wget \
     xz-utils
