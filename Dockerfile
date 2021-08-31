@@ -54,10 +54,6 @@ RUN apt-get -y install \
 RUN apt-get -y install \
     texlive-fonts-extra
 RUN apt-get -y install \
-    texlive-latex-extra-doc \
-    texlive-pictures-doc \
-    texlive-publishers-doc
-RUN apt-get -y install \
     texlive-lang-english \
     texlive-lang-japanese
 RUN apt-get -y install \
