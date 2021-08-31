@@ -130,4 +130,7 @@ RUN asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 RUN asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
 RUN asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
 
+# Create directories for languages installations
+RUN mkdir -p /home/docs/.asdf/installs/{python,nodejs,rust,golang}
+
 CMD ["/bin/bash"]
