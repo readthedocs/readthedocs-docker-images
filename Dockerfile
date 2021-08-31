@@ -3,7 +3,6 @@ FROM ubuntu:20.04
 LABEL mantainer="Read the Docs <support@readthedocs.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV APPDIR /app
 ENV LANG C.UTF-8
 
 USER root
@@ -119,8 +118,8 @@ WORKDIR /home/docs
 
 # Install asdf
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --depth 1 --branch v0.8.1
-RUN echo ". /home/docs/.asdf/asdf.sh" >> ~/.bashrc
-RUN echo ". /home/docs/.asdf/completions/asdf.bash" >> ~/.bashrc
+RUN echo ". /home/docs/.asdf/asdf.sh" >> /home/docs/.bashrc
+RUN echo ". /home/docs/.asdf/completions/asdf.bash" >> /home/docs/.bashrc
 
 # Activate asdf in current session
 ENV PATH /home/docs/.asdf/shims:/home/docs/.asdf/bin:$PATH
