@@ -1,6 +1,6 @@
 import pytest
-from docker import APIClient
 
+from .constants import DOCKER_IMAGE
 from .utils import run_command_in_container
 
 
@@ -13,5 +13,5 @@ from .utils import run_command_in_container
     ]
 )
 def test_command_versions_image_ubuntu20(command, expected_output):
-    cmd_output = run_command_in_container('readthedocs/build:ubuntu20', command)
+    cmd_output = run_command_in_container(DOCKER_IMAGE, command)
     assert cmd_output == expected_output
