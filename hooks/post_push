@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set -e
-
-docker images readthedocs/build:2.0 -q | \
-    xargs -I {} docker tag {} readthedocs/build:stable
-
-docker images readthedocs/build:3.0 -q | \
-    xargs -I {} docker tag {} readthedocs/build:latest
