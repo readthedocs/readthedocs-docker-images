@@ -1,0 +1,31 @@
+version: 2
+
+jobs:
+  tests:
+    docker:
+      - image: circleci/python:3.6
+        environment:
+          PIPENV_VENV_IN_PROJECT=1
+          PIPENV_IGNORE_VIRTUALENVS=1
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.6
+          docker_layer_caching: true
+      - run:
+          name: Setup
+          command: |
+            pip install pipenv
+            pipenv install
+      - run:
+          name: Build Docker image
+          command: docker build -t readthedocs/build:ubuntu-20.04 .
+      - run:
+          name: Run tests
+          command: pipenv run pytest
+
+workflows:
+  version: 2
+  tests:
+    jobs:
+      - tests
