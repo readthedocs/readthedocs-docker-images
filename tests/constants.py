@@ -1,1 +1,1 @@
-DOCKER_IMAGE = 'readthedocs/build:ubuntu20'
+DOCKER_IMAGE = 'readthedocs/build:ubuntu-20.04'

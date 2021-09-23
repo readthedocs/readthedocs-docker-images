@@ -4,7 +4,6 @@ from .constants import DOCKER_IMAGE
 from .utils import run_command_in_container
 
 
-
 def test_apt_dont_remove_packages():
     command ='grep "Remove:" /var/log/apt/history.log'
     expected_output = ''

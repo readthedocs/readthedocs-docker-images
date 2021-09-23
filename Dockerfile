@@ -1,6 +1,7 @@
 # Read the Docs - Environment base
 FROM ubuntu:20.04
 LABEL mantainer="Read the Docs <support@readthedocs.com>"
+LABEL version="ubuntu-20.04-2021.09.23"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
