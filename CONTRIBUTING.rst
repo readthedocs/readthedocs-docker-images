@@ -46,7 +46,7 @@ are defined in the :doc:`README`.
 
 We follow `calendar versioning`_ together with the Ubuntu LTS version for that particular image.
 For example, if the Ubuntu version is 20.04 and it is released today,
-it will be ``ubuntu-20.04-2020.08.30`` (YYYY.MM.DD)
+it will be ``ubuntu-20.04-2020.08.30`` (YYYY.MM.DD).
 
 Releases should be merged into one of the ``releases/`` branches, for instance
 ``releases/ubuntu-20.04-2020.08.30``. This commit should then also be tagged using the new version number.
