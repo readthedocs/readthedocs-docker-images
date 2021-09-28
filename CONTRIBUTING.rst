@@ -49,7 +49,7 @@ For example, if the Ubuntu version is 20.04 and it is released today,
 it will be ``ubuntu-20.04-2020.08.30`` (YYYY.MM.DD).
 
 Releases should be merged into one of the ``releases/`` branches, for instance
-``releases/ubuntu-20.04``. This commit should then also be tagged using the new version number: `ubuntu-20.04-2021.09.23`.
+``releases/ubuntu-20.04``. This commit should then also be tagged using the new version number: ``ubuntu-20.04-2021.09.23``.
 
 .. _automated Docker Hub repository: https://hub.docker.com/r/readthedocs/build/
 .. _calendar versioning: https://calver.org/
