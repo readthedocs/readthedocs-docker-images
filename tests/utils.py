@@ -1,8 +1,9 @@
-from docker import APIClient
+import docker
 
 
 def run_command_in_container(container_image, command):
-    client = APIClient()
+    # CircleCI exports environment variables that ``.from_env()`` uses
+    client = docker.from_env().api
 
     # Create the container
     container = client.create_container(

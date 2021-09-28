@@ -8,49 +8,34 @@ environments to encapsulate the build process.
 You can find these images on Docker Hub, on the `readthedocs/build`_
 repository:
 
-`readthedocs/build:1.0`
-    **Deprecated**
-    Ubuntu 14.04 based image.
+`readthedocs/build:ubuntu-20.04-YYYY.MM.DD`
+    Ubuntu 20.04 supporting multiple versions of Python, PyPy, conda, mamba, nodejs, rust and go.
+    Available for public usage as ``build.os: ubuntu-20.04``
 
-`readthedocs/build:1.0-dotnet`
-    **Deprecated**
-    Ubuntu 14.04 based image, plus .NET.
+Note that these images only contains the basic dependencies:
 
-`readthedocs/build:2.0`
-    **Deprecated**
-    Ubuntu 16.04 based image.
-
-`readthedocs/build:4.0`
-    **Deprecated**
-    Ubuntu 18.04 supporting Python 2.7, 3.5, 3.6, 3.7.
-
-`readthedocs/build:5.0`
-    ``stable``
-    Ubuntu 18.04 supporting Python 2.7, 3.6, 3.7 and pypy3.5-7.0.0.
-    This is the **stable** image supported by Read the Docs.
-
-`readthedocs/build:6.0`
-    ``latest``
-    Ubuntu 18.04 supporting Python 2.7, 3.5, 3.6, 3.7, 3.8 and PyPy3.5-7.0.0.
-    This is the **latest** default image used for documentation builds and supported by Read the Docs.
-
-`readthedocs/build:7.0`
-    ``testing``
-    Ubuntu 18.04 supporting Python 2.7, 3.5, 3.6, 3.7, 3.8, 3.9, and PyPy3.5-7.0.0.
-    Available for public usage as **testing** image. You should expect some breaking changes here.
+- ``asdf`` CLI manager to install the languages versions
+- LaTeX packages to build PDFs
+- Chinese fonts
 
 .. _readthedocs/build: https://hub.docker.com/r/readthedocs/build/
 
 Usage
 -----
 
+.. note::
+
+   These images are only for internal usage on Read the Docs project.
+   They are not meant to build your documentation locally,
+   to replace Read the Docs' service or to emulate it locally.
+
 To use the pre-built images, you can pull from Docker Hub:
 
-    docker pull readthedocs/build:latest
+    docker pull readthedocs/build:ubuntu-20.04-YYYY.MM.DD
 
 You can also compile these images locally:
 
-    docker build -t readthedocs/build:testing .
+    docker build -t readthedocs/build:ubuntu-20.04-YYYY.MM.DD .
 
 See `CONTRIBUTING`_ for more information on building and testing.
 
