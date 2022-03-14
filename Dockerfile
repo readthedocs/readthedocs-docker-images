@@ -112,7 +112,7 @@ USER docs
 WORKDIR /home/docs
 
 # Install asdf
-RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --depth 1 --branch v0.8.1
+RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --depth 1 --branch v0.9.0
 RUN echo ". /home/docs/.asdf/asdf.sh" >> /home/docs/.bashrc
 RUN echo ". /home/docs/.asdf/completions/asdf.bash" >> /home/docs/.bashrc
 
