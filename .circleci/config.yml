@@ -3,7 +3,7 @@ version: 2
 jobs:
   tests:
     docker:
-      - image: cimg/python:3.8
+      - image: cimg/python:3.10
         environment:
           PIPENV_VENV_IN_PROJECT=1
           PIPENV_IGNORE_VIRTUALENVS=1
