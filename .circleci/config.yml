@@ -3,7 +3,7 @@ version: 2
 jobs:
   tests:
     docker:
-      - image: circleci/python:3.6
+      - image: cimg/python:3.10
         environment:
           PIPENV_VENV_IN_PROJECT=1
           PIPENV_IGNORE_VIRTUALENVS=1
@@ -19,7 +19,7 @@ jobs:
             pipenv install
       - run:
           name: Build Docker image
-          command: docker build -t readthedocs/build:ubuntu-20.04 .
+          command: docker build -t readthedocs/build:ubuntu-22.04 .
       - run:
           name: Run tests
           command: pipenv run pytest
