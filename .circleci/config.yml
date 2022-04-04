@@ -1,6 +1,48 @@
 version: 2
 
 jobs:
+  compile-upload-tools:
+    parameters:
+      os:
+        type: string
+      tool:
+        type: string
+
+    docker:
+      - image: cimg/python:3.10
+      - environment:
+          OS=<< parameters.os >>
+          # TODO: how do we set this for .org and/or .com?
+          AWS_REGION=
+          AWS_ACCESS_KEY_ID=
+          AWS_SECRET_ACCESS_KEY=
+          AWS_BUILD_TOOLS_BUCKET=
+
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.11
+          docker_layer_caching: true
+      - run:
+          name: Install depedencies
+          command: |
+            pip install awscli==1.20.34
+      - run:
+          name: Download Docker image
+          command: |
+            docker pull readthedocs/build:<< parameters.os >>
+      - run:
+          name: Download compile_version_upload_s3.sh script
+          command: |
+            wget https://raw.githubusercontent.com/readthedocs/readthedocs.org/rel/scripts/compile_version_upload_s3.sh
+      - run:
+          name: Compile tool version
+          command: |
+            # TODO: How do we iterate over `parameterts.tool` properly here?
+            # TODO: How do we run only the command we want, avoiding compiling all the tools/versions each time?
+            ./compile_version_upload_s3.sh << parameters.tool >> << parameters.tool.version >>
+
+
   tests:
     docker:
       - image: cimg/python:3.10
@@ -29,3 +71,30 @@ workflows:
   tests:
     jobs:
       - tests
+
+  compile:
+    jobs:
+      - compile-upload-tools:
+          matrix:
+            parameters:
+              os:
+                - ubuntu-20.04
+                - ubuntu-22.04
+              tool:
+                python:
+                  - 2.7.18
+                  - 3.6.15
+                  - 3.7.12
+                  - 3.8.12
+                  - 3.9.7
+                  - 3.10.0
+                  - pypy3.7-7.3.5
+                  - miniconda3-4.7.12
+                  - mambaforge-4.10.3-10
+                nodejs:
+                  - 14.17.6
+                  - 16.9.1
+                rust:
+                  - 1.55.0
+                golang:
+                  - 1.17.1
