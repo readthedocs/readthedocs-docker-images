@@ -3,18 +3,13 @@ version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@3.0.0
 
-jobs:
+commands:
   compile-upload-tool:
     parameters:
       os:
         type: string
       tool:
         type: string
-
-    docker:
-      image: cimg/python:3.10
-      environment:
-          OS: << parameters.os >>
 
     steps:
       - checkout
@@ -40,6 +35,13 @@ jobs:
           from: << parameters.os >>-<< parameters.tool >>.tar.gz
           to: s3://${AWS_BUCKET_NAME}
 
+jobs:
+  compile-upload-tool:
+    docker:
+      - image: cimg/python:3.10
+      - environment:
+          OS: << parameters.os >>
+
   tests:
     docker:
       - image: cimg/python:3.10
@@ -62,6 +64,7 @@ jobs:
       - run:
           name: Run tests
           command: pipenv run pytest
+
 
 workflows:
   version: 2
