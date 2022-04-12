@@ -12,8 +12,8 @@ jobs:
         type: string
 
     docker:
-      - image: cimg/python:3.10
-      - environment:
+      image: cimg/python:3.10
+      environment:
           OS: << parameters.os >>
 
     steps:
