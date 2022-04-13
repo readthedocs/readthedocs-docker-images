@@ -21,6 +21,7 @@ jobs:
           docker_layer_caching: true
       - run:
           name: Download "compile_version_upload_s3.sh" script
+          # TODO: fix the URL of this script to use main branch when it gets merged
           command: |
             wget https://raw.githubusercontent.com/readthedocs/readthedocs.org/humitos/build-tool-no-upload-production/scripts/compile_version_upload_s3.sh
       - run:
@@ -39,6 +40,7 @@ jobs:
           aws-region: ORG_AWS_REGION
           aws-access-key-id: ORG_AWS_ACCESS_KEY_ID
           aws-secret-access-key: ORG_AWS_SECRET_ACCESS_KEY
+          # TODO: find a way to save the file on S3 without the date in the filename
           from: << parameters.os >>-<< parameters.tool >>.tar.gz
           to: s3://${ORG_AWS_BUCKET_NAME}
       - aws-s3/copy:
@@ -90,6 +92,9 @@ workflows:
 
           matrix:
             parameters:
+              # These parameters come from `readthedocs.settings.base`'s
+              # RTD_DOCKER_BUILD_SETTINGS variable
+              # https://github.com/readthedocs/readthedocs.org/blob/ccdad233cda5bcd3ac3acd935536c9e8cfc2e440/readthedocs/settings/base.py#L536
               os:
                 - ubuntu-22.04-2022.03.15
                 - ubuntu-20.04-2022.02.16
