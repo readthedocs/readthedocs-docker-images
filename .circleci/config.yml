@@ -26,21 +26,29 @@ jobs:
             wget https://raw.githubusercontent.com/readthedocs/readthedocs.org/humitos/build-tool-no-upload-production/scripts/compile_version_upload_s3.sh
       - run:
           name: Download Docker image
+          # NOTE: update the DOCKER_IMAGE when we release a new dated Ubuntu image
           command: |
-            docker pull readthedocs/build:<< parameters.os >>
+            if [[ "<< parameters.os >>" == "ubuntu-22.04" ]]
+            then
+                export DOCKER_IMAGE=ubuntu-22.04-2022.03.15
+            fi
+
+            if [[ "<< parameters.os >>" == "ubuntu-20.04" ]]
+            then
+                export DOCKER_IMAGE=ubuntu-20.04-2022.02.16
+            fi
+
+            docker pull readthedocs/build:$DOCKER_IMAGE
       - run:
           name: Compile tool version
           environment:
             OS: << parameters.os >>
-            # TODO: modify .sh script to use a different variable
-            AWS_REGION: define-something-as-a-workaround
           command: |
             /bin/bash compile_version_upload_s3.sh << parameters.tool >>
       - aws-s3/copy:
           aws-region: ORG_AWS_REGION
           aws-access-key-id: ORG_AWS_ACCESS_KEY_ID
           aws-secret-access-key: ORG_AWS_SECRET_ACCESS_KEY
-          # TODO: find a way to save the file on S3 without the date in the filename
           from: << parameters.os >>-<< parameters.tool >>.tar.gz
           to: s3://${ORG_AWS_BUCKET_NAME}
       - aws-s3/copy:
@@ -96,8 +104,8 @@ workflows:
               # RTD_DOCKER_BUILD_SETTINGS variable
               # https://github.com/readthedocs/readthedocs.org/blob/ccdad233cda5bcd3ac3acd935536c9e8cfc2e440/readthedocs/settings/base.py#L536
               os:
-                - ubuntu-22.04-2022.03.15
-                - ubuntu-20.04-2022.02.16
+                - ubuntu-22.04
+                - ubuntu-20.04
               tool:
                 - python-2.7.18
                 - python-3.6.15
