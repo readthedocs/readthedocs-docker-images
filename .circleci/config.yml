@@ -3,7 +3,7 @@ version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@3.0.0
 
-commands:
+jobs:
   compile-upload-tool:
     parameters:
       os:
@@ -11,13 +11,16 @@ commands:
       tool:
         type: string
 
+    docker:
+      - image: cimg/python:3.10
+
     steps:
       - checkout
       - setup_remote_docker:
           version: 20.10.11
           docker_layer_caching: true
       - run:
-          name: Download compile_version_upload_s3.sh script
+          name: Download "compile_version_upload_s3.sh" script
           command: |
             wget https://raw.githubusercontent.com/readthedocs/readthedocs.org/humitos/build-tool-no-upload-production/scripts/compile_version_upload_s3.sh
       - run:
@@ -26,21 +29,22 @@ commands:
             docker pull readthedocs/build:<< parameters.os >>
       - run:
           name: Compile tool version
+          environment:
+            OS: << parameters.os >>
           command: |
             ./compile_version_updload_s3.sh << parameters.tool >>
       - aws-s3/copy:
-          aws-region: $AWS_REGION
-          aws-access-key-id: $AWS_ACCESS_KEY_ID
-          aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
+          aws-region: ORG_AWS_REGION
+          aws-access-key-id: ORG_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: ORG_AWS_SECRET_ACCESS_KEY
           from: << parameters.os >>-<< parameters.tool >>.tar.gz
-          to: s3://${AWS_BUCKET_NAME}
-
-jobs:
-  compile-upload-tool:
-    docker:
-      - image: cimg/python:3.10
-      - environment:
-          OS: << parameters.os >>
+          to: s3://${ORG_AWS_BUCKET_NAME}
+      - aws-s3/copy:
+          aws-region: COM_AWS_REGION
+          aws-access-key-id: COM_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: COM_AWS_SECRET_ACCESS_KEY
+          from: << parameters.os >>-<< parameters.tool >>.tar.gz
+          to: s3://${COM_AWS_BUCKET_NAME}
 
   tests:
     docker:
@@ -78,13 +82,9 @@ workflows:
           name: compile-<< matrix.os >>-<< matrix.tool >>
           filters:
             branches:
+              # TODO: uncomment when ready to go to prod
               # only: /main/
               only: /humitos/automate-compile-upload-s3/
-          environment:
-            AWS_REGION: $ORG_AWS_SECRET_ACCESS_KEY
-            AWS_BUCKET_NAME: $ORG_BUCKET_NAME
-            AWS_ACCESS_KEY_ID: $ORG_AWS_SECRET_ACCESS_KEY
-            AWS_SECRET_ACCESS_KEY: $ORG_AWS_SECRET_ACCESS_KEY
 
           matrix:
             parameters:
@@ -92,18 +92,18 @@ workflows:
                 - ubuntu-20.04
                 - ubuntu-22.04
               tool:
-                - "python 2.7.18"
-                - "python 3.6.15"
-                - "python 2.7.18"
-                - "python 3.6.15"
-                - "python 3.7.12"
-                - "python 3.8.12"
-                - "python 3.9.7"
-                - "python 3.10.0"
-                - "python pypy3.7-7.3.5"
-                - "python miniconda3-4.7.12"
-                - "python mambaforge-4.10.3-10"
-                - "nodejs 14.17.6"
-                - "nodejs 16.9.1"
-                - "rust 1.55.0"
-                - "golang 1.17.1"
+                - python-2.7.18
+                - python-3.6.15
+                - python-2.7.18
+                - python-3.6.15
+                - python-3.7.12
+                - python-3.8.12
+                - python-3.9.7
+                - python-3.10.0
+                - python-pypy3.7-7.3.5
+                - python-miniconda3-4.7.12
+                - python-mambaforge-4.10.3-10
+                - nodejs-14.17.6
+                - nodejs-16.9.1
+                - rust-1.55.0
+                - golang-1.17.1
