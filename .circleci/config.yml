@@ -4,7 +4,7 @@ orbs:
   aws-s3: circleci/aws-s3@3.0.0
 
 jobs:
-  compile-upload-tool:
+  compile-and-upload-tool:
     parameters:
       os:
         type: string
@@ -34,12 +34,14 @@ jobs:
           command: |
             /bin/bash compile_version_upload_s3.sh << parameters.tool >>
       - aws-s3/copy:
+          name: Upload tool version to .org
           aws-region: ORG_AWS_REGION
           aws-access-key-id: ORG_AWS_ACCESS_KEY_ID
           aws-secret-access-key: ORG_AWS_SECRET_ACCESS_KEY
           from: << parameters.os >>-<< parameters.tool >>.tar.gz
           to: s3://${ORG_AWS_BUCKET_NAME}
       - aws-s3/copy:
+          name: Upload tool version to .com
           aws-region: COM_AWS_REGION
           aws-access-key-id: COM_AWS_ACCESS_KEY_ID
           aws-secret-access-key: COM_AWS_SECRET_ACCESS_KEY
@@ -76,10 +78,10 @@ workflows:
     jobs:
       - tests
 
-  compile:
+  compile-and-upload-tool:
     jobs:
-      - compile-upload-tool:
-          name: compile-<< matrix.os >>-<< matrix.tool >>
+      - compile-and-upload-tool:
+          name: << matrix.os >>-<< matrix.tool >>
           filters:
             branches:
               # TODO: uncomment when ready to go to prod
