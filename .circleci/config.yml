@@ -25,25 +25,40 @@ jobs:
           command: |
             wget https://raw.githubusercontent.com/readthedocs/readthedocs.org/humitos/build-tool-no-upload-production/scripts/compile_version_upload_s3.sh
       - run:
+          # DOCKER_IMAGES full names come from the Docker Hub
           name: Download Docker image
           command: |
-            for DOCKER_IMAGE in "<< parameters.os >>"
+            DOCKER_IMAGES="ubuntu-22.04-2022.03.15 ubuntu-20.04-2022.02.16"
+            for docker_image in DOCKER_IMAGES
             do
-              docker pull readthedocs/build:$DOCKER_IMAGE
-              DOCKER_TAG=$(echo << parameters.os >> | cut -d- -f1,2)
-              docker tag readthedocs/build:$DOCKER_IMAGE readthedocs/build:$DOCKER_TAG
+              docker pull readthedocs/build:$docker_image
+              docker_tag=$(echo $docker_image | cut -d- -f1,2)
+              docker tag readthedocs/build:$docker_image readthedocs/build:$docker_tag
             done
       - run:
+          # OS_NAMES and TOOLS comes from `readthedocs.settings.base`'s
+          # RTD_DOCKER_BUILD_SETTINGS variable
+          # https://github.com/readthedocs/readthedocs.org/blob/ccdad233cda5bcd3ac3acd935536c9e8cfc2e440/readthedocs/settings/base.py#L536
           name: Compile tool version
           command: |
-            export OS=$(echo << parameters.os >> | cut -d- -f1,2)
+            declare -A TOOLS
 
-            for TOOL_VERSION in "<< parameters.tools >>"
+            OS_NAMES="ubuntu-22.04 ubuntu-20.04"
+            TOOLS=( ["python"]="2.7.18 3.6.15 3.7.12 3.8.12 3.9.7 3.10.0 pypy3.7-7.3.5 miniconda3-4.7.12 mambaforge-4.10.3-10" ["nodejs"]="14.17.6 16.9.1" ["rust"]="1.55.0" ["golang"]="1.17.1" )
+            TOOL_NAMES="python nodejs rust golang"
+
+            for os in $OS_NAMES
             do
-              export TOOL=$(echo $TOOL_VERSION | cut -d- -f1)
-              export VERSION=$(echo $TOOL_VERSION | cut -d- -f2)
-
-              /bin/bash compile_version_upload_s3.sh $TOOL $VERSION
+              OS=$os
+              for tool in $TOOL_NAMES
+              do
+                TOOL=$tool
+                for version in ${TOOLS[$TOOL]}
+                do
+                  VERSION=$version
+                  /bin/bash compile_version_upload_s3.sh $TOOL $VERSION
+                done
+              done
             done
       - aws-s3/sync:
           aws-region: ORG_AWS_REGION
@@ -96,12 +111,3 @@ workflows:
               # TODO: uncomment when ready to go to prod
               # only: /main/
               only: /humitos/automate-compile-upload-s3/
-
-          # These parameters come from `readthedocs.settings.base`'s
-          # RTD_DOCKER_BUILD_SETTINGS variable
-          # https://github.com/readthedocs/readthedocs.org/blob/ccdad233cda5bcd3ac3acd935536c9e8cfc2e440/readthedocs/settings/base.py#L536
-          #
-          # NOTE: update "parameters.os" when we release a new dated Ubuntu image
-          # NOTE: update "parameters.tools" when we add a new tool version
-          os: "ubuntu-22.04-2022.03.15 ubuntu-20.04-2022.02.16"
-          tools: "python-2.7.18 python-3.6.15 python-2.7.18 python-3.6.15 python-3.7.12 python-3.8.12 python-3.9.7 python-3.10.0 python-pypy3.7-7.3.5 python-miniconda3-4.7.12 python-mambaforge-4.10.3-10 nodejs-14.17.6 nodejs-16.9.1 rust-1.55.0 golang-1.17.1"
