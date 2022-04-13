@@ -12,7 +12,6 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.11
-          docker_layer_caching: true
       - run:
           name: Download "compile_version_upload_s3.sh" script
           # TODO: fix the URL of this script to use main branch when it gets merged
