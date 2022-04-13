@@ -39,6 +39,7 @@ jobs:
             fi
 
             docker pull readthedocs/build:$DOCKER_IMAGE
+            docker tag readthedocs/build:$DOCKER_IMAGE readthedocs/build:<< parameters.os >>
       - run:
           name: Compile tool version
           environment:
