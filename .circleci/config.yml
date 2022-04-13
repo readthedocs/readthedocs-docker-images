@@ -89,8 +89,8 @@ workflows:
           matrix:
             parameters:
               os:
-                - ubuntu-20.04
-                - ubuntu-22.04
+                - ubuntu-22.04-2022.03.15
+                - ubuntu-20.04-2022.02.16
               tool:
                 - python-2.7.18
                 - python-3.6.15
