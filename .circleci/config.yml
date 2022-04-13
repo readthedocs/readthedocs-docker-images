@@ -5,12 +5,6 @@ orbs:
 
 jobs:
   compile-and-upload-tool:
-    parameters:
-      os:
-        type: string
-      tools:
-        type: string
-
     docker:
       - image: cimg/python:3.10
 
