@@ -31,6 +31,8 @@ jobs:
           name: Compile tool version
           environment:
             OS: << parameters.os >>
+            # TODO: modify .sh script to use a different variable
+            AWS_REGION: define-something-as-a-workaround
           command: |
             /bin/bash compile_version_upload_s3.sh << parameters.tool >>
       - aws-s3/copy:
