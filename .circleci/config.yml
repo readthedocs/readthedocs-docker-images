@@ -20,10 +20,10 @@ jobs:
             wget https://raw.githubusercontent.com/readthedocs/readthedocs.org/humitos/build-tool-no-upload-production/scripts/compile_version_upload_s3.sh
       - run:
           # DOCKER_IMAGES full names come from the Docker Hub
-          name: Download Docker image
+          name: Download Docker images
           command: |
             DOCKER_IMAGES="ubuntu-22.04-2022.03.15 ubuntu-20.04-2022.02.16"
-            for docker_image in DOCKER_IMAGES
+            for docker_image in $DOCKER_IMAGES
             do
               docker pull readthedocs/build:$docker_image
               docker_tag=$(echo $docker_image | cut -d- -f1,2)
@@ -33,7 +33,7 @@ jobs:
           # OS_NAMES and TOOLS comes from `readthedocs.settings.base`'s
           # RTD_DOCKER_BUILD_SETTINGS variable
           # https://github.com/readthedocs/readthedocs.org/blob/ccdad233cda5bcd3ac3acd935536c9e8cfc2e440/readthedocs/settings/base.py#L536
-          name: Compile tool version
+          name: Compile all tools and versions
           command: |
             declare -A TOOLS
 
