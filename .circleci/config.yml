@@ -32,7 +32,7 @@ jobs:
           environment:
             OS: << parameters.os >>
           command: |
-            ./compile_version_updload_s3.sh << parameters.tool >>
+            ./compile_version_upload_s3.sh << parameters.tool >>
       - aws-s3/copy:
           aws-region: ORG_AWS_REGION
           aws-access-key-id: ORG_AWS_ACCESS_KEY_ID
