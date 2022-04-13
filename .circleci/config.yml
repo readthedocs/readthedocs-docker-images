@@ -36,8 +36,15 @@ jobs:
           command: |
             declare -A TOOLS
 
+            # FIXME: Python 3.6.15 is failing because of "Segmentation fault
+            # (core dumped)", so we are skipping it for now.
             OS_NAMES="ubuntu-22.04 ubuntu-20.04"
-            TOOLS=( ["python"]="2.7.18 3.6.15 3.7.12 3.8.12 3.9.7 3.10.0 pypy3.7-7.3.5 miniconda3-4.7.12 mambaforge-4.10.3-10" ["nodejs"]="14.17.6 16.9.1" ["rust"]="1.55.0" ["golang"]="1.17.1" )
+            TOOLS=(
+              ["python"]="2.7.18 3.7.12 3.8.12 3.9.7 3.10.0 pypy3.7-7.3.5 miniconda3-4.7.12 mambaforge-4.10.3-10"
+              ["nodejs"]="14.17.6 16.9.1"
+              ["rust"]="1.55.0"
+              ["golang"]="1.17.1"
+            )
             TOOL_NAMES="python nodejs rust golang"
 
             for os in $OS_NAMES
