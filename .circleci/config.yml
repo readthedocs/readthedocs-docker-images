@@ -103,5 +103,5 @@ workflows:
           #
           # NOTE: update "parameters.os" when we release a new dated Ubuntu image
           # NOTE: update "parameters.tools" when we add a new tool version
-          - os: "ubuntu-22.04-2022.03.15 ubuntu-20.04-2022.02.16"
-          - tools: "python-2.7.18 python-3.6.15 python-2.7.18 python-3.6.15 python-3.7.12 python-3.8.12 python-3.9.7 python-3.10.0 python-pypy3.7-7.3.5 python-miniconda3-4.7.12 python-mambaforge-4.10.3-10 nodejs-14.17.6 nodejs-16.9.1 rust-1.55.0 golang-1.17.1"
+          os: "ubuntu-22.04-2022.03.15 ubuntu-20.04-2022.02.16"
+          tools: "python-2.7.18 python-3.6.15 python-2.7.18 python-3.6.15 python-3.7.12 python-3.8.12 python-3.9.7 python-3.10.0 python-pypy3.7-7.3.5 python-miniconda3-4.7.12 python-mambaforge-4.10.3-10 nodejs-14.17.6 nodejs-16.9.1 rust-1.55.0 golang-1.17.1"
