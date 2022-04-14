@@ -1,6 +1,75 @@
-version: 2
+version: 2.1
+
+orbs:
+  aws-s3: circleci/aws-s3@3.0.0
 
 jobs:
+  compile-and-upload-tool:
+    docker:
+      - image: cimg/python:3.10
+
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.11
+      - run:
+          name: Download "compile_version_upload_s3.sh" script
+          command: |
+            wget https://raw.githubusercontent.com/readthedocs/readthedocs.org/main/scripts/compile_version_upload_s3.sh
+      - run:
+          # DOCKER_IMAGES full names come from the Docker Hub
+          name: Download Docker images
+          command: |
+            DOCKER_IMAGES="ubuntu-22.04-2022.03.15 ubuntu-20.04-2022.02.16"
+            for docker_image in $DOCKER_IMAGES
+            do
+              docker pull readthedocs/build:$docker_image
+              docker_tag=$(echo $docker_image | cut -d- -f1,2)
+              docker tag readthedocs/build:$docker_image readthedocs/build:$docker_tag
+            done
+      - run:
+          # OS_NAMES and TOOLS comes from `readthedocs.settings.base`'s
+          # RTD_DOCKER_BUILD_SETTINGS variable
+          # https://github.com/readthedocs/readthedocs.org/blob/ccdad233cda5bcd3ac3acd935536c9e8cfc2e440/readthedocs/settings/base.py#L536
+          name: Compile all tools and versions
+          command: |
+            declare -A TOOLS
+
+            OS_NAMES="ubuntu-22.04 ubuntu-20.04"
+            TOOLS=(
+              ["python"]="2.7.18 3.6.15 3.7.12 3.8.12 3.9.7 3.10.0 pypy3.7-7.3.5 miniconda3-4.7.12 mambaforge-4.10.3-10"
+              ["nodejs"]="14.17.6 16.9.1"
+              ["rust"]="1.55.0"
+              ["golang"]="1.17.1"
+            )
+            TOOL_NAMES="python nodejs rust golang"
+
+            for os in $OS_NAMES
+            do
+              OS=$os
+              for tool in $TOOL_NAMES
+              do
+                TOOL=$tool
+                for version in ${TOOLS[$TOOL]}
+                do
+                  VERSION=$version
+                  /bin/bash compile_version_upload_s3.sh $TOOL $VERSION
+                done
+              done
+            done
+      - aws-s3/sync:
+          aws-region: ORG_AWS_REGION
+          aws-access-key-id: ORG_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: ORG_AWS_SECRET_ACCESS_KEY
+          from: ./
+          to: s3://${ORG_AWS_BUCKET_NAME}
+      - aws-s3/sync:
+          aws-region: COM_AWS_REGION
+          aws-access-key-id: COM_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: COM_AWS_SECRET_ACCESS_KEY
+          from: ./
+          to: s3://${COM_AWS_BUCKET_NAME}
+
   tests:
     docker:
       - image: cimg/python:3.10
@@ -24,8 +93,16 @@ jobs:
           name: Run tests
           command: pipenv run pytest
 
+
 workflows:
   version: 2
   tests:
     jobs:
       - tests
+
+  compile-and-upload-tool:
+    jobs:
+      - compile-and-upload-tool:
+          filters:
+            branches:
+              only: /main/
