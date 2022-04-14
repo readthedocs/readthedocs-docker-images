@@ -14,9 +14,8 @@ jobs:
           version: 20.10.11
       - run:
           name: Download "compile_version_upload_s3.sh" script
-          # TODO: fix the URL of this script to use main branch when it gets merged
           command: |
-            wget https://raw.githubusercontent.com/readthedocs/readthedocs.org/humitos/build-tool-no-upload-production/scripts/compile_version_upload_s3.sh
+            wget https://raw.githubusercontent.com/readthedocs/readthedocs.org/main/scripts/compile_version_upload_s3.sh
       - run:
           # DOCKER_IMAGES full names come from the Docker Hub
           name: Download Docker images
@@ -106,6 +105,4 @@ workflows:
       - compile-and-upload-tool:
           filters:
             branches:
-              # TODO: uncomment when ready to go to prod
-              # only: /main/
-              only: /humitos/automate-compile-upload-s3/
+              only: /main/
