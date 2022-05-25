@@ -37,10 +37,10 @@ jobs:
 
             OS_NAMES="ubuntu-22.04 ubuntu-20.04"
             TOOLS=(
-              ["python"]="2.7.18 3.6.15 3.7.12 3.8.12 3.9.7 3.10.0 pypy3.7-7.3.5 miniconda3-4.7.12 mambaforge-4.10.3-10"
-              ["nodejs"]="14.17.6 16.9.1"
-              ["rust"]="1.55.0"
-              ["golang"]="1.17.1"
+              ["python"]="2.7.18 3.6.15 3.7.13 3.8.13 3.9.13 3.10.4 3.11.0b1 pypy3.7-7.3.9 pypy3.8-7.3.9 pypy3.9-7.3.9 miniconda3-4.7.12 mambaforge-4.10.3-10"
+              ["nodejs"]="14.19.3 16.15.0 18.2.0"
+              ["rust"]="1.55.0 1.61.0"
+              ["golang"]="1.17.10 1.18.2"
             )
             TOOL_NAMES="python nodejs rust golang"
 
@@ -74,8 +74,8 @@ jobs:
     docker:
       - image: cimg/python:3.10
         environment:
-          PIPENV_VENV_IN_PROJECT=1
-          PIPENV_IGNORE_VIRTUALENVS=1
+          PIPENV_VENV_IN_PROJECT: 1
+          PIPENV_IGNORE_VIRTUALENVS: 1
     steps:
       - checkout
       - setup_remote_docker:
