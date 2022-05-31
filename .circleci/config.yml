@@ -46,14 +46,13 @@ jobs:
 
             for os in $OS_NAMES
             do
-              OS=$os
               for tool in $TOOL_NAMES
               do
                 TOOL=$tool
                 for version in ${TOOLS[$TOOL]}
                 do
                   VERSION=$version
-                  /bin/bash compile_version_upload_s3.sh $TOOL $VERSION
+                  OS=$os /bin/bash compile_version_upload_s3.sh $TOOL $VERSION
                 done
               done
             done
