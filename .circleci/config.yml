@@ -105,7 +105,8 @@ workflows:
 
   compile-and-upload-tool:
     jobs:
-      - compile-and-upload-tool:
-          filters:
-            branches:
-              only: /main/
+      - compile-and-upload-tool
+#      - compile-and-upload-tool:
+#          filters:
+#            branches:
+#              only: /main/
