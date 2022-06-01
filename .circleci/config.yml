@@ -66,12 +66,18 @@ jobs:
           aws-secret-access-key: ORG_AWS_SECRET_ACCESS_KEY
           from: ./
           to: s3://${ORG_AWS_BUCKET_NAME}
+          arguments: |
+              --exclude "*" \
+              --include "*.tar.gz"
       - aws-s3/sync:
           aws-region: COM_AWS_REGION
           aws-access-key-id: COM_AWS_ACCESS_KEY_ID
           aws-secret-access-key: COM_AWS_SECRET_ACCESS_KEY
           from: ./
           to: s3://${COM_AWS_BUCKET_NAME}
+          arguments: |
+              --exclude "*" \
+              --include "*.tar.gz"
 
   tests:
     docker:
