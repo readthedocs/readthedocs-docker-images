@@ -37,12 +37,16 @@ jobs:
 
             OS_NAMES="ubuntu-22.04 ubuntu-20.04"
             TOOLS=(
-              ["python"]="2.7.18 3.6.15 3.7.13 3.8.13 3.9.13 3.10.4 3.11.0b2 pypy3.7-7.3.9 pypy3.8-7.3.9 pypy3.9-7.3.9 miniconda3-4.7.12 mambaforge-4.10.3-10"
+              # Drop support to test S3
+              # ["python"]="2.7.18 3.6.15 3.7.13 3.8.13 3.9.13 3.10.4 3.11.0b2 pypy3.7-7.3.9 pypy3.8-7.3.9 pypy3.9-7.3.9 miniconda3-4.7.12 mambaforge-4.10.3-10"
+              ["python"]="3.10.4"
               ["nodejs"]="14.19.3 16.15.0 18.2.0"
               ["rust"]="1.55.0 1.61.0"
               ["golang"]="1.17.10 1.18.2"
             )
-            TOOL_NAMES="python nodejs rust golang"
+            # Drop support to test S3
+            # TOOL_NAMES="python nodejs rust golang"
+            TOOL_NAMES="python"
 
             for os in $OS_NAMES
             do
