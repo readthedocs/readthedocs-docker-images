@@ -7,9 +7,9 @@ from .utils import run_command_in_container
 @pytest.mark.parametrize(
     'command,expected_output',
     [
-        ('asdf version', 'v0.8.1-a1ef92a'),
+        ('asdf version', 'v0.9.0-9ee24a3'),
         ('asdf plugin list', '\n'.join(['golang', 'nodejs', 'python', 'rust'])),
-        ('git --version', 'git version 2.25.1'),
+        ('git --version', 'git version 2.34.1'),
     ]
 )
 def test_command_versions_image_ubuntu20(command, expected_output):
