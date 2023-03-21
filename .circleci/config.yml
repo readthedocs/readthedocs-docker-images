@@ -20,7 +20,7 @@ jobs:
           # DOCKER_IMAGES full names come from the Docker Hub
           name: Download Docker images
           command: |
-            DOCKER_IMAGES="ubuntu-22.04-2022.03.15 ubuntu-20.04-2022.02.16"
+            DOCKER_IMAGES="ubuntu-22.04-2023.03.09 ubuntu-20.04-2022.02.16"
             for docker_image in $DOCKER_IMAGES
             do
               docker pull readthedocs/build:$docker_image
