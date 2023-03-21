@@ -1,7 +1,7 @@
 # Read the Docs - Environment base
 FROM ubuntu:22.04
 LABEL mantainer="Read the Docs <support@readthedocs.com>"
-LABEL version="ubuntu-22.04-2022.03.15"
+LABEL version="ubuntu-22.04-2023.03.09"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
@@ -112,7 +112,7 @@ USER docs
 WORKDIR /home/docs
 
 # Install asdf
-RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --depth 1 --branch v0.9.0
+RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --depth 1 --branch v0.11.2
 RUN echo ". /home/docs/.asdf/asdf.sh" >> /home/docs/.bashrc
 RUN echo ". /home/docs/.asdf/completions/asdf.bash" >> /home/docs/.bashrc
 
