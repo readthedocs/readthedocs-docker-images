@@ -1,5 +1,5 @@
 # Read the Docs - Hotfix for urllib3
-# 
+#
 # Instead of rebuilding this version, only rebuild the last few layers. This is
 # to address some old binaries built against openssl < 1.1.1
 
@@ -32,6 +32,14 @@ LABEL python.version_37=$RTD_PYTHON_VERSION_37
 LABEL python.version_38=$RTD_PYTHON_VERSION_38
 LABEL pypy.version_35=$RTD_PYPY_VERSION_35
 LABEL conda.version=$RTD_CONDA_VERSION
+
+
+# Install a newer libssl (1.1.1) to compile Python SSL module with it
+# Note that it removes `npm` and other packages. They have to be re-installed
+# later in this Dockerfile
+USER root
+RUN apt-get update && \
+    apt-get install -y libssl-dev
 
 USER docs
 WORKDIR /home/docs
@@ -104,6 +112,10 @@ RUN pyenv local $RTD_PYPY_VERSION_35 && \
     pyenv exec pip install --no-cache-dir -U setuptools==$RTD_SETUPTOOLS_VERSION && \
     pyenv exec pip install --no-cache-dir virtualenv==$RTD_VIRTUALENV_VERSION
 
+USER root
+RUN apt-get install -y libssl1.0-dev node-gyp nodejs-dev npm
+
+USER docs
 WORKDIR /
 
 CMD ["/bin/bash"]
