@@ -1,7 +1,7 @@
 # Read the Docs - Environment base
 FROM ubuntu:22.04
 LABEL mantainer="Read the Docs <support@readthedocs.com>"
-LABEL version="ubuntu-22.04-2023.03.09"
+LABEL version="ubuntu-22.04-2024.01.29"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
@@ -112,7 +112,7 @@ USER docs
 WORKDIR /home/docs
 
 # Install asdf
-RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --depth 1 --branch v0.11.2
+RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --depth 1 --branch v0.14.0
 RUN echo ". /home/docs/.asdf/asdf.sh" >> /home/docs/.bashrc
 RUN echo ". /home/docs/.asdf/completions/asdf.bash" >> /home/docs/.bashrc
 
@@ -124,11 +124,13 @@ RUN asdf plugin add python
 RUN asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 RUN asdf plugin add rust https://github.com/code-lever/asdf-rust.git
 RUN asdf plugin add golang https://github.com/kennyp/asdf-golang.git
+RUN asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
 
 # Create directories for languages installations
 RUN mkdir -p /home/docs/.asdf/installs/python && \
     mkdir -p /home/docs/.asdf/installs/nodejs && \
     mkdir -p /home/docs/.asdf/installs/rust && \
-    mkdir -p /home/docs/.asdf/installs/golang
+    mkdir -p /home/docs/.asdf/installs/golang && \
+    mkdir -p /home/docs/.asdf/installs/ruby
 
 CMD ["/bin/bash"]
