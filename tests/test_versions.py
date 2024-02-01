@@ -7,8 +7,8 @@ from .utils import run_command_in_container
 @pytest.mark.parametrize(
     'command,expected_output',
     [
-        ('asdf version', 'v0.11.2-8eb11b8'),
-        ('asdf plugin list', '\n'.join(['golang', 'nodejs', 'python', 'rust'])),
+        ('asdf version', 'v0.14.0-ccdd47d'),
+        ('asdf plugin list', '\n'.join(['golang', 'nodejs', 'python', 'ruby', 'rust'])),
         ('git --version', 'git version 2.34.1'),
     ]
 )
