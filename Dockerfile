@@ -104,6 +104,23 @@ RUN apt-get install -y \
 RUN apt-get install -y \
     coreutils
 
+# asdf Ruby extra requirements
+# https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
+RUN apt-get install -y \
+    autoconf \
+    patch \
+    rustc \
+    libssl-dev \
+    libyaml-dev \
+    libreadline6-dev \
+    libgmp-dev \
+    libncurses5-dev \
+    libgdbm6 \
+    libgdbm-dev \
+    libdb-dev \
+    uuid-dev
+
+
 # UID and GID from readthedocs/user
 RUN groupadd --gid 205 docs
 RUN useradd -m --uid 1005 --gid 205 docs
