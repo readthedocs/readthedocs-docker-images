@@ -11,7 +11,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 20.10.14
+          version: default
       - run:
           name: Download "compile_version_upload_s3.sh" script
           command: |
@@ -85,7 +85,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 20.10.14
+          version: default
           docker_layer_caching: true
       - run:
           name: Setup
