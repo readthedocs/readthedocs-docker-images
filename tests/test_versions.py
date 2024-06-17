@@ -9,9 +9,9 @@ from .utils import run_command_in_container
     [
         ('asdf version', 'v0.14.0-ccdd47d'),
         ('asdf plugin list', '\n'.join(['golang', 'nodejs', 'python', 'ruby', 'rust'])),
-        ('git --version', 'git version 2.34.1'),
+        ('git --version', 'git version 2.43.0'),
     ]
 )
-def test_command_versions_image_ubuntu22(command, expected_output):
+def test_command_versions_image_ubuntu24(command, expected_output):
     cmd_output = run_command_in_container(DOCKER_IMAGE, command)
     assert cmd_output == expected_output

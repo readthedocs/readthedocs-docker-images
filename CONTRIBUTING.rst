@@ -18,7 +18,7 @@ If you'd like to add a feature to any of the images, you'll need to verify the
 image works locally first. After making changes to the ``Dockerfile``, you can
 build your image with::
 
-    docker build -t readthedocs/build:ubuntu-20.04 .
+    docker build -t readthedocs/build:ubuntu-24.04 .
 
 This will take quite a long time, mostly due to LaTeX dependencies. The
 resulting image will be around 5GB.
@@ -26,7 +26,7 @@ resulting image will be around 5GB.
 Once your image is built, you can test your image locally by running a shell in
 a container using your new image::
 
-    docker run --rm -t -i readthedocs/build:ubuntu-20.04 /bin/bash
+    docker run --rm -t -i readthedocs/build:ubuntu-24.04 /bin/bash
 
 This will put you into the root path in the container, as the ``docs`` user.
 From here you can head to your home path (``cd ~docs``) and run normal
