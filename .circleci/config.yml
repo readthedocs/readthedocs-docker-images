@@ -20,7 +20,7 @@ jobs:
           # DOCKER_IMAGES full names come from the Docker Hub
           name: Download Docker images
           command: |
-            DOCKER_IMAGES="ubuntu-22.04-2024.01.29 ubuntu-20.04-2024.01.29"
+            DOCKER_IMAGES="ubuntu-24.04-2024.06.17 ubuntu-22.04-2024.01.29 ubuntu-20.04-2024.01.29"
             for docker_image in $DOCKER_IMAGES
             do
               docker pull readthedocs/build:$docker_image
@@ -35,7 +35,7 @@ jobs:
           command: |
             declare -A TOOLS
 
-            OS_NAMES="ubuntu-22.04 ubuntu-20.04"
+            OS_NAMES="ubuntu-24.04 ubuntu-22.04 ubuntu-20.04"
             TOOLS=(
               ["python"]="2.7.18 3.6.15 3.7.17 3.8.19 3.9.19 3.10.14 3.11.9 3.12.3 miniconda3-4.7.12 miniconda3-3.12-24.1.2-0 mambaforge-4.10.3-10 mambaforge-22.9.0-3 mambaforge-23.11.0-0"
               ["nodejs"]="14.20.1 16.18.1 18.16.1 19.0.1 20.14.0"
@@ -94,7 +94,7 @@ jobs:
             pipenv install
       - run:
           name: Build Docker image
-          command: docker build -t readthedocs/build:ubuntu-22.04 .
+          command: docker build -t readthedocs/build:ubuntu-24.04 .
       - run:
           name: Run tests
           command: pipenv run pytest

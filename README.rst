@@ -16,6 +16,10 @@ repository:
     Ubuntu 22.04 supporting multiple versions of Python, PyPy, conda, mamba, nodejs, rust and go.
     Available for public usage as ``build.os: ubuntu-22.04``
 
+`readthedocs/build:ubuntu-24.04-YYYY.MM.DD`
+    Ubuntu 24.04 supporting multiple versions of Python, PyPy, conda, mamba, nodejs, rust and go.
+    Available for public usage as ``build.os: ubuntu-24.04``
+
 Note that these images only contains the basic dependencies:
 
 - ``asdf`` CLI manager to install the languages versions
@@ -35,7 +39,7 @@ Usage
 
 To use the pre-built images, you can pull from Docker Hub:
 
-    docker pull readthedocs/build:ubuntu-22.04-YYYY.MM.DD
+    docker pull readthedocs/build:ubuntu-24.04-YYYY.MM.DD
 
 .. note::
 
@@ -44,7 +48,7 @@ To use the pre-built images, you can pull from Docker Hub:
 
 You can also compile these images locally:
 
-    docker build -t readthedocs/build:ubuntu-22.04-YYYY.MM.DD .
+    docker build -t readthedocs/build:ubuntu-24.04-YYYY.MM.DD .
 
 See `CONTRIBUTING`_ for more information on building and testing.
 
