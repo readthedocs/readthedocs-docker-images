@@ -129,12 +129,17 @@ USER docs
 WORKDIR /home/docs
 
 # Install asdf
-RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --depth 1 --branch v0.14.0
-RUN echo ". /home/docs/.asdf/asdf.sh" >> /home/docs/.bashrc
-RUN echo ". /home/docs/.asdf/completions/asdf.bash" >> /home/docs/.bashrc
+# https://asdf-vm.com/guide/getting-started.html#_1-install-asdf
+RUN wget https://github.com/asdf-vm/asdf/releases/download/v0.18.1/asdf-v0.18.1-linux-amd64.tar.gz
+RUN tar -xzf asdf-v0.18.1-linux-amd64.tar.gz -C ~/bin
+
+# Configure asdf for bash
+# https://asdf-vm.com/guide/getting-started.html#_2-configure-asdf
+RUN echo 'export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"' >> /home/docs/.bashrc
+RUN echo ". <(asdf completion bash)" >> /home/docs/.bashrc
 
 # Activate asdf in current session
-ENV PATH /home/docs/.asdf/shims:/home/docs/.asdf/bin:$PATH
+ENV PATH /home/docs/.asdf/shims:$PATH
 
 # Install asdf plugins
 RUN asdf plugin add python
