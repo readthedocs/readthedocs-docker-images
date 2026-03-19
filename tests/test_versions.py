@@ -9,7 +9,7 @@ from .utils import run_command_in_container
     [
         ('asdf version', 'v0.14.0-ccdd47d'),
         ('asdf plugin list', '\n'.join(['golang', 'nodejs', 'python', 'ruby', 'rust'])),
-        ('git --version', 'git version 2.43.0'),
+        ('git --version', 'git version 2.53.0'),
     ]
 )
 def test_command_versions_image_ubuntu24(command, expected_output):
