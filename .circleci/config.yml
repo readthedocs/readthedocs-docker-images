@@ -20,7 +20,7 @@ jobs:
           # DOCKER_IMAGES full names come from the Docker Hub
           name: Download Docker images
           command: |
-            DOCKER_IMAGES="ubuntu-24.04-2024.06.17 ubuntu-22.04-2024.01.29 ubuntu-20.04-2024.01.29"
+            DOCKER_IMAGES="ubuntu-26.04-2026.03.19 ubuntu-24.04-2024.06.17 ubuntu-22.04-2024.01.29"
             for docker_image in $DOCKER_IMAGES
             do
               docker pull readthedocs/build:$docker_image
@@ -35,7 +35,7 @@ jobs:
           command: |
             declare -A TOOLS
 
-            OS_NAMES="ubuntu-24.04 ubuntu-22.04 ubuntu-20.04"
+            OS_NAMES="ubuntu-26.04 ubuntu-24.04 ubuntu-22.04"
             TOOLS=(
               ["python"]="3.9.25 3.10.19 3.11.14 3.12.12 3.13.9 3.14.0 miniforge3-25.11.0-1"
               ["nodejs"]="19.9.0 20.19.5 22.21.1 23.11.1 24.11.1 25.2.1"
