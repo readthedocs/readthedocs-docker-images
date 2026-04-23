@@ -1,7 +1,7 @@
 # Read the Docs - Environment base
 FROM ubuntu:26.04
 LABEL mantainer="Read the Docs <support@readthedocs.com>"
-LABEL version="ubuntu-26.04-2026.03.19"
+LABEL version="ubuntu-26.04-2026.04.23"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
