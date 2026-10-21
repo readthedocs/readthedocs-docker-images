@@ -1,7 +1,7 @@
 # Read the Docs - Environment base
 FROM ubuntu:26.04
 LABEL mantainer="Read the Docs <support@readthedocs.com>"
-LABEL version="ubuntu-26.04-2026.04.27"
+LABEL version="ubuntu-26.04-2026.10.21"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
@@ -11,6 +11,15 @@ WORKDIR /
 
 # System dependencies
 RUN apt-get -y update
+
+# Make sure the system trust store no longer contains the root behind the
+# compromised eMudhra intermediate CAs (October 2026, USN-8944-1).
+# Fail the build if an older ``ca-certificates`` is still installed; this
+# usually means a stale Docker layer cache (rebuild with ``--no-cache``).
+ARG CA_CERTIFICATES_MIN_VERSION=20260816ubuntu0.26.04.1
+RUN apt-get -y install ca-certificates && \
+    dpkg --compare-versions "$(dpkg-query -W -f='${Version}' ca-certificates)" ge "$CA_CERTIFICATES_MIN_VERSION" && \
+    test ! -e /usr/share/ca-certificates/mozilla/emSign_ECC_Root_CA_-_G3.crt
 RUN apt-get -y install \
       software-properties-common \
       vim
